@@ -1,0 +1,102 @@
+{% extends 'baseb.html.twig' %}
+
+{% block main %}
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>Add a New Recruiter Job</h1>
+        </div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Create a New Job</h5>
+
+                        {{ form_start(form, {'attr': {'onsubmit': 'return validateForm(event)'}}) }}
+                        <div class="mb-3">
+                            {{ form_row(form.title, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.title)|length > 0 %}
+                                <div class="alert alert-danger custom-error">
+                                    <strong>Error: {{ form_errors(form.title) }}</strong>
+                                </div>
+                                <script>
+                                    alert("Validation failed: {{ form_errors(form.title) }}");
+                                    event.preventDefault();
+                                </script>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.description)|length > 0 %}
+                                <div class="alert alert-danger custom-error">
+                                    <strong>Error: {{ form_errors(form.description) }}</strong>
+                                </div>
+                                <script>
+                                    alert("Validation failed: {{ form_errors(form.description) }}");
+                                    event.preventDefault();
+                                </script>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(form.deadline, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.deadline)|length > 0 %}
+                                {% for error in form_errors(form.deadline) %}
+                                    {% if 'The deadline should be a future date.' in error.message %}
+                                        <div class="alert alert-danger custom-error">
+                                            <strong>Error: Please select a future date for the deadline.</strong>
+                                        </div>
+                                        <script>
+                                            alert("Validation failed: Please select a future date for the deadline.");
+                                            event.preventDefault();
+                                        </script>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(form.type, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.type)|length > 0 %}
+                                <div class="alert alert-danger custom-error">
+                                    <strong>Error: {{ form_errors(form.type) }}</strong>
+                                </div>
+                                <script>
+                                    alert("Validation failed: {{ form_errors(form.type) }}");
+                                    event.preventDefault();
+                                </script>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(form.salary, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.salary)|length > 0 %}
+                                <div class="alert alert-danger custom-error">
+                                    <strong>Error: {{ form_errors(form.salary) }}</strong>
+                                </div>
+                                <script>
+                                    alert("Validation failed: {{ form_errors(form.salary) }}");
+                                    event.preventDefault();
+                                </script>
+                            {% endif %}
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                                <a href="{{ path('recruiter_job_list') }}" class="btn btn-secondary">Back to the list</a>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function validateForm(event) {
+            // Your custom validation logic here
+            // Display alert and prevent form submission
+            alert("Validation failed: Please check the form for specific errors.");
+            event.preventDefault();
+        }
+    </script>
+{% endblock %}

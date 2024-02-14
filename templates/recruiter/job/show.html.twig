@@ -1,0 +1,32 @@
+{# templates/recruiter/job/show.html.twig #}
+
+{% extends 'baseb.html.twig' %}
+
+{% block title %}Recruiter Job Details (show.html.twig){% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="card border-primary">
+            <div class="card-body">
+                <h1 class="card-title">Recruiter Job Details</h1>
+                
+                <dl class="row">
+                    <dt class="col-sm-3">ID:</dt>
+                    <dd class="col-sm-9">{{ job.id }}</dd>
+                    <dt class="col-sm-3">Title:</dt>
+                    <dd class="col-sm-9">{{ job.title }}</dd>
+                    <dt class="col-sm-3">Description:</dt>
+                    <dd class="col-sm-9">{{ job.description }}</dd>
+                    <dt class="col-sm-3">Deadline:</dt>
+                    <dd class="col-sm-9">{{ job.deadline ? job.deadline.format('Y-m-d') : '' }}</dd>
+                    <dt class="col-sm-3">Type:</dt>
+                    <dd class="col-sm-9">{{ job.type }}</dd>
+                    <dt class="col-sm-3">Salary:</dt>
+                    <dd class="col-sm-9">{{ job.salary }}</dd>
+                </dl>
+
+                <a href="{{ path('recruiter_job_list') }}" class="btn btn-primary">Back to the list</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

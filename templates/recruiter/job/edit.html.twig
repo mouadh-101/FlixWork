@@ -1,0 +1,55 @@
+{% extends 'baseb.html.twig' %}
+
+{% block main %}
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>Edit Recruiter Job</h1>
+        </div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Edit Job</h5>
+
+                        {{ form_start(form) }}
+                        <div class="mb-3">
+                            <label for="{{ form.title.vars.id }}" class="form-label">Job Title</label>
+                            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.title) }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="{{ form.description.vars.id }}" class="form-label">Description</label>
+                            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.description) }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="{{ form.deadline.vars.id }}" class="form-label">Deadline</label>
+                            {{ form_widget(form.deadline, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.deadline) }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="{{ form.type.vars.id }}" class="form-label">Type</label>
+                            {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.type) }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="{{ form.salary.vars.id }}" class="form-label">Salary</label>
+                            {{ form_widget(form.salary, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.salary) }}
+                        </div>
+
+                        <div class="mb-3 d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                            <a href="{{ path('recruiter_job_list') }}" class="btn btn-secondary">Cancel</a>
+                        </div>
+
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+{% endblock %}

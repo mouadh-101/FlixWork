@@ -1,0 +1,25 @@
+{% extends 'baseb.html.twig' %}
+
+{% block main %}
+    <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Edit Category</h1>
+        </div><!-- End Page Title -->
+
+        <section class="section">
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Edit Category</h5>
+
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <a href="{{ path('jobs_category_list') }}" class="btn btn-secondary">Back to the list</a>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
