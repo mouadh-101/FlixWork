@@ -12,14 +12,45 @@
                     <div class="card-body">
                         <h5 class="card-title">Add a New Category</h5>
 
-                        {{ form_start(form) }}
-                        {{ form_widget(form) }}
+                        {{ form_start(form, {'attr': {'onsubmit': 'return validateForm(event)'}}) }}
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.category_name.vars.id }}" class="form-label">Category Name</label>
+                            {{ form_widget(form.category_name, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.category_name)|length > 0 %}
+                                <div class="alert alert-danger custom-error">
+                                    <strong>Error: {{ form_errors(form.category_name) }}</strong>
+                                </div>
+                            {% endif %}
+                        </div>
+                        
                         <button type="submit" class="btn btn-primary">Create</button>
                         <a href="{{ path('jobs_category_list') }}" class="btn btn-secondary">Back to the list</a>
+                        
                         {{ form_end(form) }}
                     </div>
                 </div>
             </div>
         </section>
+
+        <script>
+            function validateForm(event) {
+                event = event || window.event; // Use window.event if event is undefined
+                // Your custom validation logic here
+                // Display alert and prevent form submission
+                var errorMessages = [];
+
+                // Check 'category name' field length
+                var categoryNameField = document.getElementById('{{ form.category_name.vars.id }}');
+                if (categoryNameField && categoryNameField.value.length > 30) {
+                    errorMessages.push('Category name cannot be longer than 30 characters.');
+                }
+
+                if (errorMessages.length > 0) {
+                    alert(errorMessages.join('\n'));
+                    event.preventDefault();
+                }
+            }
+        </script>
     </main>
 {% endblock %}
