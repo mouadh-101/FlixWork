@@ -1,0 +1,61 @@
+
+{% extends 'base.html.twig' %}
+{% block categories %}
+
+<section id="features" class="features">
+    <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Training Categories </h2>
+          <p></p>
+        </div>
+        
+        <div class="row" data-aos="fade-up" data-aos-delay="300">
+            {%for categorie in categories%}
+                <div class="col-lg-3 col-md-4">
+                    <div class="icon-box">
+                        <h3><a href="{{ path( 'list_trainingbycat' , {'id_cat' : categorie.id})}}">{{categorie.getCategoryName()}}</a></h3>
+                    </div>
+                </div> 
+            {%endfor%}
+        </div>
+    </div>
+</section>
+  {% endblock %}
+    {% block jobs  %}
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Training </h2>
+          <p>This Is a List Of trainings</p>
+        </div>
+      </div>
+    </section>
+    <!-- ======= More jobs Section ======= -->
+    <section id="more-services" class="more-services">
+      <div class="container">
+
+        <div class="row">
+        {% for training in trainings %}
+          <div class="col-md-6 d-flex align-items-stretch" style="padding:10px;">
+          
+            <div class="card" style='background-image: url("{{asset('img/training-and-dev.jpeg')}}");' data-aos="fade-up" data-aos-delay="100">
+              <div class="card-body">
+                <h5 class="card-title"><a href="">{{training.id}}</a></h5>
+                <h5 class="card-title"><a href="">{{training.title}}</a></h5>
+                <p class="card-text">{{training.description}}</p>
+                <p class="card-text">{{training.getStartDate()|date('Y-m-d')}}</p>
+                <p class="card-text">{{training.getEndDate()|date('Y-m-d')}}</p>
+                <p class="card-text">{{training.getNumberOfPlaces()}}</p>
+                <p class="card-text">{{training.trainer.getFullName()}}</p>
+                <p class="card-text">{{training.category.getCategoryName()}}</p>
+                </div>
+            </div>
+          </div>
+         {% endfor %}
+        </div>
+
+      </div>
+    </section>
+    {% endblock %}

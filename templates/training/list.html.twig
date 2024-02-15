@@ -4,7 +4,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>List of Trainer</h1>
+      <h1>List Of Trainer</h1>
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
@@ -33,7 +33,7 @@
                     <tbody>
                     {% for training in trainings %}
                     <tr>
-    <td>{{training.id}}</td>
+    <td><a href="{{ path( 'showtraining' , {'id' : training.id})}}">{{training.id}}</a></td>
     <td>{{training.title}}</td>
     <td>{{training.description}}</td>
     <td>{{training.getStartDate()|date('Y-m-d')}}</td>
@@ -42,8 +42,8 @@
     <td>{{training.trainer.getFullName()}}<td>
     <td>{{training.category.getCategoryName()}}<td>
 
-    <td><a href="{{ path( 'deletetraining' , {'id' : training.id})}}" >deleteTrainer</a></td>
-    <td><a href="{{ path( 'edit' , {'id' : training.id})}}" >editTrainer</a></td>
+    <td><a href="{{ path( 'deletetraining' , {'id' : training.id})}}" >Delete Training</a></td>
+    <td><a href="{{ path( 'edit' , {'id' : training.id})}}" >Edit Training</a></td>
                     </tr>
                     {% endfor %}
 

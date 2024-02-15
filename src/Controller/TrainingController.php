@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Training;
 use App\Entity\User;
 use App\Form\TrainingType;
+use App\Repository\TrainingCategoryRepository;
 use App\Repository\TrainingRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface ;
@@ -16,13 +17,37 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TrainingController extends AbstractController
 {
-    #[Route('/training/list', name: 'list_training')]
-    public function list(TrainingRepository $trainingRepository): Response
+
+    #[Route('/trainings/list', name: 'list_training')]
+    public function listr(TrainingRepository $trainingRepository): Response
     {
         $trainings = $trainingRepository->findAll();
 
         return $this->render('training/list.html.twig' , [
             'trainings' => $trainings,
+        ]);
+    }
+    #[Route('/trainingf/list', name: 'list_trainingf')]
+    public function listf(TrainingRepository $trainingRepository,TrainingCategoryRepository $tc): Response
+    {
+        $trainings = $trainingRepository->findAll();
+        $categories=$tc->findAll();
+
+        return $this->render('training/listf.html.twig' , [
+            'trainings' => $trainings,
+            'categories'=>$categories
+        ]);
+    }
+
+    #[Route('/trainingf/list/{id_cat}', name: 'list_trainingbycat')]
+    public function listc($id_cat,TrainingRepository $trainingRepository,TrainingCategoryRepository $tc): Response
+    {
+        $cat=$tc->find($id_cat);
+        $trainings = $trainingRepository->findBy(['category'=>$cat]);
+        $categories=$tc->findAll();
+        return $this->render('training/listf.html.twig' , [
+            'trainings' => $trainings,
+            'categories'=>$categories
         ]);
     }
 
@@ -54,16 +79,17 @@ class TrainingController extends AbstractController
             'formA' => $form->createView(),
         ]);
     }
+    
 
     #[Route('/training/{id}', name: 'showtraining')]
     public function showTraining($id,TrainingRepository $trainingRepository): Response
     {
         $training = $trainingRepository->find($id);
-
         return $this->render('training/detailtraining.html.twig', [
             'training' => $training,
         ]);
     }
+    
 
 
 
