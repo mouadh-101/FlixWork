@@ -69,20 +69,27 @@ class __TwigTemplate_99be38ba3a4e9ee0691a4cb765f5996cef15106f02ab95a0c3e5f4a15d3
         echo "    ";
         $this->displayBlock('hero', $context, $blocks);
         // line 6
-        echo "
+        echo "<style>
+    #main.main {
+        padding: 200px;
+    }
+    #breadcrumbs {
+        padding-left: 150px;
+        padding-right: 150px;
+    }
+</style>
 <main id=\"main\">
-    !-- End Breadcrumbs --
     <section id=\"breadcrumbs\" class=\"breadcrumbs\">
         <div class=\"d-flex justify-content-between align-items-center\"
           <h2>Postulation Details</h2>
           <ol>
             <li><a href=\"";
-        // line 13
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("list_postulation", ["id" => (isset($context["idUser"]) || array_key_exists("idUser", $context) ? $context["idUser"] : (function () { throw new RuntimeError('Variable "idUser" does not exist.', 13, $this->source); })())]), "html", null, true);
+        // line 20
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("list_postulation", ["id" => (isset($context["idUser"]) || array_key_exists("idUser", $context) ? $context["idUser"] : (function () { throw new RuntimeError('Variable "idUser" does not exist.', 20, $this->source); })())]), "html", null, true);
         echo "\">Postulation</a>
             <li>";
-        // line 14
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["job"]) || array_key_exists("job", $context) ? $context["job"] : (function () { throw new RuntimeError('Variable "job" does not exist.', 14, $this->source); })()), "title", [], "any", false, false, false, 14), "html", null, true);
+        // line 21
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["job"]) || array_key_exists("job", $context) ? $context["job"] : (function () { throw new RuntimeError('Variable "job" does not exist.', 21, $this->source); })()), "title", [], "any", false, false, false, 21), "html", null, true);
         echo "</li>
           </ol>
         </div>
@@ -95,20 +102,20 @@ class __TwigTemplate_99be38ba3a4e9ee0691a4cb765f5996cef15106f02ab95a0c3e5f4a15d3
               <h3>Job informations</h3>
               <ul>
                 <li><strong>Title :</strong>";
-        // line 25
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["job"]) || array_key_exists("job", $context) ? $context["job"] : (function () { throw new RuntimeError('Variable "job" does not exist.', 25, $this->source); })()), "title", [], "any", false, false, false, 25), "html", null, true);
+        // line 32
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["job"]) || array_key_exists("job", $context) ? $context["job"] : (function () { throw new RuntimeError('Variable "job" does not exist.', 32, $this->source); })()), "title", [], "any", false, false, false, 32), "html", null, true);
         echo "</li>
                 <li><strong>Recruiter :</strong> ";
-        // line 26
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["job"]) || array_key_exists("job", $context) ? $context["job"] : (function () { throw new RuntimeError('Variable "job" does not exist.', 26, $this->source); })()), "recruiter", [], "any", false, false, false, 26), "getFullName", [], "method", false, false, false, 26), "html", null, true);
+        // line 33
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["job"]) || array_key_exists("job", $context) ? $context["job"] : (function () { throw new RuntimeError('Variable "job" does not exist.', 33, $this->source); })()), "recruiter", [], "any", false, false, false, 33), "getFullName", [], "method", false, false, false, 33), "html", null, true);
         echo "</li>
                 <li><strong>Deadline :</strong> ";
-        // line 27
-        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["job"]) || array_key_exists("job", $context) ? $context["job"] : (function () { throw new RuntimeError('Variable "job" does not exist.', 27, $this->source); })()), "deadline", [], "any", false, false, false, 27), "Y-m-d"), "html", null, true);
+        // line 34
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["job"]) || array_key_exists("job", $context) ? $context["job"] : (function () { throw new RuntimeError('Variable "job" does not exist.', 34, $this->source); })()), "deadline", [], "any", false, false, false, 34), "Y-m-d"), "html", null, true);
         echo "</li>
                 <li><strong>Salary :</strong> ";
-        // line 28
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["job"]) || array_key_exists("job", $context) ? $context["job"] : (function () { throw new RuntimeError('Variable "job" does not exist.', 28, $this->source); })()), "salary", [], "any", false, false, false, 28), "html", null, true);
+        // line 35
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["job"]) || array_key_exists("job", $context) ? $context["job"] : (function () { throw new RuntimeError('Variable "job" does not exist.', 35, $this->source); })()), "salary", [], "any", false, false, false, 35), "html", null, true);
         echo "</li>
               </ul>
             </div>
@@ -116,53 +123,53 @@ class __TwigTemplate_99be38ba3a4e9ee0691a4cb765f5996cef15106f02ab95a0c3e5f4a15d3
                 <h3>Postulation informations</h3>
                 <p class=\"card-text\">
                     ";
-        // line 34
-        if ((twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 34, $this->source); })()), "etat", [], "any", false, false, false, 34) == "under consideration")) {
-            // line 35
+        // line 41
+        if ((twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 41, $this->source); })()), "etat", [], "any", false, false, false, 41) == "under consideration")) {
+            // line 42
             echo "                    <span class=\"badge bg-warning\">";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 35, $this->source); })()), "etat", [], "any", false, false, false, 35), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 42, $this->source); })()), "etat", [], "any", false, false, false, 42), "html", null, true);
             echo "</span>
                     ";
-        } elseif ((twig_get_attribute($this->env, $this->source,         // line 36
-(isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 36, $this->source); })()), "etat", [], "any", false, false, false, 36) == "rejected")) {
-            // line 37
+        } elseif ((twig_get_attribute($this->env, $this->source,         // line 43
+(isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 43, $this->source); })()), "etat", [], "any", false, false, false, 43) == "rejected")) {
+            // line 44
             echo "                        <span class=\"badge bg-danger\">";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 37, $this->source); })()), "etat", [], "any", false, false, false, 37), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 44, $this->source); })()), "etat", [], "any", false, false, false, 44), "html", null, true);
             echo "</span>
                     ";
-        } elseif ((twig_get_attribute($this->env, $this->source,         // line 38
-(isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 38, $this->source); })()), "etat", [], "any", false, false, false, 38) == "approved")) {
-            // line 39
+        } elseif ((twig_get_attribute($this->env, $this->source,         // line 45
+(isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 45, $this->source); })()), "etat", [], "any", false, false, false, 45) == "approved")) {
+            // line 46
             echo "                        <span class=\"badge bg-success\">";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 39, $this->source); })()), "etat", [], "any", false, false, false, 39), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 46, $this->source); })()), "etat", [], "any", false, false, false, 46), "html", null, true);
             echo "</span>
                     ";
         } else {
-            // line 41
+            // line 48
             echo "                        ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 41, $this->source); })()), "etat", [], "any", false, false, false, 41), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 48, $this->source); })()), "etat", [], "any", false, false, false, 48), "html", null, true);
             echo "
                     ";
         }
-        // line 43
+        // line 50
         echo "                <p>
                 <h6 class=\"card-subtitle mb-2 text-muted\">Date of postulation : ";
-        // line 44
-        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 44, $this->source); })()), "getPostulationDate", [], "method", false, false, false, 44), "Y-m-d"), "html", null, true);
+        // line 51
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 51, $this->source); })()), "getPostulationDate", [], "method", false, false, false, 51), "Y-m-d"), "html", null, true);
         echo "</h6>
                 
                 <h6 class=\"card-subtitle mb-2 text-muted\">Cover letter  </h6>
                 <p class=\"card-text\">";
-        // line 47
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 47, $this->source); })()), "getCoverLetter", [], "method", false, false, false, 47), "html", null, true);
+        // line 54
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 54, $this->source); })()), "getCoverLetter", [], "method", false, false, false, 54), "html", null, true);
         echo "</p>
                 <a href=\"";
-        // line 48
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("updatepost", ["id_p" => twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 48, $this->source); })()), "id", [], "any", false, false, false, 48), "id_u" => (isset($context["idUser"]) || array_key_exists("idUser", $context) ? $context["idUser"] : (function () { throw new RuntimeError('Variable "idUser" does not exist.', 48, $this->source); })())]), "html", null, true);
+        // line 55
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("updatepost", ["id_p" => twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 55, $this->source); })()), "id", [], "any", false, false, false, 55), "id_u" => (isset($context["idUser"]) || array_key_exists("idUser", $context) ? $context["idUser"] : (function () { throw new RuntimeError('Variable "idUser" does not exist.', 55, $this->source); })())]), "html", null, true);
         echo "\" class=\"card-link\">Update postulation | </a>
                     <a href\"=";
-        // line 49
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("deletepost", ["id_p" => twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 49, $this->source); })()), "id", [], "any", false, false, false, 49), "id_u" => (isset($context["idUser"]) || array_key_exists("idUser", $context) ? $context["idUser"] : (function () { throw new RuntimeError('Variable "idUser" does not exist.', 49, $this->source); })())]), "html", null, true);
+        // line 56
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("deletepost", ["id_p" => twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 56, $this->source); })()), "id", [], "any", false, false, false, 56), "id_u" => (isset($context["idUser"]) || array_key_exists("idUser", $context) ? $context["idUser"] : (function () { throw new RuntimeError('Variable "idUser" does not exist.', 56, $this->source); })())]), "html", null, true);
         echo "\" class=\"card-link\">Delete postulation</a>
             </div>
           </div>
@@ -222,7 +229,7 @@ class __TwigTemplate_99be38ba3a4e9ee0691a4cb765f5996cef15106f02ab95a0c3e5f4a15d3
      */
     public function getDebugInfo()
     {
-        return array (  195 => 5,  185 => 4,  165 => 49,  161 => 48,  157 => 47,  151 => 44,  148 => 43,  142 => 41,  136 => 39,  134 => 38,  129 => 37,  127 => 36,  122 => 35,  120 => 34,  111 => 28,  107 => 27,  103 => 26,  99 => 25,  85 => 14,  81 => 13,  72 => 6,  69 => 4,  59 => 3,  36 => 1,);
+        return array (  202 => 5,  192 => 4,  172 => 56,  168 => 55,  164 => 54,  158 => 51,  155 => 50,  149 => 48,  143 => 46,  141 => 45,  136 => 44,  134 => 43,  129 => 42,  127 => 41,  118 => 35,  114 => 34,  110 => 33,  106 => 32,  92 => 21,  88 => 20,  72 => 6,  69 => 4,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -232,9 +239,16 @@ class __TwigTemplate_99be38ba3a4e9ee0691a4cb765f5996cef15106f02ab95a0c3e5f4a15d3
 {% block main %}
     {% block hero %}
     {% endblock %}
-
+<style>
+    #main.main {
+        padding: 200px;
+    }
+    #breadcrumbs {
+        padding-left: 150px;
+        padding-right: 150px;
+    }
+</style>
 <main id=\"main\">
-    !-- End Breadcrumbs --
     <section id=\"breadcrumbs\" class=\"breadcrumbs\">
         <div class=\"d-flex justify-content-between align-items-center\"
           <h2>Postulation Details</h2>
@@ -286,6 +300,6 @@ class __TwigTemplate_99be38ba3a4e9ee0691a4cb765f5996cef15106f02ab95a0c3e5f4a15d3
   </main><!-- End #main -->
 {% endblock %}
 
-", "postulation/detailpostulationf.html.twig", "C:\\xampp\\htdocs\\Flixwork\\templates\\postulation\\detailpostulationf.html.twig");
+", "postulation/detailpostulationf.html.twig", "C:\\Users\\mouad\\Documents\\GitHub\\FlixWork\\templates\\postulation\\detailpostulationf.html.twig");
     }
 }

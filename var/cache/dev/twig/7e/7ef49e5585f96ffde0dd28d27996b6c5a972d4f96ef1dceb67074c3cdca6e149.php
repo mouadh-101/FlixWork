@@ -30,7 +30,6 @@ class __TwigTemplate_12a4c142edecf2b6b36e3dae028d2b141a4b93080368e85faf77029af19
             'title' => [$this, 'block_title'],
             'vendor' => [$this, 'block_vendor'],
             'css' => [$this, 'block_css'],
-            'body' => [$this, 'block_body'],
             'header' => [$this, 'block_header'],
             'hero' => [$this, 'block_hero'],
             'main' => [$this, 'block_main'],
@@ -100,11 +99,52 @@ class __TwigTemplate_12a4c142edecf2b6b36e3dae028d2b141a4b93080368e85faf77029af19
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-";
-        // line 42
-        $this->displayBlock('body', $context, $blocks);
-        // line 834
+
+<body>
+
+  <!-- ======= Header ======= -->
+  ";
+        // line 46
+        $this->displayBlock('header', $context, $blocks);
+        // line 88
+        echo "<!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  ";
+        // line 91
+        $this->displayBlock('hero', $context, $blocks);
+        // line 110
+        echo "<!-- End Hero -->
+ ";
+        // line 111
+        $this->displayBlock('main', $context, $blocks);
+        // line 788
+        echo "<!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  ";
+        // line 791
+        $this->displayBlock('footer', $context, $blocks);
+        // line 812
+        echo "<!-- End Footer -->
+
+  <a href=\"#\" class=\"back-to-top d-flex align-items-center justify-content-center\"><i class=\"bi bi-arrow-up-short\"></i></a>
+
+  <!-- vendorf JS Files -->
+  ";
+        // line 817
+        $this->displayBlock('vendorjs', $context, $blocks);
+        // line 826
         echo "
+  <!-- Template Main JS File -->
+  ";
+        // line 828
+        $this->displayBlock('js', $context, $blocks);
+        // line 831
+        echo "
+</body>
+
+
 </html>";
         
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
@@ -195,69 +235,6 @@ class __TwigTemplate_12a4c142edecf2b6b36e3dae028d2b141a4b93080368e85faf77029af19
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/stylef.css"), "html", null, true);
         echo "\" rel=\"stylesheet\">
   ";
-        
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
-
-        
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
-
-    }
-
-    // line 42
-    public function block_body($context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
-
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
-
-        // line 43
-        echo "<body>
-
-  <!-- ======= Header ======= -->
-  ";
-        // line 46
-        $this->displayBlock('header', $context, $blocks);
-        // line 88
-        echo "<!-- End Header -->
-
-  <!-- ======= Hero Section ======= -->
-  ";
-        // line 91
-        $this->displayBlock('hero', $context, $blocks);
-        // line 110
-        echo "<!-- End Hero -->
- ";
-        // line 111
-        $this->displayBlock('main', $context, $blocks);
-        // line 788
-        echo "<!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  ";
-        // line 791
-        $this->displayBlock('footer', $context, $blocks);
-        // line 812
-        echo "<!-- End Footer -->
-
-  <a href=\"#\" class=\"back-to-top d-flex align-items-center justify-content-center\"><i class=\"bi bi-arrow-up-short\"></i></a>
-
-  <!-- vendorf JS Files -->
-  ";
-        // line 817
-        $this->displayBlock('vendorjs', $context, $blocks);
-        // line 826
-        echo "
-  <!-- Template Main JS File -->
-  ";
-        // line 828
-        $this->displayBlock('js', $context, $blocks);
-        // line 831
-        echo "
-</body>
-";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -1446,7 +1423,7 @@ class __TwigTemplate_12a4c142edecf2b6b36e3dae028d2b141a4b93080368e85faf77029af19
      */
     public function getDebugInfo()
     {
-        return array (  1416 => 829,  1406 => 828,  1394 => 824,  1390 => 823,  1386 => 822,  1382 => 821,  1378 => 820,  1374 => 819,  1369 => 818,  1359 => 817,  1329 => 792,  1319 => 791,  1240 => 716,  1230 => 715,  1200 => 626,  1179 => 608,  1158 => 590,  1137 => 572,  1122 => 559,  1112 => 558,  1017 => 316,  1007 => 315,  984 => 300,  972 => 291,  959 => 281,  947 => 272,  892 => 219,  882 => 218,  827 => 171,  820 => 166,  810 => 165,  774 => 136,  764 => 135,  746 => 125,  740 => 122,  732 => 116,  722 => 115,  709 => 785,  707 => 715,  635 => 645,  633 => 558,  617 => 545,  609 => 540,  597 => 531,  589 => 526,  577 => 517,  569 => 512,  557 => 503,  549 => 498,  537 => 489,  529 => 484,  517 => 475,  509 => 470,  497 => 461,  489 => 456,  477 => 447,  469 => 442,  457 => 433,  449 => 428,  420 => 401,  418 => 315,  413 => 312,  411 => 218,  406 => 215,  404 => 165,  399 => 162,  397 => 135,  392 => 132,  390 => 115,  385 => 112,  375 => 111,  358 => 104,  344 => 92,  334 => 91,  286 => 51,  280 => 47,  270 => 46,  258 => 831,  256 => 828,  252 => 826,  250 => 817,  243 => 812,  241 => 791,  236 => 788,  234 => 111,  231 => 110,  229 => 91,  224 => 88,  222 => 46,  217 => 43,  207 => 42,  194 => 31,  184 => 30,  172 => 26,  168 => 25,  164 => 24,  160 => 23,  156 => 22,  152 => 21,  147 => 20,  137 => 19,  118 => 8,  107 => 834,  105 => 42,  94 => 33,  92 => 30,  88 => 28,  86 => 19,  77 => 13,  69 => 8,  60 => 1,);
+        return array (  1393 => 829,  1383 => 828,  1371 => 824,  1367 => 823,  1363 => 822,  1359 => 821,  1355 => 820,  1351 => 819,  1346 => 818,  1336 => 817,  1306 => 792,  1296 => 791,  1217 => 716,  1207 => 715,  1177 => 626,  1156 => 608,  1135 => 590,  1114 => 572,  1099 => 559,  1089 => 558,  994 => 316,  984 => 315,  961 => 300,  949 => 291,  936 => 281,  924 => 272,  869 => 219,  859 => 218,  804 => 171,  797 => 166,  787 => 165,  751 => 136,  741 => 135,  723 => 125,  717 => 122,  709 => 116,  699 => 115,  686 => 785,  684 => 715,  612 => 645,  610 => 558,  594 => 545,  586 => 540,  574 => 531,  566 => 526,  554 => 517,  546 => 512,  534 => 503,  526 => 498,  514 => 489,  506 => 484,  494 => 475,  486 => 470,  474 => 461,  466 => 456,  454 => 447,  446 => 442,  434 => 433,  426 => 428,  397 => 401,  395 => 315,  390 => 312,  388 => 218,  383 => 215,  381 => 165,  376 => 162,  374 => 135,  369 => 132,  367 => 115,  362 => 112,  352 => 111,  335 => 104,  321 => 92,  311 => 91,  263 => 51,  257 => 47,  247 => 46,  234 => 31,  224 => 30,  212 => 26,  208 => 25,  204 => 24,  200 => 23,  196 => 22,  192 => 21,  187 => 20,  177 => 19,  158 => 8,  144 => 831,  142 => 828,  138 => 826,  136 => 817,  129 => 812,  127 => 791,  122 => 788,  120 => 111,  117 => 110,  115 => 91,  110 => 88,  108 => 46,  93 => 33,  91 => 30,  87 => 28,  85 => 19,  76 => 13,  68 => 8,  59 => 1,);
     }
 
     public function getSourceContext()
@@ -1492,7 +1469,7 @@ class __TwigTemplate_12a4c142edecf2b6b36e3dae028d2b141a4b93080368e85faf77029af19
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-{% block body %}
+
 <body>
 
   <!-- ======= Header ======= -->
@@ -2283,8 +2260,8 @@ class __TwigTemplate_12a4c142edecf2b6b36e3dae028d2b141a4b93080368e85faf77029af19
   {% endblock %}
 
 </body>
-{% endblock %}
 
-</html>", "base.html.twig", "C:\\xampp\\htdocs\\Flixwork\\templates\\base.html.twig");
+
+</html>", "base.html.twig", "C:\\Users\\mouad\\Documents\\GitHub\\FlixWork\\templates\\base.html.twig");
     }
 }

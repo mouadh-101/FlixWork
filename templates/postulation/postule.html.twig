@@ -1,18 +1,35 @@
-{% extends 'baseb.html.twig' %}
+{% extends 'base.html.twig' %}
+{% set defaultEtatValue = '{{state}}' %}
+{% block hero %}
+  {% endblock %}
 {% block main %}
+<style>
+    #main.main {
+        padding: 100px;
+    }
+    #breadcrumbs {
+        padding-top:100;
+        padding-left: 150px;
+        padding-right: 150px;
+    }
+</style>
+  <section id="breadcrumbs" class="breadcrumbs">
+        <div class="d-flex justify-content-between align-items-center"
+          <h2>Postulation Submit</h2>
+          <ol>
+            <li><a href="{{ path('list_jobs')}}">Jobs</a>
+            <li>{{ jobTitle }}</li>
+          </ol>
+        </div>
+    </section>
   <main id="main" class="main">
-
     <div class="pagetitle">
       <h1>Postulation</h1>
     </div><!-- End Page Title -->
-
     <section class="section">
       <div class="row">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Let's postulate</h5>
-
-              <!-- General Form Elements -->
               <label for="inputPassword" class="col-sm-2 col-form-label">Job title</label>
               <input type="text" class="form-control" value="{{ jobTitle }}" disabled>
               <label for="inputPassword" class="col-sm-2 col-form-label">Date of postulation</label>
@@ -22,7 +39,8 @@
               {{ form_widget(formPstulation.etat, {
         'attr': {
             'class': 'form-select',
-            'aria-label': 'Default select example'
+            'aria-label': 'Default select example',
+            
         }
     }) }}
               <div class="row mb-3">
@@ -45,3 +63,4 @@
 
   </main>
 {% endblock %}
+

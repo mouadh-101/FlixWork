@@ -26,6 +26,8 @@
                     </p>
                     <h6 class="card-subtitle mb-2 text-muted">Description:</h6>
                     <p class="card-text">{{interview.description}}</p>
+                    <h6 class="card-subtitle mb-2 text-muted">Link :</h6>
+                    <p class="card-text">{{ interview.getInterviewLink()}}</p>
                     <a href="{{ path( 'updateinterview' , {'id_i' : interview.id,'id_u' : idUser})}}" class="card-link">Update Interview </a>
                     <a href="{{ path( 'deleteinterview' , {'id_i' : interview.id,'id_u' : idUser})}}" class="card-link">Delete Interview</a>
                     <a href="{{ path( 'list_interview' , {'id' : idUser})}}" class="card-link">Back to Interview</a>
@@ -34,3 +36,4 @@
     </section>
 </main>
 {% endblock %}
+

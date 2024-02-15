@@ -8,6 +8,7 @@ use App\Entity\Recruiter;
 use App\Entity\User;
 use App\Form\InterviewType;
 use App\Repository\InterviewRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -80,7 +81,7 @@ public function list($id, InterviewRepository $interviewrep, EntityManagerInterf
         ]);
     } elseif ($user instanceof Recruiter) {
         $interviews = $interviewrep->findBy(['recruiter' => $id]);
-        return $this->render('interview/interviewlistf.html.twig', [
+        return $this->render('interview/interviewlistr.html.twig', [
             'interviews' => $interviews ,
             'idUser' => $id
         ]);
@@ -101,10 +102,21 @@ public function list($id, InterviewRepository $interviewrep, EntityManagerInterf
         
     
         $interview = $query->getOneOrNullResult();
-        return $this->render('interview/detailinterview.html.twig', [
+        $user=$entityManager->getRepository(User::class)->find($id_u);
+        if($user instanceof Freelancer)
+        {
+            return $this->render('interview/detailinterviewf.html.twig', [
             'interview' => $interview,
             'idUser' => $id_u
-        ]);
+            ]);
+        }
+        elseif($user instanceof Recruiter)
+        {
+            return $this->render('interview/detailinterview.html.twig', [
+            'interview' => $interview,
+            'idUser' => $id_u
+            ]);
+        }
     }
     #[Route('/deleteinterview/{id_u}/{id_i}', name: 'deleteinterview')]
     public function deleteInterview($id_i,$id_u, ManagerRegistry $doctrine): Response

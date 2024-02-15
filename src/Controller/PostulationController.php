@@ -38,7 +38,6 @@ class PostulationController extends AbstractController
         $postulation->setPostulationDate(new \DateTime());
         $postulation->setFreelancer($freelancer);
         $postulation->setJob($job);
-       
         $form = $this->createForm(PostulationType::class, $postulation);
         $form->handleRequest($request);
         $em = $doctrine->getManager();

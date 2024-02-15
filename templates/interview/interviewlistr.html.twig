@@ -20,7 +20,7 @@
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Recruiter</th>
+                        <th scope="col">Freelancer</th>
                         <th scope="col">Interview Date</th>
                         <th scope="col">Interview link</th>
                         <th scope="col">Description</th>
@@ -31,10 +31,10 @@
                     {% for interview in interviews %}
                     <tr>
                         <th scope="row"><a href="{{ path( 'showinterview' ,{'id_i' : interview.id,'id_u' : idUser})}}">{{interview.id}}</a></th>
-                        <td>{{interview.recruiter.getFullName()}}</td>
+                        <td>{{interview.freelancer.getFullName()}}</td>
                         <td>{{interview.getInterviewDate()|date('Y-m-d') }}</td>
-                        <td>{{interview.description|slice(0,50) }}</td>
                         <td>{{interview.getInterviewLink()}}</td>
+                        <td>{{interview.description|slice(0,50) }}</td>
                         {% if interview.etat == 'under consideration' or interview.etat == 'under_consideration' %}
                             <td class="green"><span class="badge bg-warning">{{ interview.etat }}</span></td>
                         {% elseif interview.etat == 'rejected' %}

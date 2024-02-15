@@ -25,6 +25,7 @@ class __TwigTemplate_6140c56b766f42ae3b29dc68fdcaaa2fa03209508a2fc0d87f42dee8ac5
         $this->source = $this->getSourceContext();
 
         $this->blocks = [
+            'hero' => [$this, 'block_hero'],
             'main' => [$this, 'block_main'],
         ];
     }
@@ -32,7 +33,7 @@ class __TwigTemplate_6140c56b766f42ae3b29dc68fdcaaa2fa03209508a2fc0d87f42dee8ac5
     protected function doGetParent(array $context)
     {
         // line 1
-        return "baseb.html.twig";
+        return "base.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = [])
@@ -44,7 +45,10 @@ class __TwigTemplate_6140c56b766f42ae3b29dc68fdcaaa2fa03209508a2fc0d87f42dee8ac5
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "postulation/postule.html.twig"));
 
-        $this->parent = $this->loadTemplate("baseb.html.twig", "postulation/postule.html.twig", 1);
+        // line 2
+        $context["defaultEtatValue"] = "{{state}}";
+        // line 1
+        $this->parent = $this->loadTemplate("base.html.twig", "postulation/postule.html.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
@@ -54,7 +58,27 @@ class __TwigTemplate_6140c56b766f42ae3b29dc68fdcaaa2fa03209508a2fc0d87f42dee8ac5
 
     }
 
-    // line 2
+    // line 3
+    public function block_hero($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "hero"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "hero"));
+
+        // line 4
+        echo "  ";
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+    }
+
+    // line 5
     public function block_main($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -64,63 +88,83 @@ class __TwigTemplate_6140c56b766f42ae3b29dc68fdcaaa2fa03209508a2fc0d87f42dee8ac5
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "main"));
 
-        // line 3
-        echo "  <main id=\"main\" class=\"main\">
-
+        // line 6
+        echo "<style>
+    #main.main {
+        padding: 100px;
+    }
+    #breadcrumbs {
+        padding-top:100;
+        padding-left: 150px;
+        padding-right: 150px;
+    }
+</style>
+  <section id=\"breadcrumbs\" class=\"breadcrumbs\">
+        <div class=\"d-flex justify-content-between align-items-center\"
+          <h2>Postulation Submit</h2>
+          <ol>
+            <li><a href=\"";
+        // line 20
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("list_jobs");
+        echo "\">Jobs</a>
+            <li>";
+        // line 21
+        echo twig_escape_filter($this->env, (isset($context["jobTitle"]) || array_key_exists("jobTitle", $context) ? $context["jobTitle"] : (function () { throw new RuntimeError('Variable "jobTitle" does not exist.', 21, $this->source); })()), "html", null, true);
+        echo "</li>
+          </ol>
+        </div>
+    </section>
+  <main id=\"main\" class=\"main\">
     <div class=\"pagetitle\">
       <h1>Postulation</h1>
     </div><!-- End Page Title -->
-
     <section class=\"section\">
       <div class=\"row\">
           <div class=\"card\">
             <div class=\"card-body\">
-              <h5 class=\"card-title\">Let's postulate</h5>
-
-              <!-- General Form Elements -->
               <label for=\"inputPassword\" class=\"col-sm-2 col-form-label\">Job title</label>
               <input type=\"text\" class=\"form-control\" value=\"";
-        // line 17
-        echo twig_escape_filter($this->env, (isset($context["jobTitle"]) || array_key_exists("jobTitle", $context) ? $context["jobTitle"] : (function () { throw new RuntimeError('Variable "jobTitle" does not exist.', 17, $this->source); })()), "html", null, true);
+        // line 34
+        echo twig_escape_filter($this->env, (isset($context["jobTitle"]) || array_key_exists("jobTitle", $context) ? $context["jobTitle"] : (function () { throw new RuntimeError('Variable "jobTitle" does not exist.', 34, $this->source); })()), "html", null, true);
         echo "\" disabled>
               <label for=\"inputPassword\" class=\"col-sm-2 col-form-label\">Date of postulation</label>
               <input type=\"date\" class=\"form-control\" value=\"";
-        // line 19
-        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, (isset($context["postulationDate"]) || array_key_exists("postulationDate", $context) ? $context["postulationDate"] : (function () { throw new RuntimeError('Variable "postulationDate" does not exist.', 19, $this->source); })()), "Y-m-d"), "html", null, true);
+        // line 36
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, (isset($context["postulationDate"]) || array_key_exists("postulationDate", $context) ? $context["postulationDate"] : (function () { throw new RuntimeError('Variable "postulationDate" does not exist.', 36, $this->source); })()), "Y-m-d"), "html", null, true);
         echo "\" disabled>
               <label for=\"inputPassword\" class=\"col-sm-2 col-form-label\">Etat </label>
               ";
-        // line 21
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formPstulation"]) || array_key_exists("formPstulation", $context) ? $context["formPstulation"] : (function () { throw new RuntimeError('Variable "formPstulation" does not exist.', 21, $this->source); })()), 'form_start');
+        // line 38
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formPstulation"]) || array_key_exists("formPstulation", $context) ? $context["formPstulation"] : (function () { throw new RuntimeError('Variable "formPstulation" does not exist.', 38, $this->source); })()), 'form_start');
         echo "
               ";
-        // line 22
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formPstulation"]) || array_key_exists("formPstulation", $context) ? $context["formPstulation"] : (function () { throw new RuntimeError('Variable "formPstulation" does not exist.', 22, $this->source); })()), "etat", [], "any", false, false, false, 22), 'widget', ["attr" => ["class" => "form-select", "aria-label" => "Default select example"]]);
-        // line 27
+        // line 39
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formPstulation"]) || array_key_exists("formPstulation", $context) ? $context["formPstulation"] : (function () { throw new RuntimeError('Variable "formPstulation" does not exist.', 39, $this->source); })()), "etat", [], "any", false, false, false, 39), 'widget', ["attr" => ["class" => "form-select", "aria-label" => "Default select example"]]);
+        // line 45
         echo "
               <div class=\"row mb-3\">
                   ";
-        // line 29
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formPstulation"]) || array_key_exists("formPstulation", $context) ? $context["formPstulation"] : (function () { throw new RuntimeError('Variable "formPstulation" does not exist.', 29, $this->source); })()), "cover_letter", [], "any", false, false, false, 29), 'row', ["attr" => ["class" => "form-control", "style" => "height: 200px"]]);
+        // line 47
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formPstulation"]) || array_key_exists("formPstulation", $context) ? $context["formPstulation"] : (function () { throw new RuntimeError('Variable "formPstulation" does not exist.', 47, $this->source); })()), "cover_letter", [], "any", false, false, false, 47), 'row', ["attr" => ["class" => "form-control", "style" => "height: 200px"]]);
         echo "
               </div>
                 <div class=\"col-sm-10\">
                 ";
-        // line 32
-        if ((((isset($context["state"]) || array_key_exists("state", $context) ? $context["state"] : (function () { throw new RuntimeError('Variable "state" does not exist.', 32, $this->source); })()) == "rejected") || ((isset($context["state"]) || array_key_exists("state", $context) ? $context["state"] : (function () { throw new RuntimeError('Variable "state" does not exist.', 32, $this->source); })()) == "approved"))) {
-            // line 33
+        // line 50
+        if ((((isset($context["state"]) || array_key_exists("state", $context) ? $context["state"] : (function () { throw new RuntimeError('Variable "state" does not exist.', 50, $this->source); })()) == "rejected") || ((isset($context["state"]) || array_key_exists("state", $context) ? $context["state"] : (function () { throw new RuntimeError('Variable "state" does not exist.', 50, $this->source); })()) == "approved"))) {
+            // line 51
             echo "                  <button type=\"submit\" class=\"btn btn-primary\" disabled>Submit Postulation</button>
                 ";
         } else {
-            // line 35
+            // line 53
             echo "                  <button type=\"submit\" class=\"btn btn-primary\">Submit Postulation</button>
                 ";
         }
-        // line 37
+        // line 55
         echo "                </div>
               ";
-        // line 38
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formPstulation"]) || array_key_exists("formPstulation", $context) ? $context["formPstulation"] : (function () { throw new RuntimeError('Variable "formPstulation" does not exist.', 38, $this->source); })()), 'form_end');
+        // line 56
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formPstulation"]) || array_key_exists("formPstulation", $context) ? $context["formPstulation"] : (function () { throw new RuntimeError('Variable "formPstulation" does not exist.', 56, $this->source); })()), 'form_end');
         echo "
               <!-- End General Form Elements -->
 
@@ -160,26 +204,43 @@ class __TwigTemplate_6140c56b766f42ae3b29dc68fdcaaa2fa03209508a2fc0d87f42dee8ac5
      */
     public function getDebugInfo()
     {
-        return array (  123 => 38,  120 => 37,  116 => 35,  112 => 33,  110 => 32,  104 => 29,  100 => 27,  98 => 22,  94 => 21,  89 => 19,  84 => 17,  68 => 3,  58 => 2,  35 => 1,);
+        return array (  167 => 56,  164 => 55,  160 => 53,  156 => 51,  154 => 50,  148 => 47,  144 => 45,  142 => 39,  138 => 38,  133 => 36,  128 => 34,  112 => 21,  108 => 20,  92 => 6,  82 => 5,  72 => 4,  62 => 3,  51 => 1,  49 => 2,  36 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("{% extends 'baseb.html.twig' %}
+        return new Source("{% extends 'base.html.twig' %}
+{% set defaultEtatValue = '{{state}}' %}
+{% block hero %}
+  {% endblock %}
 {% block main %}
+<style>
+    #main.main {
+        padding: 100px;
+    }
+    #breadcrumbs {
+        padding-top:100;
+        padding-left: 150px;
+        padding-right: 150px;
+    }
+</style>
+  <section id=\"breadcrumbs\" class=\"breadcrumbs\">
+        <div class=\"d-flex justify-content-between align-items-center\"
+          <h2>Postulation Submit</h2>
+          <ol>
+            <li><a href=\"{{ path('list_jobs')}}\">Jobs</a>
+            <li>{{ jobTitle }}</li>
+          </ol>
+        </div>
+    </section>
   <main id=\"main\" class=\"main\">
-
     <div class=\"pagetitle\">
       <h1>Postulation</h1>
     </div><!-- End Page Title -->
-
     <section class=\"section\">
       <div class=\"row\">
           <div class=\"card\">
             <div class=\"card-body\">
-              <h5 class=\"card-title\">Let's postulate</h5>
-
-              <!-- General Form Elements -->
               <label for=\"inputPassword\" class=\"col-sm-2 col-form-label\">Job title</label>
               <input type=\"text\" class=\"form-control\" value=\"{{ jobTitle }}\" disabled>
               <label for=\"inputPassword\" class=\"col-sm-2 col-form-label\">Date of postulation</label>
@@ -189,7 +250,8 @@ class __TwigTemplate_6140c56b766f42ae3b29dc68fdcaaa2fa03209508a2fc0d87f42dee8ac5
               {{ form_widget(formPstulation.etat, {
         'attr': {
             'class': 'form-select',
-            'aria-label': 'Default select example'
+            'aria-label': 'Default select example',
+            
         }
     }) }}
               <div class=\"row mb-3\">
@@ -212,6 +274,7 @@ class __TwigTemplate_6140c56b766f42ae3b29dc68fdcaaa2fa03209508a2fc0d87f42dee8ac5
 
   </main>
 {% endblock %}
-", "postulation/postule.html.twig", "C:\\Users\\mouad\\Desktop\\Flixwork\\templates\\postulation\\postule.html.twig");
+
+", "postulation/postule.html.twig", "C:\\Users\\mouad\\Documents\\GitHub\\FlixWork\\templates\\postulation\\postule.html.twig");
     }
 }

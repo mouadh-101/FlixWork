@@ -1,26 +1,35 @@
-{% extends 'baseb.html.twig' %}
+{% extends 'base.html.twig' %}
+
 {% block main %}
-  <main id="main" class="main">
+{% block hero %}
+{% endblock %}
+<style>
+  .features{
+    padding-top:200px;
+  }
+</style>
+{% block categories %}
+    <section id="features" class="features">
+      <div class="container">
 
-    <div class="pagetitle">
-      <h1>Interviews</h1>
-    </div><!-- End Page Title -->
-
-    <section class="section dashboard">
+        <div class="section-title" data-aos="fade-up">
+          <h2>Interviews</h2>
+          <p>Here is a list of your Interviews </p>
+        </div>
+      <section class="section dashboard">
+      
       <div class="row">
 
         <!-- Left side columns -->
             <!-- Recent Sales -->
             <div class="col-12">
-              <div class="card recent-sales overflow-auto">
+              <div class="card recent-sales overflow-auto"data-aos="fade-up">
                 <div class="card-body">
-                  <h5 class="card-title">List of Interviews </h5>
-
                   <table class="table table-borderless datatable">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Freelancer</th>
+                        <th scope="col">Recruiter</th>
                         <th scope="col">Interview Date</th>
                         <th scope="col">Interview link</th>
                         <th scope="col">Description</th>
@@ -31,10 +40,10 @@
                     {% for interview in interviews %}
                     <tr>
                         <th scope="row"><a href="{{ path( 'showinterview' ,{'id_i' : interview.id,'id_u' : idUser})}}">{{interview.id}}</a></th>
-                        <td>{{interview.freelancer.getFullName()}}</td>
+                        <td>{{interview.recruiter.getFullName()}}</td>
                         <td>{{interview.getInterviewDate()|date('Y-m-d') }}</td>
-                        <td>{{interview.description|slice(0,50) }}</td>
                         <td>{{interview.getInterviewLink()}}</td>
+                        <td>{{interview.description|slice(0,50) }}</td>
                         {% if interview.etat == 'under consideration' or interview.etat == 'under_consideration' %}
                             <td class="green"><span class="badge bg-warning">{{ interview.etat }}</span></td>
                         {% elseif interview.etat == 'rejected' %}
@@ -56,6 +65,10 @@
             </div><!-- End Recent Sales -->
       </div>
     </section>
-
-  </main>
+      </div>
+    </section>
   {% endblock %}
+{% endblock %}
+
+
+
