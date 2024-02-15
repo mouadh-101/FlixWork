@@ -1,0 +1,64 @@
+{% extends 'baseb.html.twig' %}
+{% block main %}
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Postulation</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+            <!-- Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                  <h5 class="card-title">List of Postulations</h5>
+
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Postulation Date</th>
+                        <th scope="col">Cover letter</th>
+                        <th scope="col">Job Title</th>
+                        <th scope="col">Freelancer</th>
+                        <th scope="col">Etat</th>
+                        <th scope="col">Interview</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for post in postulations %}
+                    <tr>
+                        <th scope="row"><a href="{{ path( 'showpost' , {'id_p' : post.id,'id_u' : idUser})}}">{{post.id}}</a></th>
+                        <td>{{post.getPostulationDate()|date('Y-m-d') }}</td>
+                        <td>{{post.getCoverLetter()|slice(0,50) }}</td>
+                        <td>{{post.job.title}}</td>
+                        <td>{{post.getFreelancer().getFullName()}}</td>
+                        {% if post.etat == 'under consideration' or post.etat == 'under_consideration' %}
+                            <td class="green"><span class="badge bg-warning">{{ post.etat }}</span></td>
+                        {% elseif post.etat == 'rejected' %}
+                            <td class="green"><span class="badge bg-danger">{{ post.etat }}</span></td>
+                        {% elseif post.etat == 'approved' %}
+                            <td class="green"><span class="badge bg-success">{{ post.etat }}</span></td>
+                        {% else %}
+                            {{ post.etat }}
+                        {% endif %}
+                        <th scope="row"><a href="{{ path('addInterview', {'id_r': idUser, 'id_f': post.getFreelancer().getId() }) }}">Interview</a></th>
+
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End Recent Sales -->
+      </div>
+    </section>
+
+  </main>
+  {% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'baseb.html.twig' %}
+{% block main %}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Interview</h1>
+    </div><!-- End Page Title -->
+    <section class="section">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Interview Details</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Recruiter:</h6>
+                    <p class="card-text">{{interview.recruiter.getFullName()}}</p>
+                    <h6 class="card-subtitle mb-2 text-muted">Freelancer:</h6>
+                    <p class="card-text">{{interview.freelancer.getFullName()}}</p>
+                    <h6 class="card-subtitle mb-2 text-muted">Date of Interview :</h6>
+                    <p class="card-text">{{ interview.getInterviewDate()|date('Y-m-d') }}</p>
+                    <p class="card-text">{% if interview.etat == 'under consideration' %}
+                        <span class="badge bg-warning">{{ interview.etat }}</span>
+                    {% elseif interview.etat == 'rejected' %}
+                        <span class="badge bg-danger">{{interview.etat }}</span>
+                    {% elseif interview.etat == 'approved' %}
+                        <span class="badge bg-success">{{ interview.etat }}</span>
+                    {% else %}
+                        {{ interview.etat }}
+                    {% endif %}
+                    </p>
+                    <h6 class="card-subtitle mb-2 text-muted">Description:</h6>
+                    <p class="card-text">{{interview.description}}</p>
+                    <a href="{{ path( 'updateinterview' , {'id_i' : interview.id,'id_u' : idUser})}}" class="card-link">Update Interview </a>
+                    <a href="{{ path( 'deleteinterview' , {'id_i' : interview.id,'id_u' : idUser})}}" class="card-link">Delete Interview</a>
+                    <a href="{{ path( 'list_interview' , {'id' : idUser})}}" class="card-link">Back to Interview</a>
+                </div>
+            </div>
+    </section>
+</main>
+{% endblock %}

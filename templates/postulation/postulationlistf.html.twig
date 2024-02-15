@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+{% set approvedPostulations = postulations|filter(post => post.etat == 'approved') %}
+{% set rejectedPostulations = postulations|filter(post => post.etat == 'rejected') %}
+{% set underPostulations = postulations|filter(post => post.etat == 'under_consideration' or post.etat == 'under consideration') %}
+  {% block main %}
+    {% block hero %}
+    {% endblock %}
+    <br><br><br><br><br><br><br>
+    {% block stat %}
+    <section id="counts" class="counts">
+      <div class="container">
+
+        <div class="row">
+          <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-xl-start" data-aos="fade-right" data-aos-delay="150">
+            <img src="{{asset('img/counts.svg')}}" alt="" class="img-fluid">
+          </div>
+
+          <div class="col-xl-7 d-flex align-items-stretch pt-4 pt-xl-0" data-aos="fade-left" data-aos-delay="300">
+            <div class="content d-flex flex-column justify-content-center">
+              <div class="row">
+                <div class="col-md-6 d-md-flex align-items-md-stretch">
+                  <div class="count-box">
+                    <i class="bi bi-journal-richtext"></i>
+                    <span data-purecounter-start="0" data-purecounter-end="{{ postulations|length }}" data-purecounter-duration="1" class="purecounter"></span>
+                    <p><strong>Postulations : </strong> you have postulated <strong>{{ postulations|length }}</strong> untel now </p>
+                  </div>
+                </div>
+                <div class="col-md-6 d-md-flex align-items-md-stretch">
+                  <div class="count-box">
+                    <i class="bi bi-emoji-smile"></i>
+                    <span data-purecounter-start="0" data-purecounter-end="{{approvedPostulations|length}}" data-purecounter-duration="1" class="purecounter">65</span>
+                    <p><strong>Aproved Postulations : {{approvedPostulations|length}} </strong>of your postulations are approved</p>
+                  </div>
+                </div>
+                <div class="col-md-6 d-md-flex align-items-md-stretch">
+                  <div class="count-box">
+                    <i class="bi bi-clock"></i>
+                    <span data-purecounter-start="0" data-purecounter-end="{{underPostulations|length}}" data-purecounter-duration="1" class="purecounter">18</span>
+                    <p><strong>Under consideration Postulations : {{underPostulations|length}} </strong> of your postulations are under consideration</p>
+                  </div>
+                </div>
+                <div class="col-md-6 d-md-flex align-items-md-stretch">
+                  <div class="count-box">
+                    <i class="bi bi-emoji-frown"></i>
+                    <span data-purecounter-start="0" data-purecounter-end="{{rejectedPostulations|length}}" data-purecounter-duration="1" class="purecounter">18</span>
+                    <p><strong>Rejected Postulations : {{rejectedPostulations|length}} </strong> of your postulations are rejected</p>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End .content-->
+          </div>
+        </div>
+
+      </div>
+    </section>
+    {% endblock %}
+    {% block categories %}
+    <section id="features" class="features">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Postulations</h2>
+          <p>Here is a list of your postulations </p>
+        </div>
+      <section class="section dashboard">
+      
+      <div class="row">
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto"data-aos="fade-up">
+                <div class="card-body">
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Postulation Date</th>
+                        <th scope="col">Cover letter</th>
+                        <th scope="col">Job Title</th>
+                        <th scope="col">Etat</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for post in postulations %}
+                    <tr>
+                        <th scope="row"><a href="{{ path( 'showpost' ,{'id_p' : post.id,'id_u' : idUser})}}">{{post.id}}</a></th>
+                        <td>{{post.getPostulationDate()|date('Y-m-d') }}</td>
+                        <td>{{post.getCoverLetter()|slice(0,50) }}</td>
+                        <td>{{post.job.title}}</td>
+                        {% if post.etat == 'under consideration' or post.etat == 'under_consideration' %}
+                            <td class="green"><span class="badge bg-warning">{{ post.etat }}</span></td>
+                        {% elseif post.etat == 'rejected' %}
+                            <td class="green"><span class="badge bg-danger">{{ post.etat }}</span></td>
+                        {% elseif post.etat == 'approved' %}
+                            <td class="green"><span class="badge bg-success">{{ post.etat }}</span></td>
+                        {% else %}
+                            {{ post.etat }}
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End Recent Sales -->
+      </div>
+    </section>
+      </div>
+    </section>
+  {% endblock %}
+{% endblock %}

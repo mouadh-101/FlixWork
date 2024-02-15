@@ -1,0 +1,32 @@
+{% extends 'baseb.html.twig' %}
+{% block main %}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Postulation</h1>
+    </div><!-- End Page Title -->
+    <section class="section">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{post.job.title}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Date of postulation :</h6>
+                    <p class="card-text">{{ post.getPostulationDate()|date('Y-m-d') }}</p>
+                    <p class="card-text">{% if post.etat == 'under consideration' %}
+                        <span class="badge bg-warning">{{ post.etat }}</span>
+                    {% elseif post.etat == 'rejected' %}
+                        <span class="badge bg-danger">{{ post.etat }}</span>
+                    {% elseif post.etat == 'approved' %}
+                        <span class="badge bg-success">{{ post.etat }}</span>
+                    {% else %}
+                        {{ post.etat }}
+                    {% endif %}
+                    </p>
+                    <h6 class="card-subtitle mb-2 text-muted">Cover letter : </h6>
+                    <p class="card-text">{{ post.getCoverLetter() }}</p>
+                    <a href="{{ path( 'updatepost' , {'id_p' : post.id,'id_u' : idUser})}}" class="card-link">Update postulation </a>
+                    <a href="{{ path( 'deletepost' , {'id_p' : post.id,'id_u' : idUser})}}" class="card-link">Delete postulation</a>
+                    <a href="{{ path( 'list_postulation' , {'id' : idUser})}}" class="card-link">Back to postulations</a>
+                </div>
+            </div>
+    </section>
+</main>
+{% endblock %}
