@@ -1,0 +1,50 @@
+{% extends 'baseb.html.twig' %}
+{% block main %}
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Postulation</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Let's postulate</h5>
+
+              <!-- General Form Elements -->
+              <label for="inputPassword" class="col-sm-2 col-form-label">Job title</label>
+              <input type="text" class="form-control" value="{{ jobTitle }}" disabled>
+              <label for="inputPassword" class="col-sm-2 col-form-label">Date of postulation</label>
+              <input type="date" class="form-control" value="{{ postulationDate|date('Y-m-d') }}" disabled>
+              <label for="inputPassword" class="col-sm-2 col-form-label">Etat </label>
+              {% if state == 'under consideration' %}
+                <span class="badge bg-warning">{{ state }}</span>
+              {% elseif state == 'rejected' %}
+                <span class="badge bg-danger">{{ state }}</span>
+              {% elseif state == 'approved' %}
+                <span class="badge bg-success">{{ state }}</span>
+              {% else %}
+                {{ state }}
+              {% endif %}
+              {{ form_start(formPstulation) }}
+              <div class="row mb-3">
+                  {{ form_row(formPstulation.cover_letter, {'attr': {'class': 'form-control', 'style': 'height: 200px'}}) }}
+              </div>
+                <div class="col-sm-10">
+                {% if state == 'rejected' or state == 'approved' %}
+                  <button type="submit" class="btn btn-primary" disabled>Submit Postulation</button>
+                {% else %}
+                  <button type="submit" class="btn btn-primary">Submit Postulation</button>
+                {%endif %}
+                </div>
+              {{ form_end(formPstulation) }}
+              <!-- End General Form Elements -->
+
+            </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+{% endblock %}

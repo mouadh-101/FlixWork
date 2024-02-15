@@ -1,0 +1,31 @@
+{% extends 'baseb.html.twig' %}
+{% block main %}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Training</h1>
+    </div><!-- End Page Title -->
+    <section class="section">
+            <div class="card">
+                <div class="card-body">
+                 <h6 class="card-subtitle mb-2 text-muted">id: </h6>
+                    <h5 class="card-title">{{training.id}}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted">title: </h6>
+                    <h5 class="card-title">{{training.title}}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted">description : </h6>
+                    <h5 class="card-title">{{training.description}}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted">StartDate : </h6>
+                    <h5 class="card-title">{{training.getStartDate()|date('Y-m-d')}}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted">EndDate : </h6>
+                    <h5 class="card-title">{{training.getEndDate()|date('Y-m-d')}}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted">NumberOfPlaces : </h6>
+                    <h5 class="card-title">{{training.getNumberOfPlaces()}}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted">trainer : </h6>
+                    <h5 class="card-title">{{training.trainer.getFullName()}}</h5>
+                     
+
+                    
+                </div>
+            </div>
+    </section>
+</main>
+{% endblock %}
