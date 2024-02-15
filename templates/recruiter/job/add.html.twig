@@ -2,7 +2,6 @@
 
 {% block main %}
     <main id="main" class="main">
-
         <div class="pagetitle">
             <h1>Add a New Recruiter Job</h1>
         </div><!-- End Page Title -->
@@ -20,10 +19,6 @@
                                 <div class="alert alert-danger custom-error">
                                     <strong>Error: {{ form_errors(form.title) }}</strong>
                                 </div>
-                                <script>
-                                    alert("Validation failed: {{ form_errors(form.title) }}");
-                                    event.preventDefault();
-                                </script>
                             {% endif %}
                         </div>
                         <div class="mb-3">
@@ -32,10 +27,6 @@
                                 <div class="alert alert-danger custom-error">
                                     <strong>Error: {{ form_errors(form.description) }}</strong>
                                 </div>
-                                <script>
-                                    alert("Validation failed: {{ form_errors(form.description) }}");
-                                    event.preventDefault();
-                                </script>
                             {% endif %}
                         </div>
                         <div class="mb-3">
@@ -46,10 +37,6 @@
                                         <div class="alert alert-danger custom-error">
                                             <strong>Error: Please select a future date for the deadline.</strong>
                                         </div>
-                                        <script>
-                                            alert("Validation failed: Please select a future date for the deadline.");
-                                            event.preventDefault();
-                                        </script>
                                     {% endif %}
                                 {% endfor %}
                             {% endif %}
@@ -60,10 +47,6 @@
                                 <div class="alert alert-danger custom-error">
                                     <strong>Error: {{ form_errors(form.type) }}</strong>
                                 </div>
-                                <script>
-                                    alert("Validation failed: {{ form_errors(form.type) }}");
-                                    event.preventDefault();
-                                </script>
                             {% endif %}
                         </div>
                         <div class="mb-3">
@@ -72,10 +55,14 @@
                                 <div class="alert alert-danger custom-error">
                                     <strong>Error: {{ form_errors(form.salary) }}</strong>
                                 </div>
-                                <script>
-                                    alert("Validation failed: {{ form_errors(form.salary) }}");
-                                    event.preventDefault();
-                                </script>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(form.category, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(form.category)|length > 0 %}
+                                <div class="alert alert-danger custom-error">
+                                    <strong>Error: {{ form_errors(form.category) }}</strong>
+                                </div>
                             {% endif %}
                         </div>
                         <div class="row mt-3">
@@ -93,10 +80,56 @@
 
     <script>
         function validateForm(event) {
+            event = event || window.event; // Use window.event if event is undefined
             // Your custom validation logic here
             // Display alert and prevent form submission
-            alert("Validation failed: Please check the form for specific errors.");
-            event.preventDefault();
+            var errorMessages = [];
+
+            // Check 'job title' field length
+            var jobTitleField = document.getElementById('job_title');
+            if (jobTitleField && jobTitleField.value.length > 20) {
+                errorMessages.push('Job title cannot be longer than 20 characters.');
+            }
+
+            // Check 'description' field length
+            var descriptionField = document.getElementById('job_description');
+            if (descriptionField && descriptionField.value.length > 3000) {
+                errorMessages.push('Description cannot be longer than 3000 characters.');
+            }
+
+            // Check 'job type' field length
+            var jobTypeField = document.getElementById('job_type');
+            if (jobTypeField && jobTypeField.value.length > 20) {
+                errorMessages.push('Job type cannot be longer than 20 characters.');
+            }
+
+            // Check 'category' field
+            var categoryField = document.getElementById('job_category');
+            if (categoryField && categoryField.value === '') {
+                errorMessages.push('Please select a category.');
+            }
+
+            // Check 'deadline' field
+            var deadlineField = document.getElementById('job_deadline');
+            if (deadlineField) {
+                var selectedDate = new Date(deadlineField.value);
+                var currentDate = new Date();
+
+                if (selectedDate <= currentDate) {
+                    errorMessages.push('Please select a future date for the deadline.');
+                }
+            }
+
+            // Check 'salary' field
+            var salaryField = document.getElementById('job_salary');
+            if (salaryField && isNaN(salaryField.value.trim())) {
+                errorMessages.push('Salary must be a valid numeric value.');
+            }
+
+            if (errorMessages.length > 0) {
+                alert(errorMessages.join('\n'));
+                event.preventDefault();
+            }
         }
     </script>
 {% endblock %}

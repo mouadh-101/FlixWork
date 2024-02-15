@@ -27,16 +27,19 @@ class JobType extends AbstractType
                 'constraints' => [
                     new NotBlank(['message' => 'Please enter a job title.']),
                     new Length([
-                        'max' => 255,
-                        'maxMessage' => 'The job title cannot be longer than {{ 10 }} characters.',
+                        'max' => 20,
+                        'maxMessage' => 'The job title cannot be longer than {{ limit }} characters.',
                     ]),
                 ],
             ])
-            
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
                 'constraints' => [
                     new NotBlank(['message' => 'Please enter a job description.']),
+                    new Length([
+                        'max' => 3000,
+                        'maxMessage' => 'The job description cannot be longer than {{ limit }} characters.',
+                    ]),
                 ],
             ])
             ->add('deadline', DateType::class, [
@@ -54,11 +57,15 @@ class JobType extends AbstractType
                 'label' => 'Job Type',
                 'constraints' => [
                     new NotBlank(['message' => 'Please enter a job type.']),
+                    new Length([
+                        'max' => 20,
+                        'maxMessage' => 'The job type cannot be longer than {{ limit }} characters.',
+                    ]),
                 ],
             ])
             ->add('salary', MoneyType::class, [
                 'label' => 'Salary',
-                'currency' => false, // Désactive la devise pour n'accepter que des valeurs numériques
+                'currency' => false,
                 'constraints' => [
                     new NotBlank(['message' => 'Please enter a salary.']),
                     new Regex([
@@ -71,6 +78,7 @@ class JobType extends AbstractType
                 'class' => JobsCategory::class,
                 'choice_label' => 'categoryName',
                 'label' => 'Category',
+                'placeholder' => 'Choose the category',
                 'constraints' => [
                     new NotBlank(['message' => 'Please select a category.']),
                 ],
