@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ClaimRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use symfony\component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ClaimRepository::class)]
 class Claim
@@ -28,7 +30,7 @@ class Claim
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $claimer = null;
+    private ?User $claimer = null;
 
     public function getId(): ?int
     {
@@ -94,4 +96,5 @@ class Claim
 
         return $this;
     }
+    
 }

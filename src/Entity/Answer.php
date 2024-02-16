@@ -18,11 +18,11 @@ class Answer
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?claim $claim = null;
+    private ?Claim $claim = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $answer = null;
+    private ?User $answer = null;
 
     public function getId(): ?int
     {
@@ -41,24 +41,24 @@ class Answer
         return $this;
     }
 
-    public function getClaim(): ?claim
+    public function getClaim(): ?Claim
     {
         return $this->claim;
     }
 
-    public function setClaim(?claim $claim): static
+    public function setClaim(?Claim $claim): static
     {
         $this->claim = $claim;
 
         return $this;
     }
 
-    public function getAnswer(): ?user
+    public function getAnswer(): ?User
     {
         return $this->answer;
     }
 
-    public function setAnswer(?user $answer): static
+    public function setAnswer(?User $answer): static
     {
         $this->answer = $answer;
 

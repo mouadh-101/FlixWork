@@ -1,0 +1,23 @@
+{% extends 'baseb.html.twig' %}
+{% block main %}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Show Answers</h1>
+    </div><!-- End Page Title -->
+    <section class="section">
+            <div class="card">
+                <div class="card-body">
+                 <h6 class="card-subtitle mb-2 text-muted">id: </h6>
+                    <h5 class="card-title">{{answer.id}}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted">description: </h6>
+                    <h5 class="card-title">{{answer.description}}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted">claim_subject : </h6>
+                    <h5 class="card-title">{{answer.claim.subject}}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted">claim : </h6>
+                    <h5 class="card-title">{{answer.claim.claimer.getFullName()}}</h5>
+                    
+                </div>
+            </div>
+    </section>
+</main>
+{% endblock %}

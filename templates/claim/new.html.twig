@@ -1,0 +1,48 @@
+
+{% extends 'baseb.html.twig' %}
+{% block main %}
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>add claim</h1>
+    </div><!-- End Page Title -->
+{{ form_start(form) }}
+
+    <section class="section">
+      <div class="row">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Let's Add claim</h5>
+              <!-- General Form Elements -->
+              <label for="inputPassword" class="col-sm-2 col-form-label"> subject </label>
+              <div class="col-sm-10">
+                  {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <label for="inputPassword" class="col-sm-2 col-form-label"> description </label>
+              <div class="col-sm-10">
+                  {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <label for="inputPassword" class="col-sm-2 col-form-label"> date </label>
+              <div class="col-sm-10">
+                  {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <label for="inputPassword" class="col-sm-2 col-form-label"> etat </label>
+              <div class="col-sm-10">
+                  {{ form_widget(form.etat, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+
+             
+
+             <button type="submit" class="btn btn-primary">Submit claim</button>
+              
+{{ form_end(form) }}
+
+            </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+{% endblock %}

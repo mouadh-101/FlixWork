@@ -66,33 +66,5 @@ class Recruiter extends User
         return $this;
     }
 
-    /**
-     * @return Collection<int, Job>
-     */
-    public function getJobs(): Collection
-    {
-        return $this->jobs;
-    }
-
-    public function addJob(Job $job): static
-    {
-        if (!$this->jobs->contains($job)) {
-            $this->jobs->add($job);
-            $job->setRecruiter($this);
-        }
-
-        return $this;
-    }
-
-    public function removeJob(Job $job): static
-    {
-        if ($this->jobs->removeElement($job)) {
-            // set the owning side to null (unless already changed)
-            if ($job->getRecruiter() === $this) {
-                $job->setRecruiter(null);
-            }
-        }
-
-        return $this;
-    }
+   
 }

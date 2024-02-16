@@ -1,0 +1,61 @@
+{% extends 'baseb.html.twig' %}
+
+{% block main %}
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>List of Answers</h1>
+  </div><!-- End Page Title -->
+
+  <section class="section dashboard">
+    <div class="row">
+
+      <!-- Left side columns -->
+      <!-- Recent Sales -->
+      <div class="col-12">
+        <div class="card recent-sales overflow-auto">
+          <div class="card-body">
+            <h5 class="card-title">List of answers</h5>
+
+            <table class="table table-borderless datatable">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Answer</th>
+                  <th scope="col">Claim subject</th>
+                  <th scope="col">Answer</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for answer in answers %}
+                <tr>
+                  <td><a href="{{ path('showanswer', {'id': answer.id}) }}">{{ answer.id }}</a></td>
+                  <td>{{ answer.description }}</td>
+                  <td>{{ answer.claim.subject }}</td>
+                  <td>{{ answer.answer is not null ? answer.answer.getFullName() : 'N/A' }}</td>
+                  <td>
+                    <a href="{{ path('editAnswer', {'id': answer.id}) }}" class="">
+                      <i class="material-icons">edit</i> <span class="material-symbols-outlined">
+</span>
+                    </a>
+                    <form method="post" action="{{ path('deleteAnswer', {'id': answer.id}) }}" onsubmit="return confirm('Are you sure you want to delete this answer?');">
+                      <button type="submit" class="">
+                        <i class="material-icons">delete</i> <span class="material-symbols-outlined"></span>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+      </div><!-- End Recent Sales -->
+    </div>
+  </section>
+
+</main>
+{% endblock %}

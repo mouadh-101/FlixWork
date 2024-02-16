@@ -1,0 +1,28 @@
+{% extends 'baseb.html.twig' %}
+{% block main %}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Show Answers</h1>
+    </div><!-- End Page Title -->
+    <section class="section">
+            <div class="card">
+                <div class="card-body">
+                 <h6 class="card-subtitle mb-2 text-muted">id: </h6>
+                    <h5 class="card-title">{{ claim.id }}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted">Subject : </h6>
+                    <h5 class="card-title">{{ claim.subject }}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted">Description : </h6>
+                    <h5 class="card-title"> {{ claim.description }}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted">Claim date :/h6>
+                    <h5 class="card-title">{{ claim.date|date('Y-m-d') }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Claim etat :/h6>
+                    <h5 class="card-title">{{ claim.etat }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Claimer :/h6>
+                    <h5 class="card-title">{{ claim.getClaimer().getFullName() }}</h5>
+                    
+                </div>
+            </div>
+    </section>
+</main>
+{% endblock %}
+

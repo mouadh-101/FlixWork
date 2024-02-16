@@ -31,7 +31,7 @@ class Job
 
     #[ORM\ManyToOne(inversedBy: 'jobs')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?recruiter $recruiter = null;
+    private ?Recruiter $recruiter = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]

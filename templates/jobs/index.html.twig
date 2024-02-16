@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block jobs  %}
+    <!-- ======= More jobs Section ======= -->
+    <section id="more-services" class="more-services">
+      <div class="container">
+
+        <div class="row">
+        {% for job in jobs%}
+          <div class="col-md-6 d-flex align-items-stretch">
+            <div class="card" style='background-image: url("{{asset('img/more-services-1.jpg')}}");' data-aos="fade-up" data-aos-delay="100">
+              <div class="card-body">
+                <h5 class="card-title"><a href="">{{job.title}}</a></h5>
+                <p class="card-text"><h5>Job descreption :</h5>{{job.description}}</p>
+                <h5> - Job Owner :{{job.recruiter.getFullName()}}</h5>
+                <h5> - DeadLine :{{ job.deadline|date('Y-m-d') }}</h5>
+                <h5> - Job type :{{job.type}}</h5>
+                <h5> - Job salary :{{job.salary}}</h5>
+                <h5> - Job Category :{{job.category.getCategoryName()}}</h5>
+                <div class="read-more"><a href="{{ path('postulate', {'idJob': job.id, 'idFreelancer': 2}) }}"><i class="bi bi-arrow-right"></i>Postulation </a></div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      </div>
+    </section>
+{% endblock %}
