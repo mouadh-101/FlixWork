@@ -115,7 +115,33 @@ class __TwigTemplate_6140c56b766f42ae3b29dc68fdcaaa2fa03209508a2fc0d87f42dee8ac5
         </div>
     </section>
   <main id=\"main\" class=\"main\">
-    <div class=\"pagetitle\">
+  ";
+        // line 26
+        if ( !twig_test_empty((isset($context["errors"]) || array_key_exists("errors", $context) ? $context["errors"] : (function () { throw new RuntimeError('Variable "errors" does not exist.', 26, $this->source); })()))) {
+            // line 27
+            echo "    <div class=\"alert alert-danger\">
+        <ul>
+            ";
+            // line 29
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable((isset($context["errors"]) || array_key_exists("errors", $context) ? $context["errors"] : (function () { throw new RuntimeError('Variable "errors" does not exist.', 29, $this->source); })()));
+            foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
+                // line 30
+                echo "                <li>";
+                echo twig_escape_filter($this->env, $context["error"], "html", null, true);
+                echo "</li>
+            ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 32
+            echo "        </ul>
+    </div>
+";
+        }
+        // line 35
+        echo "    <div class=\"pagetitle\">
       <h1>Postulation</h1>
     </div><!-- End Page Title -->
     <section class=\"section\">
@@ -124,47 +150,46 @@ class __TwigTemplate_6140c56b766f42ae3b29dc68fdcaaa2fa03209508a2fc0d87f42dee8ac5
             <div class=\"card-body\">
               <label for=\"inputPassword\" class=\"col-sm-2 col-form-label\">Job title</label>
               <input type=\"text\" class=\"form-control\" value=\"";
-        // line 34
-        echo twig_escape_filter($this->env, (isset($context["jobTitle"]) || array_key_exists("jobTitle", $context) ? $context["jobTitle"] : (function () { throw new RuntimeError('Variable "jobTitle" does not exist.', 34, $this->source); })()), "html", null, true);
+        // line 43
+        echo twig_escape_filter($this->env, (isset($context["jobTitle"]) || array_key_exists("jobTitle", $context) ? $context["jobTitle"] : (function () { throw new RuntimeError('Variable "jobTitle" does not exist.', 43, $this->source); })()), "html", null, true);
         echo "\" disabled>
               <label for=\"inputPassword\" class=\"col-sm-2 col-form-label\">Date of postulation</label>
               <input type=\"date\" class=\"form-control\" value=\"";
-        // line 36
-        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, (isset($context["postulationDate"]) || array_key_exists("postulationDate", $context) ? $context["postulationDate"] : (function () { throw new RuntimeError('Variable "postulationDate" does not exist.', 36, $this->source); })()), "Y-m-d"), "html", null, true);
+        // line 45
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, (isset($context["postulationDate"]) || array_key_exists("postulationDate", $context) ? $context["postulationDate"] : (function () { throw new RuntimeError('Variable "postulationDate" does not exist.', 45, $this->source); })()), "Y-m-d"), "html", null, true);
         echo "\" disabled>
               <label for=\"inputPassword\" class=\"col-sm-2 col-form-label\">Etat </label>
               ";
-        // line 38
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formPstulation"]) || array_key_exists("formPstulation", $context) ? $context["formPstulation"] : (function () { throw new RuntimeError('Variable "formPstulation" does not exist.', 38, $this->source); })()), 'form_start');
+        // line 47
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formPstulation"]) || array_key_exists("formPstulation", $context) ? $context["formPstulation"] : (function () { throw new RuntimeError('Variable "formPstulation" does not exist.', 47, $this->source); })()), 'form_start');
         echo "
-              ";
-        // line 39
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formPstulation"]) || array_key_exists("formPstulation", $context) ? $context["formPstulation"] : (function () { throw new RuntimeError('Variable "formPstulation" does not exist.', 39, $this->source); })()), "etat", [], "any", false, false, false, 39), 'widget', ["attr" => ["class" => "form-select", "aria-label" => "Default select example"]]);
-        // line 45
-        echo "
+              <input type=\"text\" class=\"form-control\" value=\"";
+        // line 48
+        echo twig_escape_filter($this->env, (isset($context["state"]) || array_key_exists("state", $context) ? $context["state"] : (function () { throw new RuntimeError('Variable "state" does not exist.', 48, $this->source); })()), "html", null, true);
+        echo "\" disabled>
               <div class=\"row mb-3\">
                   ";
-        // line 47
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formPstulation"]) || array_key_exists("formPstulation", $context) ? $context["formPstulation"] : (function () { throw new RuntimeError('Variable "formPstulation" does not exist.', 47, $this->source); })()), "cover_letter", [], "any", false, false, false, 47), 'row', ["attr" => ["class" => "form-control", "style" => "height: 200px"]]);
+        // line 50
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formPstulation"]) || array_key_exists("formPstulation", $context) ? $context["formPstulation"] : (function () { throw new RuntimeError('Variable "formPstulation" does not exist.', 50, $this->source); })()), "cover_letter", [], "any", false, false, false, 50), 'row', ["widget" => "textarea", "attr" => ["class" => "form-control", "style" => "height: 200px"], "tag" => "textarea"]);
         echo "
               </div>
                 <div class=\"col-sm-10\">
                 ";
-        // line 50
-        if ((((isset($context["state"]) || array_key_exists("state", $context) ? $context["state"] : (function () { throw new RuntimeError('Variable "state" does not exist.', 50, $this->source); })()) == "rejected") || ((isset($context["state"]) || array_key_exists("state", $context) ? $context["state"] : (function () { throw new RuntimeError('Variable "state" does not exist.', 50, $this->source); })()) == "approved"))) {
-            // line 51
+        // line 53
+        if ((((isset($context["state"]) || array_key_exists("state", $context) ? $context["state"] : (function () { throw new RuntimeError('Variable "state" does not exist.', 53, $this->source); })()) == "rejected") || ((isset($context["state"]) || array_key_exists("state", $context) ? $context["state"] : (function () { throw new RuntimeError('Variable "state" does not exist.', 53, $this->source); })()) == "approved"))) {
+            // line 54
             echo "                  <button type=\"submit\" class=\"btn btn-primary\" disabled>Submit Postulation</button>
                 ";
         } else {
-            // line 53
+            // line 56
             echo "                  <button type=\"submit\" class=\"btn btn-primary\">Submit Postulation</button>
                 ";
         }
-        // line 55
+        // line 58
         echo "                </div>
               ";
-        // line 56
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formPstulation"]) || array_key_exists("formPstulation", $context) ? $context["formPstulation"] : (function () { throw new RuntimeError('Variable "formPstulation" does not exist.', 56, $this->source); })()), 'form_end');
+        // line 59
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formPstulation"]) || array_key_exists("formPstulation", $context) ? $context["formPstulation"] : (function () { throw new RuntimeError('Variable "formPstulation" does not exist.', 59, $this->source); })()), 'form_end');
         echo "
               <!-- End General Form Elements -->
 
@@ -204,7 +229,7 @@ class __TwigTemplate_6140c56b766f42ae3b29dc68fdcaaa2fa03209508a2fc0d87f42dee8ac5
      */
     public function getDebugInfo()
     {
-        return array (  167 => 56,  164 => 55,  160 => 53,  156 => 51,  154 => 50,  148 => 47,  144 => 45,  142 => 39,  138 => 38,  133 => 36,  128 => 34,  112 => 21,  108 => 20,  92 => 6,  82 => 5,  72 => 4,  62 => 3,  51 => 1,  49 => 2,  36 => 1,);
+        return array (  192 => 59,  189 => 58,  185 => 56,  181 => 54,  179 => 53,  173 => 50,  168 => 48,  164 => 47,  159 => 45,  154 => 43,  144 => 35,  139 => 32,  130 => 30,  126 => 29,  122 => 27,  120 => 26,  112 => 21,  108 => 20,  92 => 6,  82 => 5,  72 => 4,  62 => 3,  51 => 1,  49 => 2,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -234,6 +259,15 @@ class __TwigTemplate_6140c56b766f42ae3b29dc68fdcaaa2fa03209508a2fc0d87f42dee8ac5
         </div>
     </section>
   <main id=\"main\" class=\"main\">
+  {% if errors is not empty %}
+    <div class=\"alert alert-danger\">
+        <ul>
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
     <div class=\"pagetitle\">
       <h1>Postulation</h1>
     </div><!-- End Page Title -->
@@ -247,15 +281,9 @@ class __TwigTemplate_6140c56b766f42ae3b29dc68fdcaaa2fa03209508a2fc0d87f42dee8ac5
               <input type=\"date\" class=\"form-control\" value=\"{{ postulationDate|date('Y-m-d') }}\" disabled>
               <label for=\"inputPassword\" class=\"col-sm-2 col-form-label\">Etat </label>
               {{ form_start(formPstulation) }}
-              {{ form_widget(formPstulation.etat, {
-        'attr': {
-            'class': 'form-select',
-            'aria-label': 'Default select example',
-            
-        }
-    }) }}
+              <input type=\"text\" class=\"form-control\" value=\"{{state}}\" disabled>
               <div class=\"row mb-3\">
-                  {{ form_row(formPstulation.cover_letter, {'attr': {'class': 'form-control', 'style': 'height: 200px', }}) }}
+                  {{ form_row(formPstulation.cover_letter, {'widget': 'textarea','attr': {'class': 'form-control', 'style': 'height: 200px'},'tag': 'textarea'}) }}
               </div>
                 <div class=\"col-sm-10\">
                 {% if state == 'rejected' or state == 'approved' %}

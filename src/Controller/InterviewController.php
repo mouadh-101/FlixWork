@@ -52,12 +52,17 @@ public function addInterview(ManagerRegistry $doctrine, Request $request, $id_r,
 
         return $this->redirectToRoute('list_interview',['id' => $id_r]);
     }
+    $errors = [];
+        foreach ($form->getErrors(true) as $error) {
+            $errors[] = $error->getMessage();
+        }
 
     return $this->render('interview/addinterview.html.twig', [
         'formInterview' => $form->createView(),
         'freelancer' => $freelancer,
         'recruiter' => $recruiter,
-        'idUser'=>$id_r
+        'idUser'=>$id_r,
+        'errors' => $errors,
     ]);
 }
 #[Route('/interviewlist/{id}', name: 'list_interview')]
@@ -160,18 +165,30 @@ public function updateinterview($id_u, $id_i, EntityManagerInterface $entityMana
         $entityManager->flush();
 
         return $this->redirectToRoute('list_interview',['id' => $id_u]);
-    } else {
+    } 
+    
+    else {
 
         // Render different templates based on user type
         if ($user instanceof Freelancer) {
+            $errors = [];
+        foreach ($form->getErrors(true) as $error) {
+            $errors[] = $error->getMessage();
+        }
             return $this->render('interview/addinterview.html.twig', [
                 'formInterview' => $form->createView(),
-                'idUser' => $id_u
+                'idUser' => $id_u,
+                'errors' => $errors,
             ]);
         } elseif ($user instanceof Recruiter) {
+            $errors = [];
+        foreach ($form->getErrors(true) as $error) {
+            $errors[] = $error->getMessage();
+        }
             return $this->render('interview/addinterview.html.twig', [
                 'formInterview' => $form->createView(),
-                'idUser' => $id_u
+                'idUser' => $id_u,
+                'errors' => $errors,
             ]);
         }
     }

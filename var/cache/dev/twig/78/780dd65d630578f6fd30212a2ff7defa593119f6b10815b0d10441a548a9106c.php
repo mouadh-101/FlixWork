@@ -163,14 +163,17 @@ class __TwigTemplate_99be38ba3a4e9ee0691a4cb765f5996cef15106f02ab95a0c3e5f4a15d3
         // line 54
         echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 54, $this->source); })()), "getCoverLetter", [], "method", false, false, false, 54), "html", null, true);
         echo "</p>
+                <li>
                 <a href=\"";
-        // line 55
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("updatepost", ["id_p" => twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 55, $this->source); })()), "id", [], "any", false, false, false, 55), "id_u" => (isset($context["idUser"]) || array_key_exists("idUser", $context) ? $context["idUser"] : (function () { throw new RuntimeError('Variable "idUser" does not exist.', 55, $this->source); })())]), "html", null, true);
-        echo "\" class=\"card-link\">Update postulation | </a>
-                    <a href\"=";
         // line 56
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("deletepost", ["id_p" => twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 56, $this->source); })()), "id", [], "any", false, false, false, 56), "id_u" => (isset($context["idUser"]) || array_key_exists("idUser", $context) ? $context["idUser"] : (function () { throw new RuntimeError('Variable "idUser" does not exist.', 56, $this->source); })())]), "html", null, true);
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("updatepost", ["id_p" => twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 56, $this->source); })()), "id", [], "any", false, false, false, 56), "id_u" => (isset($context["idUser"]) || array_key_exists("idUser", $context) ? $context["idUser"] : (function () { throw new RuntimeError('Variable "idUser" does not exist.', 56, $this->source); })())]), "html", null, true);
+        echo "\" class=\"card-link\">Update postulation | </a>
+
+                <a href=\"";
+        // line 58
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("deletepost", ["id_p" => twig_get_attribute($this->env, $this->source, (isset($context["post"]) || array_key_exists("post", $context) ? $context["post"] : (function () { throw new RuntimeError('Variable "post" does not exist.', 58, $this->source); })()), "id", [], "any", false, false, false, 58), "id_u" => (isset($context["idUser"]) || array_key_exists("idUser", $context) ? $context["idUser"] : (function () { throw new RuntimeError('Variable "idUser" does not exist.', 58, $this->source); })())]), "html", null, true);
         echo "\" class=\"card-link\">Delete postulation</a>
+                </li>
             </div>
           </div>
 
@@ -229,7 +232,7 @@ class __TwigTemplate_99be38ba3a4e9ee0691a4cb765f5996cef15106f02ab95a0c3e5f4a15d3
      */
     public function getDebugInfo()
     {
-        return array (  202 => 5,  192 => 4,  172 => 56,  168 => 55,  164 => 54,  158 => 51,  155 => 50,  149 => 48,  143 => 46,  141 => 45,  136 => 44,  134 => 43,  129 => 42,  127 => 41,  118 => 35,  114 => 34,  110 => 33,  106 => 32,  92 => 21,  88 => 20,  72 => 6,  69 => 4,  59 => 3,  36 => 1,);
+        return array (  205 => 5,  195 => 4,  174 => 58,  169 => 56,  164 => 54,  158 => 51,  155 => 50,  149 => 48,  143 => 46,  141 => 45,  136 => 44,  134 => 43,  129 => 42,  127 => 41,  118 => 35,  114 => 34,  110 => 33,  106 => 32,  92 => 21,  88 => 20,  72 => 6,  69 => 4,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -288,8 +291,11 @@ class __TwigTemplate_99be38ba3a4e9ee0691a4cb765f5996cef15106f02ab95a0c3e5f4a15d3
                 
                 <h6 class=\"card-subtitle mb-2 text-muted\">Cover letter  </h6>
                 <p class=\"card-text\">{{ post.getCoverLetter() }}</p>
+                <li>
                 <a href=\"{{ path( 'updatepost' , {'id_p' :post.id,'id_u' :idUser})}}\" class=\"card-link\">Update postulation | </a>
-                    <a href\"={{ path( 'deletepost' , {'id_p' :post.id,'id_u': idUser})}}\" class=\"card-link\">Delete postulation</a>
+
+                <a href=\"{{ path( 'deletepost' , {'id_p' :post.id,'id_u': idUser})}}\" class=\"card-link\">Delete postulation</a>
+                </li>
             </div>
           </div>
 

@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Postulation;
 use App\Entity\Recruiter;
 use App\Entity\User;
+use App\Form\PostulationrType;
 use App\Repository\PostulationRepository;
 use App\Form\PostulationType;
 use App\Repository\JobRepository;
@@ -49,6 +50,10 @@ class PostulationController extends AbstractController
 
             return $this->redirectToRoute('list_postulation',['id' => $idFreelancer]);
         }
+        $errors = [];
+        foreach ($form->getErrors(true) as $error) {
+            $errors[] = $error->getMessage();
+        }
 
         // Pass job title, postulation date, and state to the template
         $jobTitle = $job->getTitle();
@@ -60,6 +65,7 @@ class PostulationController extends AbstractController
             'jobTitle' => $jobTitle,
             'postulationDate' => $postulationDate,
             'state' => $state,
+            'errors' => $errors,
             
         ]);
     }
@@ -92,6 +98,7 @@ class PostulationController extends AbstractController
             return $this->render('postulation/detailpostulation.html.twig', [
                 'post' => $post,
                 'idUser' => $id_u
+                
             ]);
         }
         
@@ -171,9 +178,11 @@ public function updatepost($id_u, $id_p, EntityManagerInterface $entityManager, 
 
     $post = $query->getOneOrNullResult();
     $form = $this->createForm(PostulationType::class, $post);
+    $formr=$this->createForm(PostulationrType::class, $post);
     $form->handleRequest($request);
+    $formr->handleRequest($request);
 
-    if ($form->isSubmitted() && $form->isValid()) {
+    if (($form->isSubmitted() && $form->isValid()) ||($formr->isSubmitted() && $formr->isValid())) {
         $entityManager->persist($post);
         $entityManager->flush();
 
@@ -182,23 +191,35 @@ public function updatepost($id_u, $id_p, EntityManagerInterface $entityManager, 
         $jobTitle = $post->getJob()->getTitle();
         $postulationDate = $post->getPostulationDate();
         $state = $post->getEtat();
+        $cover=$post->getCoverLetter();
 
         // Render different templates based on user type
         if ($user instanceof Freelancer) {
+            $errors = [];
+        foreach ($form->getErrors(true) as $error) {
+            $errors[] = $error->getMessage();
+        }
             return $this->render('postulation/postule.html.twig', [
                 'formPstulation' => $form->createView(),
                 'jobTitle' => $jobTitle,
                 'postulationDate' => $postulationDate,
                 'state' => $state,
-                'idUser' => $id_u
+                'idUser' => $id_u,
+                'errors' => $errors,
             ]);
         } elseif ($user instanceof Recruiter) {
+            $errors = [];
+        foreach ($form->getErrors(true) as $error) {
+            $errors[] = $error->getMessage();
+        }
             return $this->render('postulation/postuler.html.twig', [
-                'formPstulation' => $form->createView(),
+                'formPstulation' => $formr->createView(),
                 'jobTitle' => $jobTitle,
                 'postulationDate' => $postulationDate,
+                'cover' => $cover,
                 'state' => $state,
-                'idUser' => $id_u
+                'idUser' => $id_u,
+                'errors' => $errors,
             ]);
         }
     }

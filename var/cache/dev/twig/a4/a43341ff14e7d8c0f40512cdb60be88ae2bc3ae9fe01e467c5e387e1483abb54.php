@@ -54,7 +54,7 @@ class __TwigTemplate_7f7a83cdf670598d0d7f4e3f6a52fbb46bb4add661fb7a860cc0af8917f
 
     }
 
-    // line 3
+    // line 4
     public function block_main($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -64,9 +64,36 @@ class __TwigTemplate_7f7a83cdf670598d0d7f4e3f6a52fbb46bb4add661fb7a860cc0af8917f
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "main"));
 
-        // line 4
-        echo "  <main id=\"main\" class=\"main\">
-    <div class=\"pagetitle\">
+        // line 5
+        echo "
+  <main id=\"main\" class=\"main\">
+  ";
+        // line 7
+        if ( !twig_test_empty((isset($context["errors"]) || array_key_exists("errors", $context) ? $context["errors"] : (function () { throw new RuntimeError('Variable "errors" does not exist.', 7, $this->source); })()))) {
+            // line 8
+            echo "    <div class=\"alert alert-danger\">
+        <ul>
+            ";
+            // line 10
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable((isset($context["errors"]) || array_key_exists("errors", $context) ? $context["errors"] : (function () { throw new RuntimeError('Variable "errors" does not exist.', 10, $this->source); })()));
+            foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
+                // line 11
+                echo "                <li>";
+                echo twig_escape_filter($this->env, $context["error"], "html", null, true);
+                echo "</li>
+            ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 13
+            echo "        </ul>
+    </div>
+";
+        }
+        // line 16
+        echo "    <div class=\"pagetitle\">
       <h1>Interview</h1>
     </div><!-- End Page Title -->
 
@@ -77,15 +104,15 @@ class __TwigTemplate_7f7a83cdf670598d0d7f4e3f6a52fbb46bb4add661fb7a860cc0af8917f
             <h5 class=\"card-title\">Let's Programme Interview</h5>
             <form method=\"post\">
               ";
-        // line 15
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formInterview"]) || array_key_exists("formInterview", $context) ? $context["formInterview"] : (function () { throw new RuntimeError('Variable "formInterview" does not exist.', 15, $this->source); })()), 'form_start');
+        // line 26
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formInterview"]) || array_key_exists("formInterview", $context) ? $context["formInterview"] : (function () { throw new RuntimeError('Variable "formInterview" does not exist.', 26, $this->source); })()), 'form_start');
         echo "
               <div class=\"row mb-3\">
                 <label for=\"inputText\" class=\"col-sm-2 col-form-label\">Recruiter</label>
                 <div class=\"col-sm-10\">
                   <input type=\"text\" class=\"form-control\" value=\"";
-        // line 19
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["formInterview"]) || array_key_exists("formInterview", $context) ? $context["formInterview"] : (function () { throw new RuntimeError('Variable "formInterview" does not exist.', 19, $this->source); })()), "vars", [], "any", false, false, false, 19), "data", [], "any", false, false, false, 19), "recruiter", [], "any", false, false, false, 19), "fullname", [], "any", false, false, false, 19), "html", null, true);
+        // line 30
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["formInterview"]) || array_key_exists("formInterview", $context) ? $context["formInterview"] : (function () { throw new RuntimeError('Variable "formInterview" does not exist.', 30, $this->source); })()), "vars", [], "any", false, false, false, 30), "data", [], "any", false, false, false, 30), "recruiter", [], "any", false, false, false, 30), "fullname", [], "any", false, false, false, 30), "html", null, true);
         echo "\" readonly>
                 </div>
               </div>
@@ -93,8 +120,8 @@ class __TwigTemplate_7f7a83cdf670598d0d7f4e3f6a52fbb46bb4add661fb7a860cc0af8917f
                 <label for=\"inputText\" class=\"col-sm-2 col-form-label\">Freelancer</label>
                 <div class=\"col-sm-10\">
                   <input type=\"text\" class=\"form-control\" value=\"";
-        // line 25
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["formInterview"]) || array_key_exists("formInterview", $context) ? $context["formInterview"] : (function () { throw new RuntimeError('Variable "formInterview" does not exist.', 25, $this->source); })()), "vars", [], "any", false, false, false, 25), "data", [], "any", false, false, false, 25), "freelancer", [], "any", false, false, false, 25), "fullname", [], "any", false, false, false, 25), "html", null, true);
+        // line 36
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["formInterview"]) || array_key_exists("formInterview", $context) ? $context["formInterview"] : (function () { throw new RuntimeError('Variable "formInterview" does not exist.', 36, $this->source); })()), "vars", [], "any", false, false, false, 36), "data", [], "any", false, false, false, 36), "freelancer", [], "any", false, false, false, 36), "fullname", [], "any", false, false, false, 36), "html", null, true);
         echo "\" readonly>
                 </div>
               </div>
@@ -102,8 +129,8 @@ class __TwigTemplate_7f7a83cdf670598d0d7f4e3f6a52fbb46bb4add661fb7a860cc0af8917f
                 <label for=\"inputText\" class=\"col-sm-2 col-form-label\">etat</label>
                 <div class=\"col-sm-10\">
                   ";
-        // line 31
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formInterview"]) || array_key_exists("formInterview", $context) ? $context["formInterview"] : (function () { throw new RuntimeError('Variable "formInterview" does not exist.', 31, $this->source); })()), "etat", [], "any", false, false, false, 31), 'widget', ["attr" => ["class" => "form-control"]]);
+        // line 42
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formInterview"]) || array_key_exists("formInterview", $context) ? $context["formInterview"] : (function () { throw new RuntimeError('Variable "formInterview" does not exist.', 42, $this->source); })()), "etat", [], "any", false, false, false, 42), 'widget', ["attr" => ["class" => "form-control"]]);
         echo "
                 </div>
               </div>
@@ -111,8 +138,8 @@ class __TwigTemplate_7f7a83cdf670598d0d7f4e3f6a52fbb46bb4add661fb7a860cc0af8917f
                 <label for=\"inputDate\" class=\"col-sm-2 col-form-label\">Date</label>
                 <div class=\"col-sm-10\">
                   ";
-        // line 37
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formInterview"]) || array_key_exists("formInterview", $context) ? $context["formInterview"] : (function () { throw new RuntimeError('Variable "formInterview" does not exist.', 37, $this->source); })()), "interview_date", [], "any", false, false, false, 37), 'widget', ["attr" => ["class" => "form-control"]]);
+        // line 48
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formInterview"]) || array_key_exists("formInterview", $context) ? $context["formInterview"] : (function () { throw new RuntimeError('Variable "formInterview" does not exist.', 48, $this->source); })()), "interview_date", [], "any", false, false, false, 48), 'widget', ["attr" => ["class" => "form-control"]]);
         echo "
                 </div>
               </div>
@@ -120,8 +147,8 @@ class __TwigTemplate_7f7a83cdf670598d0d7f4e3f6a52fbb46bb4add661fb7a860cc0af8917f
                 <label for=\"inputText\" class=\"col-sm-2 col-form-label\">Interview link</label>
                 <div class=\"col-sm-10\">
                   ";
-        // line 43
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formInterview"]) || array_key_exists("formInterview", $context) ? $context["formInterview"] : (function () { throw new RuntimeError('Variable "formInterview" does not exist.', 43, $this->source); })()), "interview_link", [], "any", false, false, false, 43), 'widget', ["attr" => ["class" => "form-control"]]);
+        // line 54
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formInterview"]) || array_key_exists("formInterview", $context) ? $context["formInterview"] : (function () { throw new RuntimeError('Variable "formInterview" does not exist.', 54, $this->source); })()), "interview_link", [], "any", false, false, false, 54), 'widget', ["attr" => ["class" => "form-control"]]);
         echo "
                 </div>
               </div>
@@ -129,8 +156,8 @@ class __TwigTemplate_7f7a83cdf670598d0d7f4e3f6a52fbb46bb4add661fb7a860cc0af8917f
                 <label for=\"inputPassword\" class=\"col-sm-2 col-form-label\">Description</label>
                 <div class=\"col-sm-10\">
                   ";
-        // line 49
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formInterview"]) || array_key_exists("formInterview", $context) ? $context["formInterview"] : (function () { throw new RuntimeError('Variable "formInterview" does not exist.', 49, $this->source); })()), "description", [], "any", false, false, false, 49), 'widget', ["attr" => ["class" => "form-control", "style" => "height: 100px"]]);
+        // line 60
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formInterview"]) || array_key_exists("formInterview", $context) ? $context["formInterview"] : (function () { throw new RuntimeError('Variable "formInterview" does not exist.', 60, $this->source); })()), "description", [], "any", false, false, false, 60), 'widget', ["attr" => ["class" => "form-control", "style" => "height: 100px"]]);
         echo "
                 </div>
               </div>
@@ -138,8 +165,8 @@ class __TwigTemplate_7f7a83cdf670598d0d7f4e3f6a52fbb46bb4add661fb7a860cc0af8917f
                 <button type=\"submit\" class=\"btn btn-primary\">Submit Interview</button>
               </div>
               ";
-        // line 55
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formInterview"]) || array_key_exists("formInterview", $context) ? $context["formInterview"] : (function () { throw new RuntimeError('Variable "formInterview" does not exist.', 55, $this->source); })()), 'form_end');
+        // line 66
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formInterview"]) || array_key_exists("formInterview", $context) ? $context["formInterview"] : (function () { throw new RuntimeError('Variable "formInterview" does not exist.', 66, $this->source); })()), 'form_end');
         echo "
             </form>
           </div>
@@ -177,15 +204,26 @@ class __TwigTemplate_7f7a83cdf670598d0d7f4e3f6a52fbb46bb4add661fb7a860cc0af8917f
      */
     public function getDebugInfo()
     {
-        return array (  142 => 55,  133 => 49,  124 => 43,  115 => 37,  106 => 31,  97 => 25,  88 => 19,  81 => 15,  68 => 4,  58 => 3,  35 => 1,);
+        return array (  169 => 66,  160 => 60,  151 => 54,  142 => 48,  133 => 42,  124 => 36,  115 => 30,  108 => 26,  96 => 16,  91 => 13,  82 => 11,  78 => 10,  74 => 8,  72 => 7,  68 => 5,  58 => 4,  35 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("{% extends 'baseb.html.twig' %}
 
+
 {% block main %}
+
   <main id=\"main\" class=\"main\">
+  {% if errors is not empty %}
+    <div class=\"alert alert-danger\">
+        <ul>
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
     <div class=\"pagetitle\">
       <h1>Interview</h1>
     </div><!-- End Page Title -->
@@ -244,6 +282,6 @@ class __TwigTemplate_7f7a83cdf670598d0d7f4e3f6a52fbb46bb4add661fb7a860cc0af8917f
     </section>
   </main>
 {% endblock %}
-", "interview/addinterview.html.twig", "C:\\Users\\mouad\\Desktop\\Flixwork\\templates\\interview\\addinterview.html.twig");
+", "interview/addinterview.html.twig", "C:\\Users\\mouad\\Documents\\GitHub\\FlixWork\\templates\\interview\\addinterview.html.twig");
     }
 }

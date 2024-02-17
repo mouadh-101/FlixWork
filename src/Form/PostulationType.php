@@ -6,25 +6,25 @@ use App\Entity\Postulation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class PostulationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $options = [
-            'under consideration' => 'under consideration',
-            'rejected' => 'rejected',
-            'approved' => 'approved',
-        ];
+        
         $builder
-            ->add('cover_letter')
-            ->add('etat', ChoiceType::class, [
-                'choices' => $options,
-                'label' => 'Etat',
-                // Autres options pour le champ 'etat' si nécessaire
-            ])
+        ->add('cover_letter', TextareaType::class, [
+            'constraints' => [
+                new Assert\Length([
+                    'max' => 500,
+                    'maxMessage' => 'Cover letter must be at most {{ limit }} characters long.',
+                ]),
+            ],
+        ])
         ;
     }
 

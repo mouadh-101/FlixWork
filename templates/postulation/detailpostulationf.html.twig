@@ -52,8 +52,11 @@
                 
                 <h6 class="card-subtitle mb-2 text-muted">Cover letter  </h6>
                 <p class="card-text">{{ post.getCoverLetter() }}</p>
+                <li>
                 <a href="{{ path( 'updatepost' , {'id_p' :post.id,'id_u' :idUser})}}" class="card-link">Update postulation | </a>
-                    <a href"={{ path( 'deletepost' , {'id_p' :post.id,'id_u': idUser})}}" class="card-link">Delete postulation</a>
+
+                <a href="{{ path( 'deletepost' , {'id_p' :post.id,'id_u': idUser})}}" class="card-link">Delete postulation</a>
+                </li>
             </div>
           </div>
 
