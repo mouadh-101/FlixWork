@@ -15,19 +15,15 @@
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body">
                             <!-- Search Bar -->
-                            <!-- Assuming you have a search form or input here -->
                             <div class="mb-3">
                                 <!-- Your search form or input goes here -->
                             </div>
 
-                            <!-- Add Job Button -->
-                            <div class="mb-3 d-flex justify-content-between align-items-center">
-                                <!-- Your search form or input goes here -->
-                                <a href="{{ path('recruiter_job_add') }}" class="btn btn-warning" style="width: 150px;">Add Job</a>
-                            </div>
-
+                            <!-- Table -->
                             <table class="table border datatable">
+                                <!-- Table Header -->
                                 <thead>
+                                    <!-- Header Rows -->
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Title</th>
@@ -38,8 +34,11 @@
                                         <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
+
+                                <!-- Table Body -->
                                 <tbody>
                                     {% for job in jobs %}
+                                        <!-- Rows for Job Data -->
                                         <tr>
                                             <th scope="row">{{ job.id }}</th>
                                             <td>{{ job.title }}</td>
@@ -59,9 +58,14 @@
                                     {% endfor %}
                                 </tbody>
                             </table>
+
+                            <!-- Add Job Button -->
+                            <div class="mb-3 d-flex justify-content-end">
+                                <a href="{{ path('recruiter_job_add') }}" class="btn btn-warning">Add Job</a>
+                            </div>
                         </div>
                     </div>
-                </div><!-- End Recent Sales -->
+                </div>
             </div>
         </section>
 
