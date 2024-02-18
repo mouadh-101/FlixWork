@@ -6,7 +6,7 @@
     <div class="pagetitle">
       <h1>Training</h1>
     </div><!-- End Page Title -->
-{{ form_start(formA) }}
+{{ form_start(formA,{attr:{novalidate:'novalidate'}}) }}
 
     <section class="section">
       <div class="row">
@@ -18,31 +18,37 @@
               <label for="inputPassword" class="col-sm-2 col-form-label">TITLE</label>
               <div class="col-sm-10">
                   {{ form_widget(formA.title, {'attr': {'class': 'form-control'}}) }}
+                  {{ form_errors(formA.title, {'attr': {'class': 'text-danger'}}) }}
                 </div>
                 
 
               <label for="inputPassword" class="col-sm-2 col-form-label">DESCRIPTION</label>
               <div class="col-sm-10">
                   {{ form_widget(formA.description, {'attr': {'class': 'form-control'}}) }}
+                  {{ form_errors(formA.description, {'attr': {'class': 'text-danger'}}) }}
                 </div>
 
               <label for="inputPassword" class="col-sm-2 col-form-label">START DATE</label>
               <div class="col-sm-10">
                   {{ form_widget(formA.start_date, {'attr': {'class': 'form-control'}}) }}
+                  {{ form_errors(formA.start_date, {'attr': {'class': 'text-danger'}}) }}
                 </div>
 
               <label for="inputPassword" class="col-sm-2 col-form-label">END DATE</label>
               <div class="col-sm-10">
                   {{ form_widget(formA.end_date, {'attr': {'class': 'form-control'}}) }}
+                  {{ form_errors(formA.end_date, {'attr': {'class': 'text-danger'}}) }}
                 </div>
 
               <label for="inputPassword" class="col-sm-2 col-form-label">NUMBER OF PLACES</label>
               <div class="col-sm-10">
                   {{ form_widget(formA.number_of_places, {'attr': {'class': 'form-control'}}) }}
+                  {{ form_errors(formA.number_of_places, {'attr': {'class': 'text-danger'}}) }}
                 </div>
               <label for="inputPassword" class="col-sm-2 col-form-label">CATEGORY</label>
               <div class="col-sm-10">
                   {{ form_widget(formA.category, {'attr': {'class': 'form-control'}}) }}
+                  {{ form_errors(formA.category, {'attr': {'class': 'text-danger'}}) }}
                 </div>
 
              

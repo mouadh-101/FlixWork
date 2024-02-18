@@ -4,3 +4,9 @@ twig:
 when@test:
     twig:
         strict_variables: true
+form_themes:
+    - bootstrap_4_layout.html.twig 
+
+framework:
+    validation:
+        enable_annotations: true
