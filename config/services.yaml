@@ -6,13 +6,13 @@
 parameters:
 
 services:
-    # default configuration for services in *this* file
+    # Configuration par défaut pour les services dans ce fichier
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true      # Injecte automatiquement les dépendances dans vos services.
+        autoconfigure: true # Enregistre automatiquement vos services en tant que commandes, abonnés d'événements, etc.
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
+    # Rend les classes dans src/ disponibles pour être utilisées en tant que services
+    # Cela crée un service par classe dont l'ID est le nom de classe entièrement qualifié
     App\:
         resource: '../src/'
         exclude:
@@ -20,5 +20,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # Ajoutez d'autres définitions de services lorsque vous avez besoin d'une configuration explicite
+    # Veuillez noter que les dernières définitions remplacent toujours les précédentes
+    App\Entity\User:
+        autowire: true

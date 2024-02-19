@@ -5,8 +5,6 @@ namespace App\Entity;
 use App\Repository\JobRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Recruiter;
-use App\Entity\JobsCategory;
 
 #[ORM\Entity(repositoryClass: JobRepository::class)]
 class Job
@@ -30,7 +28,8 @@ class Job
 
     #[ORM\Column]
     private ?float $salary = null;
-    #[ORM\ManyToOne]
+
+    #[ORM\ManyToOne(inversedBy: 'jobs')]
     #[ORM\JoinColumn(nullable: false)]
     private ?recruiter $recruiter = null;
 

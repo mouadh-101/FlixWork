@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+
+{% block sidebar %}
+{% endblock %}
+
+{% block body %}
+<div class="row" style="display: flex;align-items: center;justify-content: center;margin-top: 150px;">
+<div class="col-lg-6">
+
+<div class="card">
+            <div class="card-body">
+            <a href="{{path('adduser')}}"><i class="ri-arrow-left-circle-fill" style="font-size: 50px;"></i>
+            
+              <h5 class="card-title">Liste Des Utilisateurs</h5>
+
+              <!-- Table with stripped rows -->
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>FullName</th>
+    <th>Email</th>
+    
+    <th>UserType</th>
+    <th>Suppression</th>
+    <th>Modification</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for user in users %}
+    <tr>
+    <td>{{ user.fullName }}</td>
+    <td>{{ user.email }}</td>
+    
+    <td>{{ user.userType }}</td>
+    <td>
+        {# Assurez-vous que user.id est défini avant de générer l'URL #}
+       
+            <a class="btn btn-danger" href="{{ path('supp_user', {'id': user.id}) }}">Supprimer</a>
+       
+        
+    </td>
+     
+    <td>
+        {# Lien vers la route de modification, avec l'identifiant de l'utilisateur #}
+        <a class="btn btn-success" href="{{ path('modifuser', {'id': user.id}) }}">Modifier</a>
+    </td>
+    </tr>
+    {% endfor %}
+                  
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
+            </div>
+          </div>
+
+
+
+
+
+
+
+<div class="example-wrapper">
+
+{% endblock %}

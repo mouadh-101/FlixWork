@@ -1,3 +1,21 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+    path: /
+    controller: App\Controller\UserController::index
+    methods: ['GET']
+
+add_user:
+    path: /adduser
+    controller: App\Controller\UserController::adduser
+    methods: ['GET', 'POST']
+
+app_user:
+    path: /app_user
+    controller: App\Controller\UserController::app_user
+    methods: ['GET']
+app_login:
+    path: /login
+    controller: 'App\Controller\SecurityController::login'
+    methods: ['GET', 'POST']
+
+app_logout:
+    path: /logout
