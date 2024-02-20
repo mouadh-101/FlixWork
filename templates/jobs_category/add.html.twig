@@ -3,54 +3,39 @@
 {% block main %}
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Add Category</h1>
+            <h1>Add a New Recruiter Job</h1>
         </div><!-- End Page Title -->
 
         <section class="section">
             <div class="row">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Add a New Category</h5>
+                        <h5 class="card-title">Create a New Job</h5>
 
                         {{ form_start(form, {'attr': {'onsubmit': 'return validateForm(event)'}}) }}
                         
-                        <div class="mb-3">
-                            <label for="{{ form.category_name.vars.id }}" class="form-label">Category Name</label>
-                            {{ form_widget(form.category_name, {'attr': {'class': 'form-control'}}) }}
-                            {% if form_errors(form.category_name)|length > 0 %}
-                                <div class="alert alert-danger custom-error">
-                                    <strong>Error: {{ form_errors(form.category_name) }}</strong>
-                                </div>
-                            {% endif %}
+                        {% for field in form %}
+                            <div class="mb-3">
+                                {{ form_row(field, {'attr': {'class': 'form-control'}}) }}
+                                {% for error in form_errors(field) %}
+                                    <div class="alert alert-custom-error">
+                                        {{ error.message }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+
+                        <div id="error-container"></div> {# Container to display errors #}
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                                <a href="{{ path('recruiter_job_list') }}" class="btn btn-secondary">Back to the list</a>
+                            </div>
                         </div>
-                        
-                        <button type="submit" class="btn btn-primary">Create</button>
-                        <a href="{{ path('jobs_category_list') }}" class="btn btn-secondary">Back to the list</a>
-                        
                         {{ form_end(form) }}
                     </div>
                 </div>
             </div>
         </section>
-
-        <script>
-            function validateForm(event) {
-                event = event || window.event; // Use window.event if event is undefined
-                // Your custom validation logic here
-                // Display alert and prevent form submission
-                var errorMessages = [];
-
-                // Check 'category name' field length
-                var categoryNameField = document.getElementById('{{ form.category_name.vars.id }}');
-                if (categoryNameField && categoryNameField.value.length > 30) {
-                    errorMessages.push('Category name cannot be longer than 30 characters.');
-                }
-
-                if (errorMessages.length > 0) {
-                    alert(errorMessages.join('\n'));
-                    event.preventDefault();
-                }
-            }
-        </script>
     </main>
 {% endblock %}

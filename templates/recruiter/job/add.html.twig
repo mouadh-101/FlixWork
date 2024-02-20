@@ -13,125 +13,29 @@
                         <h5 class="card-title">Create a New Job</h5>
 
                         {{ form_start(form, {'attr': {'onsubmit': 'return validateForm(event)'}}) }}
-                        <div class="mb-3">
-                            {{ form_row(form.title, {'attr': {'class': 'form-control'}}) }}
-                            {% if form_errors(form.title)|length > 0 %}
-                                <div class="alert alert-danger custom-error">
-                                    <strong>Error: {{ form_errors(form.title) }}</strong>
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="mb-3">
-                            {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
-                            {% if form_errors(form.description)|length > 0 %}
-                                <div class="alert alert-danger custom-error">
-                                    <strong>Error: {{ form_errors(form.description) }}</strong>
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="mb-3">
-                            {{ form_row(form.deadline, {'attr': {'class': 'form-control'}}) }}
-                            {% if form_errors(form.deadline)|length > 0 %}
-                                {% for error in form_errors(form.deadline) %}
-                                    {% if 'The deadline should be a future date.' in error.message %}
-                                        <div class="alert alert-danger custom-error">
-                                            <strong>Error: Please select a future date for the deadline.</strong>
-                                        </div>
-                                    {% endif %}
+                        
+                        {% for field in form %}
+                            <div class="mb-3">
+                                {{ form_row(field, {'attr': {'class': 'form-control'}}) }}
+                                {% for error in form_errors(field) %}
+                                    <div class="alert alert-custom-error">
+                                        <strong>Error: {{ error.message }}</strong>
+                                    </div>
                                 {% endfor %}
-                            {% endif %}
-                        </div>
-                        <div class="mb-3">
-                            {{ form_row(form.type, {'attr': {'class': 'form-control'}}) }}
-                            {% if form_errors(form.type)|length > 0 %}
-                                <div class="alert alert-danger custom-error">
-                                    <strong>Error: {{ form_errors(form.type) }}</strong>
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="mb-3">
-                            {{ form_row(form.salary, {'attr': {'class': 'form-control'}}) }}
-                            {% if form_errors(form.salary)|length > 0 %}
-                                <div class="alert alert-danger custom-error">
-                                    <strong>Error: {{ form_errors(form.salary) }}</strong>
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="mb-3">
-                            {{ form_row(form.category, {'attr': {'class': 'form-control'}}) }}
-                            {% if form_errors(form.category)|length > 0 %}
-                                <div class="alert alert-danger custom-error">
-                                    <strong>Error: {{ form_errors(form.category) }}</strong>
-                                </div>
-                            {% endif %}
-                        </div>
+                            </div>
+                        {% endfor %}
+
+                        <div id="error-container"></div> {# Container to display errors #}
                         <div class="row mt-3">
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary">Create</button>
                                 <a href="{{ path('recruiter_job_list') }}" class="btn btn-secondary">Back to the list</a>
                             </div>
                         </div>
-                        {{ form_end(form) }} 
+                        {{ form_end(form) }}
                     </div>
                 </div>
             </div>
         </section>
     </main>
-
-    <script>
-        function validateForm(event) {
-            event = event || window.event; // Use window.event if event is undefined
-            // Your custom validation logic here
-            // Display alert and prevent form submission
-            var errorMessages = [];
-
-            // Check 'job title' field length
-            var jobTitleField = document.getElementById('job_title');
-            if (jobTitleField && jobTitleField.value.length > 20) {
-                errorMessages.push('Job title cannot be longer than 20 characters.');
-            }
-
-            // Check 'description' field length
-            var descriptionField = document.getElementById('job_description');
-            if (descriptionField && descriptionField.value.length > 3000) {
-                errorMessages.push('Description cannot be longer than 3000 characters.');
-            }
-
-            // Check 'job type' field length
-            var jobTypeField = document.getElementById('job_type');
-            if (jobTypeField && jobTypeField.value.length > 20) {
-                errorMessages.push('Job type cannot be longer than 20 characters.');
-            }
-
-            // Check 'category' field
-            var categoryField = document.getElementById('job_category');
-            if (categoryField && categoryField.value === '') {
-                errorMessages.push('Please select a category.');
-            }
-
-            // Check 'deadline' field
-            var deadlineField = document.getElementById('job_deadline');
-            if (deadlineField) {
-                var selectedDate = new Date(deadlineField.value);
-                var currentDate = new Date();
-
-                if (selectedDate <= currentDate) {
-                    errorMessages.push('Please select a future date for the deadline.');
-                }
-            }
-
-            // Check 'salary' field
-            var salaryField = document.getElementById('job_salary');
-            if (salaryField && isNaN(salaryField.value.trim())) {
-                errorMessages.push('Salary must be a valid numeric value.');
-            } else if (salaryField && parseFloat(salaryField.value.trim()) < 0) {
-                errorMessages.push('Salary cannot be a negative value.');
-            }
-
-            if (errorMessages.length > 0) {
-                alert(errorMessages.join('\n'));
-                event.preventDefault();
-            }
-        }
-    </script>
 {% endblock %}
