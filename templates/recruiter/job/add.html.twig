@@ -124,6 +124,8 @@
             var salaryField = document.getElementById('job_salary');
             if (salaryField && isNaN(salaryField.value.trim())) {
                 errorMessages.push('Salary must be a valid numeric value.');
+            } else if (salaryField && parseFloat(salaryField.value.trim()) < 0) {
+                errorMessages.push('Salary cannot be a negative value.');
             }
 
             if (errorMessages.length > 0) {

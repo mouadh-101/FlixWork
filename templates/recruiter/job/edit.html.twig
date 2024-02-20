@@ -32,9 +32,13 @@
                         <div class="mb-3">
                             {{ form_row(form.deadline, {'attr': {'class': 'form-control'}}) }}
                             {% if form_errors(form.deadline)|length > 0 %}
-                                <div class="alert alert-danger custom-error">
-                                    <strong>Error: {{ form_errors(form.deadline) }}</strong>
-                                </div>
+                                {% for error in form_errors(form.deadline) %}
+                                    {% if 'The deadline should be a future date.' in error.message %}
+                                        <div class="alert alert-danger custom-error">
+                                            <strong>Error: Please select a future date for the deadline.</strong>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
                             {% endif %}
                         </div>
                         <div class="mb-3">
@@ -120,6 +124,8 @@
                 var salaryField = document.getElementById('{{ form.salary.vars.id }}');
                 if (salaryField && isNaN(salaryField.value.trim())) {
                     errorMessages.push('Salary must be a valid numeric value.');
+                } else if (salaryField && parseFloat(salaryField.value.trim()) < 0) {
+                    errorMessages.push('Salary cannot be a negative value.');
                 }
 
                 if (errorMessages.length > 0) {

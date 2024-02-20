@@ -4,14 +4,12 @@
 
 {% block main %}
     <main id="main" class="main">
-
         <div class="pagetitle">
             <h1>Recruiter Job Details</h1>
-        </div><!-- End Page Title -->
+        </div>
 
         <section class="section dashboard">
             <div class="row">
-
                 <!-- Job Details -->
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
@@ -39,6 +37,23 @@
                         </div>
                     </div>
                 </div><!-- End Job Details -->
+
+                <!-- Display Related Jobs -->
+                <div class="col-12 mt-3">
+                    <h3>Related Jobs</h3>
+                    <div class="card-group">
+                        {% for relatedJob in relatedJobs %}
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ relatedJob.title }}</h5>
+                                    <p class="card-text">{{ relatedJob.description }}</p>
+                                    <p class="card-text"><strong>Deadline:</strong> {{ relatedJob.deadline ? relatedJob.deadline.format('Y-m-d') : '' }}</p>
+                                    <!-- Add other related job details as needed -->
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div><!-- End Related Jobs -->
 
             </div>
         </section>

@@ -16,6 +16,12 @@ class JobsController extends AbstractController
     #[Route('/jobs', name: 'list_jobs')]
     public function list(jobRepository $jobRepository , EntityManagerInterface $entityManager): Response
     {
+        $imageList = [
+            'img/clients/client-1.png',
+            'img/clients/client-2.png',
+            'img/clients/client-3.png',
+            // ... Ajoutez autant d'images que nécessaire
+        ];
         $jobs = $entityManager->createQueryBuilder()
             ->select('j', 'r')
             ->from(Job::class, 'j')
@@ -25,6 +31,8 @@ class JobsController extends AbstractController
 
         return $this->render('jobs/index.html.twig', [
             'jobs' => $jobs,
+            'imageList' => $imageList,
+
         ]);
     }
 }

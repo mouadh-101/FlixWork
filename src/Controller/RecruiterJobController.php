@@ -19,10 +19,12 @@ class RecruiterJobController extends AbstractController
      */
     public function list(JobRepository $jobRepository): Response
     {
+       
         $jobs = $jobRepository->findAll(); // Retrieve all jobs
 
         return $this->render('recruiter/job/list.html.twig', [
             'jobs' => $jobs,
+
         ]);
     }
 
@@ -58,8 +60,12 @@ class RecruiterJobController extends AbstractController
     {
         $job = $jobRepository->find($id);
 
+        // Assuming the category name is stored in the 'categoryName' property of the related category
+        $relatedJobs = $jobRepository->findBy(['category' => $job->getCategory()]);
+
         return $this->render('recruiter/job/show.html.twig', [
             'job' => $job,
+            'relatedJobs' => $relatedJobs,
         ]);
     }
 
@@ -104,5 +110,21 @@ class RecruiterJobController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('recruiter_job_list');
+    }
+
+    /**
+     * @Route("/recruiter/job/related/{id}", name="recruiter_job_related")
+     */
+    public function relatedJobs($id, JobRepository $jobRepository): Response
+    {
+        $job = $jobRepository->find($id);
+
+        // Assuming the category name is stored in the 'categoryName' property of the related category
+        $relatedJobs = $jobRepository->findBy(['category' => $job->getCategory()]);
+
+        return $this->render('recruiter/job/related.html.twig', [
+            'job' => $job,
+            'relatedJobs' => $relatedJobs,
+        ]);
     }
 }

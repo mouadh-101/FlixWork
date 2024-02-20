@@ -72,6 +72,10 @@ class JobType extends AbstractType
                         'pattern' => '/^\d+(\.\d{1,2})?$/',
                         'message' => 'Salary must be a valid numeric value.',
                     ]),
+                    new GreaterThan([
+                        'value' => 0,
+                        'message' => 'Salary cannot be a negative value.',
+                    ]),
                 ],
             ])
             ->add('category', EntityType::class, [
