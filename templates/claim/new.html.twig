@@ -1,48 +1,65 @@
-
 {% extends 'baseb.html.twig' %}
-{% block main %}
-  <main id="main" class="main">
 
+{% block main %}
+<main id="main" class="main">
+    {% if errors %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for fieldName, errorMessage in errors %}
+                    <li>{{ fieldName }}: {{ errorMessage }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
     <div class="pagetitle">
-      <h1>add claim</h1>
+        <h1>Add Claim</h1>
     </div><!-- End Page Title -->
-{{ form_start(form) }}
+
+    {{ form_start(form) }}
 
     <section class="section">
-      <div class="row">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Let's Add claim</h5>
-              <!-- General Form Elements -->
-              <label for="inputPassword" class="col-sm-2 col-form-label"> subject </label>
-              <div class="col-sm-10">
-                  {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Let's Add Claim</h5>
+                    <!-- General Form Elements -->
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Subject</label>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Date</label>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Etat</label>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.etat, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <div class="col-sm-10 offset-sm-2">
+                            <button type="submit" class="btn btn-primary">Submit Claim</button>
+                        </div>
+                    </div>
                 </div>
-
-                <label for="inputPassword" class="col-sm-2 col-form-label"> description </label>
-              <div class="col-sm-10">
-                  {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
-                </div>
-                <label for="inputPassword" class="col-sm-2 col-form-label"> date </label>
-              <div class="col-sm-10">
-                  {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
-                </div>
-                <label for="inputPassword" class="col-sm-2 col-form-label"> etat </label>
-              <div class="col-sm-10">
-                  {{ form_widget(form.etat, {'attr': {'class': 'form-control'}}) }}
-                </div>
-
-
-             
-
-             <button type="submit" class="btn btn-primary">Submit claim</button>
-              
-{{ form_end(form) }}
-
             </div>
         </div>
-      </div>
     </section>
-
-  </main>
+    {{ form_end(form) }}
+</main>
 {% endblock %}

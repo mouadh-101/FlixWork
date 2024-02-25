@@ -67,10 +67,10 @@ class Claim extends \App\Entity\Claim implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'subject', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'description', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'date', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'etat', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'claimer', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'answers'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'subject', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'description', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'date', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'etat', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'claimer', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'claimFor'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'subject', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'description', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'date', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'etat', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'claimer', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'answers'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'subject', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'description', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'date', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'etat', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'claimer', '' . "\0" . 'App\\Entity\\Claim' . "\0" . 'claimFor'];
     }
 
     /**
@@ -300,6 +300,28 @@ class Claim extends \App\Entity\Claim implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setClaimer', [$claimer]);
 
         return parent::setClaimer($claimer);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getClaimFor(): ?\App\Entity\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getClaimFor', []);
+
+        return parent::getClaimFor();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setClaimFor(?\App\Entity\User $claimFor): static
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setClaimFor', [$claimFor]);
+
+        return parent::setClaimFor($claimFor);
     }
 
 }

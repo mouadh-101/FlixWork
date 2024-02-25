@@ -155,6 +155,6 @@ class __TwigTemplate_4a4daf2afdb64bd93125ef2dd1c50a1825e0e4eed09f6e820db74ddb24c
     </section>
 </main>
 {% endblock %}
-", "answer/show.html.twig", "C:\\Users\\admin\\Desktop\\Flixwork\\templates\\answer\\show.html.twig");
+", "answer/show.html.twig", "C:\\Users\\admin\\Desktop\\FlixWork-1\\templates\\answer\\show.html.twig");
     }
 }

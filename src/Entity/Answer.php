@@ -24,6 +24,10 @@ class Answer
     #[ORM\JoinColumn(nullable: false)]
     private ?User $answer = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $answerFor = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +65,18 @@ class Answer
     public function setAnswer(?User $answer): static
     {
         $this->answer = $answer;
+
+        return $this;
+    }
+
+    public function getAnswerFor(): ?User
+    {
+        return $this->answerFor;
+    }
+
+    public function setAnswerFor(?User $answerFor): static
+    {
+        $this->answerFor = $answerFor;
 
         return $this;
     }

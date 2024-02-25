@@ -1551,7 +1551,7 @@ class __TwigTemplate_9562b91d35e3bc8a5445983c7bbeeee094e2245b2a49a2b2a544e02cdd7
         // line 1169
         echo "  <footer id=\"footer\" class=\"footer\">
     <div class=\"copyright\">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>FlixWork</span></strong>. All Rights Reserved
     </div>
     <div class=\"credits\">
       <!-- All the links in the footer should remain intact. -->
@@ -2766,7 +2766,7 @@ class __TwigTemplate_9562b91d35e3bc8a5445983c7bbeeee094e2245b2a49a2b2a544e02cdd7
   {% block footer %}
   <footer id=\"footer\" class=\"footer\">
     <div class=\"copyright\">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>FlixWork</span></strong>. All Rights Reserved
     </div>
     <div class=\"credits\">
       <!-- All the links in the footer should remain intact. -->
@@ -2796,6 +2796,6 @@ class __TwigTemplate_9562b91d35e3bc8a5445983c7bbeeee094e2245b2a49a2b2a544e02cdd7
 </body>
 {% endblock %}
 
-</html>", "baseb.html.twig", "C:\\Users\\admin\\Desktop\\Flixwork\\templates\\baseb.html.twig");
+</html>", "baseb.html.twig", "C:\\Users\\admin\\Desktop\\FlixWork-1\\templates\\baseb.html.twig");
     }
 }

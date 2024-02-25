@@ -87,7 +87,7 @@ class __TwigTemplate_dcdfd9fd890599bf124068b4a96246c2e1825e2db750c8ad8ff33773a58
                   <th scope=\"col\">#</th>
                   <th scope=\"col\">Answer</th>
                   <th scope=\"col\">Claim subject</th>
-                  <th scope=\"col\">Answer</th>
+                  <th scope=\"col\">Answer for</th>
                   <th scope=\"col\">Actions</th>
                 </tr>
               </thead>
@@ -101,7 +101,7 @@ class __TwigTemplate_dcdfd9fd890599bf124068b4a96246c2e1825e2db750c8ad8ff33773a58
             echo "                <tr>
                   <td><a href=\"";
             // line 33
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("showanswer", ["id" => twig_get_attribute($this->env, $this->source, $context["answer"], "id", [], "any", false, false, false, 33)]), "html", null, true);
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("showanswer", ["id_a" => twig_get_attribute($this->env, $this->source, $context["answer"], "id", [], "any", false, false, false, 33), "id_u" => (isset($context["idU"]) || array_key_exists("idU", $context) ? $context["idU"] : (function () { throw new RuntimeError('Variable "idU" does not exist.', 33, $this->source); })())]), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["answer"], "id", [], "any", false, false, false, 33), "html", null, true);
             echo "</a></td>
@@ -115,24 +115,25 @@ class __TwigTemplate_dcdfd9fd890599bf124068b4a96246c2e1825e2db750c8ad8ff33773a58
             echo "</td>
                   <td>";
             // line 36
-            (( !(null === twig_get_attribute($this->env, $this->source, $context["answer"], "answer", [], "any", false, false, false, 36))) ? (print (twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["answer"], "answer", [], "any", false, false, false, 36), "getFullName", [], "method", false, false, false, 36), "html", null, true))) : (print ("N/A")));
+            (( !(null === twig_get_attribute($this->env, $this->source, $context["answer"], "answerFor", [], "any", false, false, false, 36))) ? (print (twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["answer"], "answerFor", [], "any", false, false, false, 36), "getFullName", [], "method", false, false, false, 36), "html", null, true))) : (print ("N/A")));
             echo "</td>
                   <td>
-                    <a href=\"";
-            // line 38
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("editAnswer", ["id" => twig_get_attribute($this->env, $this->source, $context["answer"], "id", [], "any", false, false, false, 38)]), "html", null, true);
-            echo "\" class=\"\">
-                      <i class=\"material-icons\">edit</i> <span class=\"material-symbols-outlined\">
-</span>
-                    </a>
-                    <form method=\"post\" action=\"";
+                    <div class=\"d-flex\">
+                      <a href=\"";
+            // line 39
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("editAnswer", ["id_a" => twig_get_attribute($this->env, $this->source, $context["answer"], "id", [], "any", false, false, false, 39), "id_u" => (isset($context["idU"]) || array_key_exists("idU", $context) ? $context["idU"] : (function () { throw new RuntimeError('Variable "idU" does not exist.', 39, $this->source); })())]), "html", null, true);
+            echo "\" class=\"btn btn-primary me-2 bg-transparent border-0\">
+                        <i class=\"material-icons text-primary\">edit</i>
+                      </a>
+                      <form method=\"post\" action=\"";
             // line 42
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("deleteAnswer", ["id" => twig_get_attribute($this->env, $this->source, $context["answer"], "id", [], "any", false, false, false, 42)]), "html", null, true);
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("deleteAnswer", ["id_a" => twig_get_attribute($this->env, $this->source, $context["answer"], "id", [], "any", false, false, false, 42), "id_u" => (isset($context["idU"]) || array_key_exists("idU", $context) ? $context["idU"] : (function () { throw new RuntimeError('Variable "idU" does not exist.', 42, $this->source); })())]), "html", null, true);
             echo "\" onsubmit=\"return confirm('Are you sure you want to delete this answer?');\">
-                      <button type=\"submit\" class=\"\">
-                        <i class=\"material-icons\">delete</i> <span class=\"material-symbols-outlined\"></span>
-                      </button>
-                    </form>
+                        <button type=\"submit\" class=\"btn btn-danger bg-transparent border-0\">
+                          <i class=\"material-icons text-danger\">delete</i>
+                        </button>
+                      </form>
+                    </div>
                   </td>
                 </tr>
                 ";
@@ -140,7 +141,70 @@ class __TwigTemplate_dcdfd9fd890599bf124068b4a96246c2e1825e2db750c8ad8ff33773a58
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['answer'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 50
+        // line 51
+        echo "              </tbody>
+            </table>
+
+          </div>
+          <div class=\"card recent-sales overflow-auto\">
+          <div class=\"card-body\">
+            <h5 class=\"card-title\">List of answers For me</h5>
+
+            <table class=\"table table-borderless datatable\">
+              <thead>
+                <tr>
+                  <th scope=\"col\">#</th>
+                  <th scope=\"col\">Answer</th>
+                  <th scope=\"col\">Claim subject</th>
+                  <th scope=\"col\">Answer</th>
+                  <th scope=\"col\">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                ";
+        // line 70
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["answersFor"]) || array_key_exists("answersFor", $context) ? $context["answersFor"] : (function () { throw new RuntimeError('Variable "answersFor" does not exist.', 70, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["answerf"]) {
+            // line 71
+            echo "                <tr>
+                  <td><a href=\"";
+            // line 72
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("showanswer", ["id_a" => twig_get_attribute($this->env, $this->source, $context["answerf"], "id", [], "any", false, false, false, 72), "id_u" => (isset($context["idU"]) || array_key_exists("idU", $context) ? $context["idU"] : (function () { throw new RuntimeError('Variable "idU" does not exist.', 72, $this->source); })())]), "html", null, true);
+            echo "\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["answerf"], "id", [], "any", false, false, false, 72), "html", null, true);
+            echo "</a></td>
+                  <td>";
+            // line 73
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["answerf"], "description", [], "any", false, false, false, 73), "html", null, true);
+            echo "</td>
+                  <td>";
+            // line 74
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["answerf"], "claim", [], "any", false, false, false, 74), "subject", [], "any", false, false, false, 74), "html", null, true);
+            echo "</td>
+                  <td>";
+            // line 75
+            (( !(null === twig_get_attribute($this->env, $this->source, $context["answerf"], "answer", [], "any", false, false, false, 75))) ? (print (twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["answerf"], "answer", [], "any", false, false, false, 75), "getFullName", [], "method", false, false, false, 75), "html", null, true))) : (print ("N/A")));
+            echo "</td>
+                  <td>
+                    <div class=\"d-flex\">
+                      <form method=\"post\" action=\"";
+            // line 78
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("deleteAnswer", ["id_a" => twig_get_attribute($this->env, $this->source, $context["answerf"], "id", [], "any", false, false, false, 78), "id_u" => (isset($context["idU"]) || array_key_exists("idU", $context) ? $context["idU"] : (function () { throw new RuntimeError('Variable "idU" does not exist.', 78, $this->source); })())]), "html", null, true);
+            echo "\" onsubmit=\"return confirm('Are you sure you want to delete this answer?');\">
+                        <button type=\"submit\" class=\"btn btn-danger bg-transparent border-0\">
+                          <i class=\"material-icons text-danger\">delete</i>
+                        </button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+                ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['answerf'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 87
         echo "              </tbody>
             </table>
 
@@ -182,7 +246,7 @@ class __TwigTemplate_dcdfd9fd890599bf124068b4a96246c2e1825e2db750c8ad8ff33773a58
      */
     public function getDebugInfo()
     {
-        return array (  144 => 50,  130 => 42,  123 => 38,  118 => 36,  114 => 35,  110 => 34,  104 => 33,  101 => 32,  97 => 31,  68 => 4,  58 => 3,  35 => 1,);
+        return array (  208 => 87,  193 => 78,  187 => 75,  183 => 74,  179 => 73,  173 => 72,  170 => 71,  166 => 70,  145 => 51,  130 => 42,  124 => 39,  118 => 36,  114 => 35,  110 => 34,  104 => 33,  101 => 32,  97 => 31,  68 => 4,  58 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -212,27 +276,64 @@ class __TwigTemplate_dcdfd9fd890599bf124068b4a96246c2e1825e2db750c8ad8ff33773a58
                   <th scope=\"col\">#</th>
                   <th scope=\"col\">Answer</th>
                   <th scope=\"col\">Claim subject</th>
-                  <th scope=\"col\">Answer</th>
+                  <th scope=\"col\">Answer for</th>
                   <th scope=\"col\">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {% for answer in answers %}
                 <tr>
-                  <td><a href=\"{{ path('showanswer', {'id': answer.id}) }}\">{{ answer.id }}</a></td>
+                  <td><a href=\"{{ path('showanswer', {'id_a': answer.id, 'id_u':idU}) }}\">{{ answer.id }}</a></td>
                   <td>{{ answer.description }}</td>
                   <td>{{ answer.claim.subject }}</td>
-                  <td>{{ answer.answer is not null ? answer.answer.getFullName() : 'N/A' }}</td>
+                  <td>{{ answer.answerFor is not null ? answer.answerFor.getFullName() : 'N/A' }}</td>
                   <td>
-                    <a href=\"{{ path('editAnswer', {'id': answer.id}) }}\" class=\"\">
-                      <i class=\"material-icons\">edit</i> <span class=\"material-symbols-outlined\">
-</span>
-                    </a>
-                    <form method=\"post\" action=\"{{ path('deleteAnswer', {'id': answer.id}) }}\" onsubmit=\"return confirm('Are you sure you want to delete this answer?');\">
-                      <button type=\"submit\" class=\"\">
-                        <i class=\"material-icons\">delete</i> <span class=\"material-symbols-outlined\"></span>
-                      </button>
-                    </form>
+                    <div class=\"d-flex\">
+                      <a href=\"{{ path('editAnswer', {'id_a': answer.id,'id_u':idU}) }}\" class=\"btn btn-primary me-2 bg-transparent border-0\">
+                        <i class=\"material-icons text-primary\">edit</i>
+                      </a>
+                      <form method=\"post\" action=\"{{ path('deleteAnswer', {'id_a': answer.id,'id_u':idU}) }}\" onsubmit=\"return confirm('Are you sure you want to delete this answer?');\">
+                        <button type=\"submit\" class=\"btn btn-danger bg-transparent border-0\">
+                          <i class=\"material-icons text-danger\">delete</i>
+                        </button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+          </div>
+          <div class=\"card recent-sales overflow-auto\">
+          <div class=\"card-body\">
+            <h5 class=\"card-title\">List of answers For me</h5>
+
+            <table class=\"table table-borderless datatable\">
+              <thead>
+                <tr>
+                  <th scope=\"col\">#</th>
+                  <th scope=\"col\">Answer</th>
+                  <th scope=\"col\">Claim subject</th>
+                  <th scope=\"col\">Answer</th>
+                  <th scope=\"col\">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for answerf in answersFor %}
+                <tr>
+                  <td><a href=\"{{ path('showanswer', {'id_a': answerf.id, 'id_u':idU}) }}\">{{ answerf.id }}</a></td>
+                  <td>{{ answerf.description }}</td>
+                  <td>{{ answerf.claim.subject }}</td>
+                  <td>{{ answerf.answer is not null ? answerf.answer.getFullName() : 'N/A' }}</td>
+                  <td>
+                    <div class=\"d-flex\">
+                      <form method=\"post\" action=\"{{ path('deleteAnswer', {'id_a': answerf.id,'id_u':idU}) }}\" onsubmit=\"return confirm('Are you sure you want to delete this answer?');\">
+                        <button type=\"submit\" class=\"btn btn-danger bg-transparent border-0\">
+                          <i class=\"material-icons text-danger\">delete</i>
+                        </button>
+                      </form>
+                    </div>
                   </td>
                 </tr>
                 {% endfor %}
@@ -248,6 +349,6 @@ class __TwigTemplate_dcdfd9fd890599bf124068b4a96246c2e1825e2db750c8ad8ff33773a58
 
 </main>
 {% endblock %}
-", "answer/showAll.html.twig", "C:\\Users\\admin\\Desktop\\Flixwork\\templates\\answer\\showAll.html.twig");
+", "answer/showAll.html.twig", "C:\\Users\\admin\\Desktop\\FlixWork-1\\templates\\answer\\showAll.html.twig");
     }
 }

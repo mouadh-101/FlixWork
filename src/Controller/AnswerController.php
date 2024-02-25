@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Answer;
 use App\Entity\Claim;
+use App\Entity\Freelancer;
+use App\Entity\Recruiter;
 use App\Entity\User;
 use App\Form\AnswerType;
 use App\Repository\AnswerRepository;
@@ -16,61 +18,110 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AnswerController extends AbstractController
 {
-    #[Route('/answers/{id}/{id_c}/new', name: 'addanswer')]
-    public function new($id,$id_c,Request $request): Response
+    #[Route('/addAnswer/{id_u}/{id_c}', name: 'addanswer')]
+    public function new($id_u,$id_c,Request $request): Response
     {
-        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id_u);
         $claim = $this->getDoctrine()->getRepository(Claim::class)->find($id_c);
+        $claim=$claim->setEtat('Answered');
+        $claimer=$claim->getClaimer();
         $answer = new Answer();
         $answer->setAnswer($user);
         $answer->setClaim($claim);
+        $answer->setAnswerFor($claimer);
         $form = $this->createForm(AnswerType::class, $answer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($answer);
+            $entityManager->persist($claim);
             $entityManager->flush();
 
-            return $this->redirectToRoute('showAllanswers');
+            return $this->redirectToRoute('showAllanswers',['id_u'=>$id_u]);
         }
-
-        return $this->render('answer/new.html.twig', [
-            'form' => $form->createView(),
-            'claim'=>$claim
-        ]);
+        $errors = [];
+    foreach ($form->getErrors(true, true) as $error) {
+        $fieldName = $error->getOrigin()->getName();
+        $errorMessage = $error->getMessage();
+        $errors[$fieldName] = $errorMessage;
     }
-    #[Route('/answer/{id}', name: 'showanswer')]
-    public function show(int $id): Response
+        if($user instanceof Recruiter)
+        {
+            return $this->render('answer/new.html.twig', [
+            'form' => $form->createView(),
+            'claim'=>$claim,
+            'idU'=>$id_u,
+            'errors' => $errors,
+        ]);
+        }
+        if($user instanceof Freelancer)
+        {
+            return $this->render('answer/new1.html.twig', [
+            'form' => $form->createView(),
+            'claim'=>$claim,
+            'idU'=>$id_u,
+            'errors' => $errors,
+        ]);
+        }
+    }
+    #[Route('/answer/{id_u}/{id_a}', name: 'showanswer')]
+    public function show(int $id_u,$id_a): Response
     {
-        // Retrieve the claim based on the provided ID
-        $answer = $this->getDoctrine()->getRepository(Answer::class)->find($id);
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id_u);
+        $answer = $this->getDoctrine()->getRepository(Answer::class)->find($id_a);
 
         // Check if the claim exists
         if (!$answer) {
             throw $this->createNotFoundException('Answer not found');
         }
 
-        // Render the claim details using a Twig template
-        return $this->render('answer/show.html.twig', [
+        if($user instanceof Recruiter)
+        {
+            return $this->render('answer/show.html.twig', [
             'answer' => $answer,
+            'idU'=>$id_u,
         ]);
+        }
+        if($user instanceof Freelancer)
+        {
+            return $this->render('answer/show1.html.twig', [
+            'answer' => $answer,
+            'idU'=>$id_u,
+        ]);
+        }
     }
-    #[Route('/answers', name: 'showAllanswers')]
-    public function showAllAnswers(): Response
+    #[Route('/answers/{id_u}', name: 'showAllanswers')]
+    public function showAllAnswers($id_u): Response
     {
-        $answers = $this->getDoctrine()->getRepository(Answer::class)->findAll();
+        $user=$this->getDoctrine()->getRepository(User::class)->find($id_u);
+        $answers = $this->getDoctrine()->getRepository(Answer::class)->findBy(['answer'=>$user]);
+        $answersForMe = $this->getDoctrine()->getRepository(Answer::class)->findBy(['answerFor'=>$user]);
 
-        return $this->render('answer/showAll.html.twig', [
+
+        if($user instanceof Recruiter)
+        {
+            return $this->render('answer/showAll.html.twig', [
             'answers' => $answers,
+            'idU'=>$id_u,
+            'answersFor'=>$answersForMe,
         ]);
+        }
+        if($user instanceof Freelancer)
+        {
+            return $this->render('answer/showAll1.html.twig', [
+            'answers' => $answers,
+            'idU'=>$id_u,
+            'answersFor'=>$answersForMe,
+        ]);
+        }
     }
-    #[Route('/answers/{id}/delete', name: 'deleteAnswer')]
-public function deleteanswer(int $id): RedirectResponse
+    #[Route('deleteAnswer/{id_u}/{id_a}', name: 'deleteAnswer')]
+public function deleteanswer($id_a,$id_u): RedirectResponse
 {
     // Retrieve the claim from the database
     $entityManager = $this->getDoctrine()->getManager();
-    $answer = $entityManager->getRepository(Answer::class)->find($id);
+    $answer = $entityManager->getRepository(Answer::class)->find($id_a);
 
     // Check if the claim exists
     if (!$answer) {
@@ -85,7 +136,7 @@ public function deleteanswer(int $id): RedirectResponse
     $this->addFlash('success', 'answer deleted successfully');
 
     // Redirect to the page displaying all claims
-    return $this->redirectToRoute('showAllanswers');
+    return $this->redirectToRoute('showAllanswers',['id_u'=>$id_u]);
 }
     #[Route('/answer', name: 'app_answer')]
     public function index(): Response
@@ -94,12 +145,13 @@ public function deleteanswer(int $id): RedirectResponse
             'controller_name' => 'AnswerController',
         ]);
     }
-    #[Route('/answers/{id}/edit', name: 'editAnswer')]
-public function editAnswer(Request $request, int $id): Response
+    #[Route('editAnswer/{id_u}/{id_a}', name: 'editAnswer')]
+public function editAnswer(Request $request,$id_a,$id_u): Response
 {
     // Retrieve the answer from the database
     $entityManager = $this->getDoctrine()->getManager();
-    $answer = $entityManager->getRepository(Answer::class)->find($id);
+    $answer = $entityManager->getRepository(Answer::class)->find($id_a);
+    $user = $entityManager->getRepository(User::class)->find($id_u);
     $claim=$answer->getClaim();
 
     // Check if the answer exists
@@ -115,17 +167,33 @@ public function editAnswer(Request $request, int $id): Response
     if ($form->isSubmitted() && $form->isValid()) {
         // Save the updated answer to the database
         $entityManager->flush();
-
-        // Redirect to the page displaying all answers
-        return $this->redirectToRoute('showAllanswers');
+        return $this->redirectToRoute('showAllanswers',['id_u'=>$id_u]);
     }
-
-    // Render the form for editing an answer
-    return $this->render('answer/new.html.twig', [
+    $errors = [];
+    foreach ($form->getErrors(true, true) as $error) {
+        $fieldName = $error->getOrigin()->getName();
+        $errorMessage = $error->getMessage();
+        $errors[$fieldName] = $errorMessage;
+    }
+    if($user instanceof Recruiter)   
+    {
+        return $this->render('answer/new.html.twig', [
         'form' => $form->createView(),
+        'errors' => $errors,
         'answer' => $answer,
-        'claim'=>$claim
-    ]);
+        'claim'=>$claim,
+        'idU'=>$id_u,
+        ]);
+    }
+    if($user instanceof Freelancer)   
+    {
+        return $this->render('answer/new1.html.twig', [
+        'form' => $form->createView(),
+        'errors' => $errors,
+        'answer' => $answer,
+        'claim'=>$claim,
+        'idU'=>$id_u,
+        ]);
+    }
 }
-
 }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ClaimRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use symfony\component\Validator\Constraints as Assert;
@@ -31,6 +33,11 @@ class Claim
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $claimer = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $claimFor = null;
+
 
     public function getId(): ?int
     {
@@ -93,6 +100,18 @@ class Claim
     public function setClaimer(?user $claimer): static
     {
         $this->claimer = $claimer;
+
+        return $this;
+    }
+
+    public function getClaimFor(): ?User
+    {
+        return $this->claimFor;
+    }
+
+    public function setClaimFor(?User $claimFor): static
+    {
+        $this->claimFor = $claimFor;
 
         return $this;
     }

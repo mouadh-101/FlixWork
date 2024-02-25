@@ -23,27 +23,64 @@
                   <th scope="col">#</th>
                   <th scope="col">Answer</th>
                   <th scope="col">Claim subject</th>
-                  <th scope="col">Answer</th>
+                  <th scope="col">Answer for</th>
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {% for answer in answers %}
                 <tr>
-                  <td><a href="{{ path('showanswer', {'id': answer.id}) }}">{{ answer.id }}</a></td>
+                  <td><a href="{{ path('showanswer', {'id_a': answer.id, 'id_u':idU}) }}">{{ answer.id }}</a></td>
                   <td>{{ answer.description }}</td>
                   <td>{{ answer.claim.subject }}</td>
-                  <td>{{ answer.answer is not null ? answer.answer.getFullName() : 'N/A' }}</td>
+                  <td>{{ answer.answerFor is not null ? answer.answerFor.getFullName() : 'N/A' }}</td>
                   <td>
-                    <a href="{{ path('editAnswer', {'id': answer.id}) }}" class="">
-                      <i class="material-icons">edit</i> <span class="material-symbols-outlined">
-</span>
-                    </a>
-                    <form method="post" action="{{ path('deleteAnswer', {'id': answer.id}) }}" onsubmit="return confirm('Are you sure you want to delete this answer?');">
-                      <button type="submit" class="">
-                        <i class="material-icons">delete</i> <span class="material-symbols-outlined"></span>
-                      </button>
-                    </form>
+                    <div class="d-flex">
+                      <a href="{{ path('editAnswer', {'id_a': answer.id,'id_u':idU}) }}" class="btn btn-primary me-2 bg-transparent border-0">
+                        <i class="material-icons text-primary">edit</i>
+                      </a>
+                      <form method="post" action="{{ path('deleteAnswer', {'id_a': answer.id,'id_u':idU}) }}" onsubmit="return confirm('Are you sure you want to delete this answer?');">
+                        <button type="submit" class="btn btn-danger bg-transparent border-0">
+                          <i class="material-icons text-danger">delete</i>
+                        </button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+          </div>
+          <div class="card recent-sales overflow-auto">
+          <div class="card-body">
+            <h5 class="card-title">List of answers For me</h5>
+
+            <table class="table table-borderless datatable">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Answer</th>
+                  <th scope="col">Claim subject</th>
+                  <th scope="col">Answer</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for answerf in answersFor %}
+                <tr>
+                  <td><a href="{{ path('showanswer', {'id_a': answerf.id, 'id_u':idU}) }}">{{ answerf.id }}</a></td>
+                  <td>{{ answerf.description }}</td>
+                  <td>{{ answerf.claim.subject }}</td>
+                  <td>{{ answerf.answer is not null ? answerf.answer.getFullName() : 'N/A' }}</td>
+                  <td>
+                    <div class="d-flex">
+                      <form method="post" action="{{ path('deleteAnswer', {'id_a': answerf.id,'id_u':idU}) }}" onsubmit="return confirm('Are you sure you want to delete this answer?');">
+                        <button type="submit" class="btn btn-danger bg-transparent border-0">
+                          <i class="material-icons text-danger">delete</i>
+                        </button>
+                      </form>
+                    </div>
                   </td>
                 </tr>
                 {% endfor %}

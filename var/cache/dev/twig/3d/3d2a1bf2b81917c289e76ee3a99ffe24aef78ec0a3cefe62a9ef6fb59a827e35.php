@@ -54,7 +54,7 @@ class __TwigTemplate_bf598a11ee772b0edc9dd5a847ab1290f8a573d203a884b10a8ad8c563f
 
     }
 
-    // line 2
+    // line 3
     public function block_main($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -64,7 +64,7 @@ class __TwigTemplate_bf598a11ee772b0edc9dd5a847ab1290f8a573d203a884b10a8ad8c563f
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "main"));
 
-        // line 3
+        // line 4
         echo "<main id=\"main\" class=\"main\">
     <div class=\"pagetitle\">
         <h1>Show Answers</h1>
@@ -74,33 +74,61 @@ class __TwigTemplate_bf598a11ee772b0edc9dd5a847ab1290f8a573d203a884b10a8ad8c563f
                 <div class=\"card-body\">
                  <h6 class=\"card-subtitle mb-2 text-muted\">id: </h6>
                     <h5 class=\"card-title\">";
-        // line 11
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 11, $this->source); })()), "id", [], "any", false, false, false, 11), "html", null, true);
+        // line 12
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 12, $this->source); })()), "id", [], "any", false, false, false, 12), "html", null, true);
         echo "</h5>
                      <h6 class=\"card-subtitle mb-2 text-muted\">Subject : </h6>
                     <h5 class=\"card-title\">";
-        // line 13
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 13, $this->source); })()), "subject", [], "any", false, false, false, 13), "html", null, true);
+        // line 14
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 14, $this->source); })()), "subject", [], "any", false, false, false, 14), "html", null, true);
         echo "</h5>
                      <h6 class=\"card-subtitle mb-2 text-muted\">Description : </h6>
                     <h5 class=\"card-title\"> ";
-        // line 15
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 15, $this->source); })()), "description", [], "any", false, false, false, 15), "html", null, true);
+        // line 16
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 16, $this->source); })()), "description", [], "any", false, false, false, 16), "html", null, true);
         echo "</h5>
-                     <h6 class=\"card-subtitle mb-2 text-muted\">Claim date :/h6>
+                     <h6 class=\"card-subtitle mb-2 text-muted\">Claim date :</h6>
                     <h5 class=\"card-title\">";
-        // line 17
-        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 17, $this->source); })()), "date", [], "any", false, false, false, 17), "Y-m-d"), "html", null, true);
+        // line 18
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 18, $this->source); })()), "date", [], "any", false, false, false, 18), "Y-m-d"), "html", null, true);
         echo "</h5>
-                    <h6 class=\"card-subtitle mb-2 text-muted\">Claim etat :/h6>
-                    <h5 class=\"card-title\">";
-        // line 19
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 19, $this->source); })()), "etat", [], "any", false, false, false, 19), "html", null, true);
-        echo "</h5>
-                    <h6 class=\"card-subtitle mb-2 text-muted\">Claimer :/h6>
-                    <h5 class=\"card-title\">";
+                    <h6 class=\"card-subtitle mb-2 text-muted\">Claim etat :</h6>
+                    <p>
+                      ";
         // line 21
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 21, $this->source); })()), "getClaimer", [], "method", false, false, false, 21), "getFullName", [], "method", false, false, false, 21), "html", null, true);
+        if ((twig_get_attribute($this->env, $this->source, (isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 21, $this->source); })()), "etat", [], "any", false, false, false, 21) == "In Process")) {
+            // line 22
+            echo "                        <span class=\"badge bg-warning\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 22, $this->source); })()), "etat", [], "any", false, false, false, 22), "html", null, true);
+            echo "</span>
+                      ";
+        } elseif ((twig_get_attribute($this->env, $this->source,         // line 23
+(isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 23, $this->source); })()), "etat", [], "any", false, false, false, 23) == "Not Yet")) {
+            // line 24
+            echo "                        <span class=\"badge bg-danger\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 24, $this->source); })()), "etat", [], "any", false, false, false, 24), "html", null, true);
+            echo "</span>
+                      ";
+        } elseif ((twig_get_attribute($this->env, $this->source,         // line 25
+(isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 25, $this->source); })()), "etat", [], "any", false, false, false, 25) == "Answered")) {
+            // line 26
+            echo "                        <span class=\"badge bg-success\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 26, $this->source); })()), "etat", [], "any", false, false, false, 26), "html", null, true);
+            echo "</span>
+                      ";
+        } else {
+            // line 28
+            echo "                        ";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 28, $this->source); })()), "etat", [], "any", false, false, false, 28), "html", null, true);
+            echo "
+                      ";
+        }
+        // line 30
+        echo "                    </p>
+                    <h6 class=\"card-subtitle mb-2 text-muted\">Claimer :</h6>
+                    <h5 class=\"card-title\">";
+        // line 32
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["claim"]) || array_key_exists("claim", $context) ? $context["claim"] : (function () { throw new RuntimeError('Variable "claim" does not exist.', 32, $this->source); })()), "getClaimer", [], "method", false, false, false, 32), "getFullName", [], "method", false, false, false, 32), "html", null, true);
         echo "</h5>
                     
                 </div>
@@ -137,12 +165,13 @@ class __TwigTemplate_bf598a11ee772b0edc9dd5a847ab1290f8a573d203a884b10a8ad8c563f
      */
     public function getDebugInfo()
     {
-        return array (  103 => 21,  98 => 19,  93 => 17,  88 => 15,  83 => 13,  78 => 11,  68 => 3,  58 => 2,  35 => 1,);
+        return array (  131 => 32,  127 => 30,  121 => 28,  115 => 26,  113 => 25,  108 => 24,  106 => 23,  101 => 22,  99 => 21,  93 => 18,  88 => 16,  83 => 14,  78 => 12,  68 => 4,  58 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("{% extends 'baseb.html.twig' %}
+
 {% block main %}
 <main id=\"main\" class=\"main\">
     <div class=\"pagetitle\">
@@ -157,11 +186,21 @@ class __TwigTemplate_bf598a11ee772b0edc9dd5a847ab1290f8a573d203a884b10a8ad8c563f
                     <h5 class=\"card-title\">{{ claim.subject }}</h5>
                      <h6 class=\"card-subtitle mb-2 text-muted\">Description : </h6>
                     <h5 class=\"card-title\"> {{ claim.description }}</h5>
-                     <h6 class=\"card-subtitle mb-2 text-muted\">Claim date :/h6>
+                     <h6 class=\"card-subtitle mb-2 text-muted\">Claim date :</h6>
                     <h5 class=\"card-title\">{{ claim.date|date('Y-m-d') }}</h5>
-                    <h6 class=\"card-subtitle mb-2 text-muted\">Claim etat :/h6>
-                    <h5 class=\"card-title\">{{ claim.etat }}</h5>
-                    <h6 class=\"card-subtitle mb-2 text-muted\">Claimer :/h6>
+                    <h6 class=\"card-subtitle mb-2 text-muted\">Claim etat :</h6>
+                    <p>
+                      {% if claim.etat == 'In Process' %}
+                        <span class=\"badge bg-warning\">{{ claim.etat }}</span>
+                      {% elseif claim.etat == 'Not Yet' %}
+                        <span class=\"badge bg-danger\">{{ claim.etat }}</span>
+                      {% elseif claim.etat == 'Answered' %}
+                        <span class=\"badge bg-success\">{{ claim.etat }}</span>
+                      {% else %}
+                        {{ claim.etat }}
+                      {% endif %}
+                    </p>
+                    <h6 class=\"card-subtitle mb-2 text-muted\">Claimer :</h6>
                     <h5 class=\"card-title\">{{ claim.getClaimer().getFullName() }}</h5>
                     
                 </div>
@@ -169,7 +208,6 @@ class __TwigTemplate_bf598a11ee772b0edc9dd5a847ab1290f8a573d203a884b10a8ad8c563f
     </section>
 </main>
 {% endblock %}
-
-", "claim/show.html.twig", "C:\\Users\\admin\\Desktop\\Flixwork\\templates\\claim\\show.html.twig");
+", "claim/show.html.twig", "C:\\Users\\admin\\Desktop\\FlixWork-1\\templates\\claim\\show.html.twig");
     }
 }

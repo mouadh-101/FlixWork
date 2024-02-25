@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block main %}
+  <main id="main" class="main">
+    {% if errors %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for fieldName, errorMessage in errors %}
+                    <li>{{ fieldName }}: {{ errorMessage }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %} {# Close the "if" block here #}
+    <div class="pagetitle">
+      <h1>add answer</h1>
+    </div><!-- End Page Title -->
+    {{ form_start(form) }}
+    <section class="section">
+      <div class="row">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Let's Add Answers</h5>
+              <p><strong>Claim Subject:</strong> {{ claim.subject }}</p>
+              <p><strong>Claim Description:</strong> {{ claim.description }}</p>
+              <p><strong>Claim Date:</strong> {{ claim.date|date('Y-m-d') }}</p>
+              <p><strong>Claim State:</strong> {{ claim.etat }}</p>
+              <!-- General Form Elements -->
+              <label for="inputPassword" class="col-sm-2 col-form-label"> answer </label>
+              <div class="col-sm-10">
+                  {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+              </div>
+              <button type="submit" class="btn btn-primary">Submit answer</button>
+              {{ form_end(form) }}
+            </div>
+          </div>
+      </div>
+    </section>
+  </main>
+{% endblock %}

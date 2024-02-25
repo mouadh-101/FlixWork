@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Claim;
+use App\Entity\Freelancer;
+use App\Entity\Recruiter;
 use App\Entity\User;
 use App\Form\ClaimType;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request; // Corrected import statement
 use Symfony\Component\HttpFoundation\Response;
@@ -13,12 +16,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ClaimController extends AbstractController
 {
-    #[Route('/claims/{id}/new', name: 'addClaim')]
+    #[Route('/claimNew/{id}', name: 'addClaim')]
     public function new($id,Request $request): Response
     {
         $claimer = $this->getDoctrine()->getRepository(User::class)->find($id);
         $claim = new Claim();
         $claim->setClaimer($claimer);
+        $claim->setDate(new DateTime());
         $form = $this->createForm(ClaimType::class, $claim);
         $form->handleRequest($request);
 
@@ -27,17 +31,39 @@ class ClaimController extends AbstractController
             $entityManager->persist($claim);
             $entityManager->flush();
 
-            return $this->redirectToRoute('showAllClaims');
+            return $this->redirectToRoute('showAllClaims',['id_u'=>$id]);
         }
-
-        return $this->render('claim/new.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        $errors = [];
+        foreach ($form->getErrors(true, true) as $error) {
+            // Get the field name associated with the error
+            $fieldName = $error->getOrigin()->getName();
+            // Get the error message
+            $errorMessage = $error->getMessage();
+            // Add error message to the array
+            $errors[$fieldName] = $errorMessage;
+        }
+        if($claimer instanceof Recruiter)
+        {
+            return $this->render('claim/new.html.twig', [
+                'form' => $form->createView(),
+                'errors' => $errors,
+                'idU'=>$id,
+            ]);
+        }
+        if($claimer instanceof Freelancer)
+        {
+            return $this->render('claim/new2.html.twig', [
+                'form' => $form->createView(),
+                'errors' => $errors,
+                'idU'=>$id,
+            ]);
+        }
     }
-    #[Route('/claim/{id}', name: 'showClaim')]
-    public function show(int $id): Response
+    #[Route('/claim/{id_u}/{id}', name: 'showClaim')]
+    public function show(int $id,$id_u): Response
     {
         // Retrieve the claim based on the provided ID
+        $claimer=$this->getDoctrine()->getRepository(User::class)->find($id_u);
         $claim = $this->getDoctrine()->getRepository(Claim::class)->find($id);
 
         // Check if the claim exists
@@ -45,22 +71,50 @@ class ClaimController extends AbstractController
             throw $this->createNotFoundException('Claim not found');
         }
 
-        // Render the claim details using a Twig template
-        return $this->render('claim/show.html.twig', [
+        if($claimer instanceof Freelancer)
+        {
+            return $this->render('claim/show2.html.twig', [
             'claim' => $claim,
+            'idU'=>$id_u,
         ]);
+        }
+        if($claimer instanceof Recruiter)
+        {
+            return $this->render('claim/show.html.twig', [
+            'claim' => $claim,
+            'idU'=>$id_u,
+        ]);
+        }
     }
-    #[Route('/claims', name: 'showAllClaims')]
-    public function showAllClaims(): Response
+    #[Route('/claims/{id_u}', name: 'showAllClaims')]
+    public function showAllClaims($id_u): Response
     {
-        $claims = $this->getDoctrine()->getRepository(Claim::class)->findAll();
+        $claimer=$this->getDoctrine()->getRepository(User::class)->find($id_u);
 
-        return $this->render('claim/show_all.html.twig', [
-            'claims' => $claims,
-        ]);
+        if($claimer instanceof Freelancer)
+        {
+            $claims = $this->getDoctrine()->getRepository(Claim::class)->findBy(['claimer'=>$claimer]);
+            $claimsForMe = $this->getDoctrine()->getRepository(Claim::class)->findBy(['claimFor'=>$claimer]);
+            return $this->render('claim/showall.html.twig', [
+                'claims' => $claims,
+                'claimsFor'=>$claimsForMe,
+                'idU'=>$id_u,
+            ]);
+        }
+        if($claimer instanceof Recruiter)
+        {
+            $claims = $this->getDoctrine()->getRepository(Claim::class)->findBy(['claimer'=>$claimer]);
+            $claimsForMe = $this->getDoctrine()->getRepository(Claim::class)->findBy(['claimFor'=>$claimer]);
+            return $this->render('claim/show_all.html.twig', [
+                'claims' => $claims,
+                'idU'=>$id_u,
+                'claimsFor'=>$claimsForMe,
+                
+            ]);
+        }
     }
-    #[Route('/claims/{id}/delete', name: 'deleteClaim')]
-public function deleteClaim(int $id): RedirectResponse
+    #[Route('/deleteclaim/{id_u}/{id}', name: 'deleteClaim')]
+public function deleteClaim(int $id,$id_u): RedirectResponse
 {
     // Retrieve the claim from the database
     $entityManager = $this->getDoctrine()->getManager();
@@ -79,12 +133,13 @@ public function deleteClaim(int $id): RedirectResponse
     $this->addFlash('success', 'Claim deleted successfully');
 
     // Redirect to the page displaying all claims
-    return $this->redirectToRoute('showAllClaims');
+    return $this->redirectToRoute('showAllClaims',['id_u'=>$id_u]);
 }
-#[Route('/claim/{id}/edit', name: 'editClaim')]
-public function editClaim(int $id, Request $request): Response
+#[Route('/editclaim/{id_u}/{id_c}', name: 'editClaim')]
+public function editClaim(int $id_u,$id_c, Request $request): Response
 {
-    $claim = $this->getDoctrine()->getRepository(Claim::class)->find($id);
+    $claim = $this->getDoctrine()->getRepository(Claim::class)->find($id_c);
+    $claimer=$this->getDoctrine()->getRepository(User::class)->find($id_u);
 
     if (!$claim) {
         throw $this->createNotFoundException('Claim not found');
@@ -98,12 +153,30 @@ public function editClaim(int $id, Request $request): Response
 
         $this->addFlash('success', 'Claim updated successfully');
 
-        return $this->redirectToRoute('showAllClaims');
+        return $this->redirectToRoute('showAllClaims',['id_u'=>$id_u]);
     }
-
-    return $this->render('claim/edit.html.twig', [
+    $errors = [];
+    foreach ($form->getErrors(true, true) as $error) {
+        $fieldName = $error->getOrigin()->getName();
+        $errorMessage = $error->getMessage();
+        $errors[$fieldName] = $errorMessage;
+    }
+    if($claimer instanceof Freelancer)
+    {
+        return $this->render('claim/new.html.twig', [
         'form' => $form->createView(),
+        'errors' => $errors,
+        'idU'=> $id_u,
     ]);
+    }
+    if($claimer instanceof Recruiter)
+    {
+        return $this->render('claim/new.html.twig', [
+        'form' => $form->createView(),
+        'errors' => $errors,
+        'idU'=> $id_u,
+    ]);
+    }
 }
 
     #[Route('/claim', name: 'app_claim')]
