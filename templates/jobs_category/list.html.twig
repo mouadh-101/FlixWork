@@ -2,9 +2,8 @@
 
 {% block main %}
     <main id="main" class="main">
-
         <div class="pagetitle">
-            <h1>List of Category Job</h1>
+            <h1>List of Job Categories</h1>
         </div><!-- End Page Title -->
 
         <section class="section dashboard">
@@ -14,18 +13,27 @@
                 <div class="col-12">
                     <div class="card recent-sales overflow-auto">
                         <div class="card-body">
-                            <h5 class="card-title">List of Category</h5>
+                            <!-- Search Bar -->
+                            <div class="mb-3">
+                                <!-- Your search form or input goes here -->
+                            </div>
 
+                            <!-- Table -->
                             <table class="table border datatable">
+                                <!-- Table Header -->
                                 <thead>
+                                    <!-- Header Rows -->
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">name</th>
+                                        <th scope="col">Name</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
+
+                                <!-- Table Body -->
                                 <tbody>
                                     {% for category in categories %}
+                                        <!-- Rows for Category Data -->
                                         <tr>
                                             <th scope="row">{{ category.id }}</th>
                                             <td>{{ category.getCategoryName() }}</td>
@@ -42,14 +50,13 @@
                             </table>
 
                             <!-- Add Category Button -->
-                            <div class="mt-3 d-flex justify-content-end">
-                                <a href="{{ path('jobs_category_add') }}" class="btn btn-warning" style="width: 150px;">Add Category</a>
+                            <div class="mb-3 d-flex justify-content-end">
+                                <a href="{{ path('jobs_category_add') }}" class="btn btn-warning">Add Category</a>
                             </div>
                         </div>
                     </div>
-                </div><!-- End Recent Sales -->
+                </div>
             </div>
         </section>
-
     </main>
 {% endblock %}

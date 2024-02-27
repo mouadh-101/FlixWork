@@ -6,6 +6,7 @@ use App\Entity\JobsCategory;
 use App\Form\JobsCategoryType;
 use App\Repository\JobsCategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,9 +17,17 @@ class JobsCategoryController extends AbstractController
     /**
      * @Route("/jobs_category", name="jobs_category_list", methods={"GET"})
      */
-    public function list(JobsCategoryRepository $categoryRepository): Response
+    public function list(Request $request, JobsCategoryRepository $categoryRepository, PaginatorInterface $paginator): Response
     {
-        $categories = $categoryRepository->findAll();
+        $query = $categoryRepository->createQueryBuilder('c')
+            ->orderBy('c.id', 'DESC')
+            ->getQuery();
+
+        $categories = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10 // Items per page
+        );
 
         return $this->render('jobs_category/list.html.twig', [
             'categories' => $categories,
@@ -85,7 +94,6 @@ class JobsCategoryController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/jobs_category/delete/{id}", name="jobs_category_delete", methods={"POST"})
      */
@@ -103,17 +111,3 @@ class JobsCategoryController extends AbstractController
         return $this->redirectToRoute('jobs_category_list');
     }
 }
-
-    
-    
-
-    
-    
-    
-
-    
-    
-
-    
-    
-

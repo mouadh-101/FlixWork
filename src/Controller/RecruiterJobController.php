@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\JobType;
 use App\Repository\JobRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,14 +18,19 @@ class RecruiterJobController extends AbstractController
     /**
      * @Route("/recruiter/job", name="recruiter_job_list")
      */
-    public function list(JobRepository $jobRepository): Response
+    public function list(Request $request, JobRepository $jobRepository, PaginatorInterface $paginator): Response
     {
-       
-        $jobs = $jobRepository->findAll(); // Retrieve all jobs
+        $queryBuilder = $jobRepository->createQueryBuilder('j')
+            ->orderBy('j.id', 'DESC'); // You can adjust the sorting as needed
+
+        $pagination = $paginator->paginate(
+            $queryBuilder,
+            $request->query->getInt('page', 1),
+            10 // Number of items per page
+        );
 
         return $this->render('recruiter/job/list.html.twig', [
-            'jobs' => $jobs,
-
+            'pagination' => $pagination,
         ]);
     }
 
