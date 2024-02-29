@@ -2,6 +2,7 @@
 
 {% block main %}
     <main id="main" class="main">
+
         <div class="pagetitle">
             <h1>List of Jobs</h1>
         </div><!-- End Page Title -->
@@ -36,7 +37,7 @@
 
                                 <!-- Table Body -->
                                 <tbody>
-                                    {% for job in pagination %}
+                                    {% for job in jobs %}
                                         <!-- Rows for Job Data -->
                                         <tr>
                                             <th scope="row">{{ job.id }}</th>
@@ -58,15 +59,10 @@
                                 </tbody>
                             </table>
 
-                            <!-- Pagination -->
-                            <div class="d-flex justify-content-end">
-                                {% if pagination.getTotalItemCount() > 0 %}
-                                    {{ knp_pagination_render(pagination) }}
-                                {% endif %}
-                            </div>
-
                             <!-- Add Job Button -->
                             <div class="mb-3 d-flex justify-content-end">
+                                <a href="{{ path('recruiter_job_pdf_all') }}" class="btn btn-secondary">Download All Jobs PDF</a>
+
                                 <a href="{{ path('recruiter_job_add') }}" class="btn btn-warning">Add Job</a>
                             </div>
                         </div>
@@ -74,5 +70,6 @@
                 </div>
             </div>
         </section>
+
     </main>
 {% endblock %}

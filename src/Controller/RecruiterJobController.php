@@ -6,8 +6,9 @@ use App\Entity\Job;
 use App\Entity\User;
 use App\Form\JobType;
 use App\Repository\JobRepository;
+use App\Service\PdfService;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\PaginatorInterface;
+use Knp\Snappy\Pdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,19 +19,14 @@ class RecruiterJobController extends AbstractController
     /**
      * @Route("/recruiter/job", name="recruiter_job_list")
      */
-    public function list(Request $request, JobRepository $jobRepository, PaginatorInterface $paginator): Response
+    public function list(JobRepository $jobRepository): Response
     {
-        $queryBuilder = $jobRepository->createQueryBuilder('j')
-            ->orderBy('j.id', 'DESC'); // You can adjust the sorting as needed
-
-        $pagination = $paginator->paginate(
-            $queryBuilder,
-            $request->query->getInt('page', 1),
-            10 // Number of items per page
-        );
+       
+        $jobs = $jobRepository->findAll(); // Retrieve all jobs
 
         return $this->render('recruiter/job/list.html.twig', [
-            'pagination' => $pagination,
+            'jobs' => $jobs,
+
         ]);
     }
 
@@ -133,4 +129,33 @@ class RecruiterJobController extends AbstractController
             'relatedJobs' => $relatedJobs,
         ]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+     * @Route("/recruiter/job/pdf/all", name="recruiter_job_pdf_all", methods={"GET"})
+     */
+    public function generatePdfForAllJobs(JobRepository $jobRepository, PdfService $pdfService): Response
+    {
+        $jobs = $jobRepository->findAll();
+
+        $html = $this->renderView('recruiter/job/pdf_template_all.html.twig', [
+            'jobs' => $jobs,
+        ]);
+
+        return $pdfService->generateResponsePDF($html, 'recruiter_job_list');
+
+
+
+}
 }

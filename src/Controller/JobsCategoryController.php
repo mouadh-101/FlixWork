@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\JobsCategory;
 use App\Form\JobsCategoryType;
+use App\Repository\JobRepository;
 use App\Repository\JobsCategoryRepository;
+use App\Service\PdfService; // Don't forget to import the PdfService
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,6 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class JobsCategoryController extends AbstractController
 {
+  
+    private $pdfService;
+
+    public function __construct(PdfService $pdfService)
+    {
+        $this->pdfService = $pdfService;
+    }
+
     /**
      * @Route("/jobs_category", name="jobs_category_list", methods={"GET"})
      */
@@ -110,4 +120,134 @@ class JobsCategoryController extends AbstractController
 
         return $this->redirectToRoute('jobs_category_list');
     }
+
+   
+    /**
+     * @Route("/jobs_category/pdf/all", name="jobs_category_pdf_all", methods={"GET"})
+     */
+    public function generatePdfForAllCategories(JobsCategoryRepository $categoryRepository): Response
+    {
+        $categories = $categoryRepository->findAll();
+
+        $html = $this->renderView('jobs_category/pdf_template_all.html.twig', [
+            'categories' => $categories,
+        ]);
+
+        // Assuming you have a PdfService similar to the one in RecruiterJobController
+        return $this->pdfService->generateResponsePDF($html);
+    }
+   
+   
+   
+
+   
+   
+   
+
+   
+
+   
+   
+   
+   
+
+   
+   
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
 }
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+

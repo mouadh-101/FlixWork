@@ -1,0 +1,66 @@
+{# templates/recruiter/job/pdf_template_all.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recruiter Job List PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #3498db;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recruiter Job List</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Salary</th>
+                <th>Type</th>
+                <th>Deadline</th>
+                <!-- Add more job details as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+                <tr>
+                    <td>{{ job.title }}</td>
+                    <td>{{ job.description }}</td>
+                    <td>{{ job.salary }}</td>
+                    <td>{{ job.type }}</td>
+                    <td>{{ job.deadline|date("Y-m-d") }}</td>
+                    <!-- Add more job details as needed -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p>Generated on: {{ "now"|date("Y-m-d H:i:s") }}</p>
+</body>
+</html>

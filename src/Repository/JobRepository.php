@@ -21,20 +21,36 @@ class JobRepository extends ServiceEntityRepository
         parent::__construct($registry, Job::class);
     }
 
-    /**
-     * Find jobs by recruiter ID
-     *
-     * @param int $recruiterId
-     * @return Job[]
-     */
-    public function findByRecruiterId($recruiterId): array
-    {
-        return $this->createQueryBuilder('j')
-            ->andWhere('j.recruiter = :recruiterId')
-            ->setParameter('recruiterId', $recruiterId)
-            ->getQuery()
-            ->getResult();
-    }
+//    /**
+//     * @return Job[] Returns an array of Job objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('j')
+//            ->andWhere('j.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('j.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
 
-    // You can add more custom methods here as needed
+//    public function findOneBySomeField($value): ?Job
+//    {
+//        return $this->createQueryBuilder('j')
+//            ->andWhere('j.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//        ;
+//    }
+//   public function findByRecruiterId($recruiterId)
+//    {
+//        return $this->createQueryBuilder('j')
+//            ->andWhere('j.recruiter = :recruiterId')
+//            ->setParameter('recruiterId', $recruiterId)
+//            ->getQuery()
+//            ->getResult();
+//    }
 }

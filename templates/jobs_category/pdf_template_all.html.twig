@@ -1,0 +1,66 @@
+{# templates/jobs_category/pdf_template_all.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Categories List PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #3498db;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+
+        .logo {
+            max-width: 100px;
+            max-height: 100px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<img src="{{ asset('img/logo.png') }}" alt="">
+
+
+
+    <h1>Job Categories List</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Category Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.getCategoryName() }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p>Generated on: {{ "now"|date("Y-m-d H:i:s") }}</p>
+</body>
+</html>
