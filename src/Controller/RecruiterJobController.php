@@ -12,7 +12,12 @@ use Knp\Snappy\Pdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mailer\Transport as MailerTransport;
+use Symfony\Component\Mime\Email;
+
+
 
 class RecruiterJobController extends AbstractController
 {
@@ -30,30 +35,86 @@ class RecruiterJobController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/recruiter/job/add", name="recruiter_job_add")
-     */
-    public function add(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $user = $entityManager->getRepository(User::class)->find(1); // Assuming you want to associate the job with a specific recruiter
+/**
+ * @Route("/recruiter/job/add", name="recruiter_job_add")
+ */
+public function add(Request $request, EntityManagerInterface $entityManager): Response
+{
+    $users = $entityManager->getRepository(User::class)->findAll(); // Retrieve all users
 
-        $job = new Job();
-        $job->setRecruiter($user);
+    $job = new Job();
 
-        $form = $this->createForm(JobType::class, $job);
-        $form->handleRequest($request);
+    $form = $this->createForm(JobType::class, $job);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($job);
-            $entityManager->flush();
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Mailing:
+        $transport = MailerTransport::fromDsn('gmail+smtp://flixworkteam@gmail.com:nkbnqbibnenlciiz@default');
+        $mailer = new Mailer($transport);
+        $logoUrl = 'https://i.ibb.co/cgZvtRR/logo.png';
 
-            return $this->redirectToRoute('recruiter_job_list');
+        foreach ($users as $user) {
+            $email = (new Email())
+                ->from('flixworkteam@gmail.com')
+                ->to($user->getEmail())
+                ->subject('New Job Added')
+                ->html('<div style="text-align: center;"><img src="' . $logoUrl . '" alt="Logo"></div><br>'
+                    . '<p>Hello ' . $user->getFullName() . ',</p>'
+                    . '<p>We would like to inform you that a new Job has been added to your works: ' . $job->getTitle() . '.</p>'
+                    . '<p>Please review the postulation and take necessary actions.</p>'
+                    . '<p>Best regards,<br>FlixWork</p>');
+
+            $mailer->send($email);
         }
+        // End mailer
 
-        return $this->render('recruiter/job/add.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        $entityManager->persist($job);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('recruiter_job_list');
     }
+
+    return $this->render('recruiter/job/add.html.twig', [
+        'form' => $form->createView(),
+    ]);
+}
+
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
 
     /**
      * @Route("/recruiter/job/{id}", name="recruiter_job_show")
@@ -129,16 +190,6 @@ class RecruiterJobController extends AbstractController
             'relatedJobs' => $relatedJobs,
         ]);
     }
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -9,11 +9,15 @@
                     <h2 class="section-title">Jobs Categories</h2>
                 </div>
                 {% for job in jobs %}
-                    {# Obtenez l'index de la boucle actuelle pour accéder à une image spécifique dans la liste #}
+                    {# Get the index of the current loop to access a specific image in the list #}
                     {% set imageIndex = loop.index0 %}
 
+                    {# Check if the current index exists in the imageList array #}
+                    {% set defaultImage = asset('img/clients/client-2.png') %}
+                    {% set currentImage = imageIndex < imageList|length ? asset(imageList[imageIndex]) : defaultImage %}
+
                     <div class="col-md-6 mb-4 d-flex align-items-stretch">
-                        <div class="card" style='background-image: url("{{ asset(imageList[imageIndex]) }}");' data-aos="fade-up" data-aos-delay="100">
+                        <div class="card" style='background-image: url("{{ currentImage }}");' data-aos="fade-up" data-aos-delay="100">
                             <div class="card-body">
                                 {% if job.category %}
                                     <h5 class="card-title">{{ job.category.categoryName }}</h5>

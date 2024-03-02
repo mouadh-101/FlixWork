@@ -26,6 +26,7 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">Jobs Count</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
@@ -37,6 +38,7 @@
                                         <tr>
                                             <th scope="row">{{ category.id }}</th>
                                             <td>{{ category.getCategoryName() }}</td>
+                                            <td>{{ categoryJobsCount[category.getId()] }}</td>
                                             <td class="d-flex justify-content-around align-items-center">
                                                 <form method="post" action="{{ path('jobs_category_delete', {'id': category.id}) }}" onsubmit="return confirm('Are you sure you want to delete this category?');">
                                                     <input type="hidden" name="_method" value="DELETE">
@@ -54,10 +56,150 @@
                                 <a href="{{ path('jobs_category_add') }}" class="btn btn-warning">Add Category</a>
                                 <a href="{{ path('jobs_category_pdf_all') }}" class="btn btn-secondary ml-2">Download All Categories PDF</a>
                             </div>
+
+                            <!-- Charts -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <canvas id="barChart" style="height: 400px;"></canvas>
+                                </div>
+                                <div class="col-md-6">
+                                    <canvas id="doughnutChart" style="height: 400px;"></canvas>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Prepare data for the bar chart
+            const barChartLabels = [];
+            const barChartData = [];
+
+            // Prepare data for the doughnut chart
+            const doughnutChartLabels = [];
+            const doughnutChartData = [];
+
+            {% for category in categories %}
+                barChartLabels.push('{{ category.getCategoryName() }}');
+                barChartData.push({{ categoryJobsCount[category.getId()] }});
+
+                doughnutChartLabels.push('{{ category.getCategoryName() }}');
+                doughnutChartData.push({{ categoryJobsCount[category.getId()] }});
+            {% endfor %}
+
+            // Create the bar chart
+            var barCtx = document.getElementById('barChart').getContext('2d');
+            var barChart = new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: barChartLabels,
+                    datasets: [{
+                        label: 'Jobs Count',
+                        data: barChartData,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',   // Red
+                            'rgba(54, 162, 235, 0.7)',  // Blue
+                            'rgba(255, 206, 86, 0.7)',  // Yellow
+                            'rgba(75, 192, 192, 0.7)',  // Teal
+                            'rgba(153, 102, 255, 0.7)', // Purple
+                            'rgba(255, 159, 64, 0.7)',  // Orange
+                            'rgba(0, 128, 0, 0.7)',    // Green
+                            'rgba(255, 69, 0, 0.7)',   // Red-Orange
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(0, 128, 0, 1)',
+                            'rgba(255, 69, 0, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Jobs'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Categories'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Create the doughnut chart
+            var doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+            var doughnutChart = new Chart(doughnutCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: doughnutChartLabels,
+                    datasets: [{
+                        data: doughnutChartData,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',   // Red
+                            'rgba(54, 162, 235, 0.7)',  // Blue
+                            'rgba(255, 206, 86, 0.7)',  // Yellow
+                            'rgba(75, 192, 192, 0.7)',  // Teal
+                            'rgba(153, 102, 255, 0.7)', // Purple
+                            'rgba(255, 159, 64, 0.7)',  // Orange
+                            'rgba(0, 128, 0, 0.7)',    // Green
+                            'rgba(255, 69, 0, 0.7)',   // Red-Orange
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(0, 128, 0, 1)',
+                            'rgba(255, 69, 0, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'right',
+                        }
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function (tooltipItem, data) {
+                                var dataset = data.datasets[tooltipItem.datasetIndex];
+                                var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
+                                    return previousValue + currentValue;
+                                });
+                                var currentValue = dataset.data[tooltipItem.index];
+                                var percentage = Math.round((currentValue / total) * 100);
+                                return currentValue + ' (' + percentage + '%)';
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 {% endblock %}

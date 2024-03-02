@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Job Notification</title>
+</head>
+<body>
+    <h2>New Job Notification</h2>
+    <p>Hello,</p>
+    <p>A new job has been added:</p>
+
+    <ul>
+        <li><strong>Title:</strong> {{ job.getTitle() }}</li>
+        <li><strong>Description:</strong> {{ job.getDescription() }}</li>
+        <li><strong>Deadline:</strong> {{ job.getDeadline()|date('Y-m-d') }}</li>
+        <li><strong>Type:</strong> {{ job.getType() }}</li>
+        <li><strong>Salary:</strong> {{ job.getSalary() }}</li>
+        <!-- You can include more details as needed -->
+    </ul>
+
+    <p>Thank you for using our platform.</p>
+    <p>Best regards,</p>
+    <p>Your Platform Team</p>
+</body>
+</html>
