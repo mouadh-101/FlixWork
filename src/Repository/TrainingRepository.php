@@ -20,6 +20,14 @@ class TrainingRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Training::class);
     }
+    public function findByTitle($title)
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.title LIKE :title')
+            ->setParameter('title', '%'.$title.'%')
+            ->getQuery()
+            ->getResult();
+    }
 
 //    /**
 //     * @return Training[] Returns an array of Training objects

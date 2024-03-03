@@ -1,0 +1,49 @@
+{% extends 'baseb.html.twig' %}
+
+{% block title %}Résultats de la recherche{% endblock %}
+
+{% block body %}
+    <h1>RESULT OF SEARCH</h1>
+    
+    {% if trainings is not empty %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">TITLE</th>
+                        <th scope="col">DESCRIPTION</th>
+                        <th scope="col">START-DATE</th>
+                        <th scope="col">END-DATE</th>
+                        <th scope="col">NumberOfPlaces</th>
+                        <th scope="col">TRAINER</th>
+                        <th scope="col">CATEGORY</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for training in trainings %}
+                        <tr>
+                            <td>{{ training.id }}</td>
+                            <td>{{ training.title }}</td>
+                            <td>{{ training.description }}</td>
+                            <td>{{ training.startDate|date('Y-m-d') }}</td>
+                            <td>{{ training.endDate|date('Y-m-d') }}</td>
+                            <td>{{ training.numberOfPlaces }}</td>
+                            <td>{{ training.trainer.getFullName() }}</td>
+                            <td>{{ training.category.getCategoryName() }}</td>
+                            <td>
+                                <a href="{{ path('deletetraining', {'id': training.id}) }}" class="btn btn-warning">DELETE CATEGORY</a> 
+                                <a href="{{ path('edit', {'id': training.id}) }}" class="btn btn-info">UPDATE CATEGORY</a> 
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="{{ path('list_training') }}" class="btn btn-success">RETURN TO THE COMPLETE LIST OF TRAININGS</a> 
+    {% else %}
+        <p>Aucun résultat trouvé pour la recherche "{{ app.request.query.get('q') }}"</p>
+        <a href="{{ path('list_training') }}" class="btn btn-success">RETURN TO THE COMPLETE LIST OF TRAININGS</a> 
+    {% endif %}
+{% endblock %}

@@ -15,38 +15,10 @@ class Training
     #[ORM\Column]
     private ?int $id = null;
 
-
-
-/**
-     * @Assert\NotBlank(message="title doit être non vide")
-     * @Assert\Length(
-     *     min = 5,
-     *     minMessage="Entrer un titre ou minimum de 5 caractères"
-     *     )
-     * @ORM\Column(type="string", length=255)
-     
-*/
-    
-
     #[ORM\Column(length: 255)]
     private ?string $title = null;
-/**
- * @Assert\Length(
- *     min = 7,
- *     minMessage="Entrer une discription avec au moins {{ 7 }} caractères",
- *     max = 1000,
- *     maxMessage="Le titre ne peut pas dépasser {{ 1000 }} caractères"
- * )
- * @ORM\Column(type="string", length=500)
- */
-
     #[ORM\Column(length: 500)]
     private ?string $description = null;
-/**
- * @ORM\Column(type="date")
- * @Assert\NotBlank(message="La date de début ne doit pas être vide")
- */
-
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $start_date = null;
 /**
@@ -57,23 +29,11 @@ class Training
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $end_date = null;
-/**
- * @ORM\Column(type="integer")
- * @Assert\NotBlank(message="Le nombre de places ne doit pas être vide")
- * @Assert\Type(type="integer", message="Le nombre de places doit être un entier")
- * @Assert\PositiveOrZero(message="Le nombre de places doit être positif ou nul")
- */
     #[ORM\Column]
     private ?int $number_of_places = null;
-
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $trainer = null;
-/**
- * @ORM\ManyToOne(targetEntity=TrainingCategory::class)
- * @ORM\JoinColumn(nullable=false)
- * @Assert\NotNull(message="La catégorie ne doit pas être vide")
- */
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?TrainingCategory $category = null;
@@ -166,4 +126,6 @@ class Training
 
         return $this;
     }
+
+    
 }

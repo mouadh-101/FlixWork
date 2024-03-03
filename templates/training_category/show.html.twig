@@ -1,0 +1,28 @@
+{% extends 'baseb.html.twig' %}
+
+{% block main %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>DETAILS CATEGORY OF TRAINING</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-12">
+                <div class="card recent-sales overflow-auto">
+                    <div class="card-body">
+                        <h5 class="card-title">DETAILS CATEGORY OF TRAINING</h5>
+                        <dl class="row">
+                            <dt class="col-sm-3" style="color: #FF5733;">NAME OF CATEGORY:</dt>
+                            <dd class="col-sm-9" style="color: #28B463;">{{ categorie.getCategoryName() }}</dd>
+                        </dl>
+                        <a href="{{ path('listcategorie') }}" class="btn btn-primary">BACK TO LIST CATEGORY OF TRAININGS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+{% endblock %}

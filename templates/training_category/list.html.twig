@@ -1,47 +1,68 @@
 {% extends 'baseb.html.twig' %}
+
 {% block main %}
-  <main id="main" class="main">
+<main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>List_Category Of Trainer</h1>
+        <h1>LIST CATEGORY OF TRAININGS</h1>
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
-      <div class="row">
+        <div class="row">
 
-        <!-- Left side columns -->
-            <!-- Recent Sales -->
-            <div class="col-12">
-              <div class="card recent-sales overflow-auto">
-                <div class="card-body">
-                  <h5 class="card-title">List of Category</h5>
-
-                  <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">name</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    {% for categorie in categories %}
-                    <tr>
-                        <th scope="row">{{categorie.id}}</a></th>
-                        <td>{{categorie.getCategoryName()}}</td>
-                        <td><a href="{{ path( 'deletecategorie' , {'id' : categorie.id})}}" >deleteCategorie</a></td>
-                        <td><a href="{{ path( 'editcategorie' , {'id' : categorie.id})}}" >editCategorie</a></td>
-                    </tr>
-                    {% endfor %}
-
-                    </tbody>
-                  </table>
-
+            <!-- Boutons d'action -->
+            <div class="col-12 mb-3">
+                <div class="btn-group" role="group" aria-label="Actions">
+                    <form action="{{ path('search_categorie') }}" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="t" placeholder="SEARCH BY NAME OF CATEGORY">
+                            <button class="btn btn-primary" type="submit">SEARCH</button> 
+                        </div>
+                    </form>
                 </div>
+               
+            </div>
 
-              </div>
-            </div><!-- End Recent Sales -->
-      </div>
+            <!-- Liste des catégories -->
+            <div class="col-12">
+                <div class="card recent-sales overflow-auto">
+                    <div class="card-body">
+                        <h5 class="card-title">LIST CATEGORY OF TRAININGS</h5>
+                        
+                        <a href="{{ path('addcategorie') }}" class="btn btn-success" style="background-color: #F4D03F;">ADD CATEGORY</a>
+
+                        <table class="table table-borderless datatable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">CATEGORY NAME</th> 
+                                    <th scope="col">Actions</th> 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for categorie in categories %}
+                                <tr>
+                                    <th scope="row">{{ categorie.id }}</th>
+                                    <td>{{ categorie.getCategoryName() }}</td>
+                                    <td>
+                                        <a href="{{ path('showcategorie', {'id': categorie.id}) }}" class="btn btn-info" style="background-color: #3498db;">SHOW</a> <!-- Bouton Afficher en bleu -->
+                                        <a href="{{ path('deletecategorie', {'id': categorie.id}) }}" class="btn btn-danger" style="background-color: #FF5733;">DELETE</a> <!-- Bouton Supprimer en rouge -->
+                                        <a href="{{ path('editcategorie', {'id': categorie.id}) }}" class="btn btn-primary" style="background-color: #0A79DF;">UPDATE</a> <!-- Bouton Modifier en bleu -->
+                                        
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <a href="{{ path('generate_pdf_cat') }}" class="btn btn-success" style="background-color: #28B463;">GENERATE PDF</a>
+                         <div class="btn-group" role="group" aria-label="Actions">
+                    <a href="{{ path('chart') }}" class="btn btn-success" style="background-color: #28B463;">VIEW CHART</a>
+                </div>
+                    </div>
+                </div>
+            </div><!-- Fin de la liste des catégories -->
+        </div>
     </section>
 
-  </main>
-  {% endblock %}
+</main>
+{% endblock %}

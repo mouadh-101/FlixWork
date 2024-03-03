@@ -17,6 +17,7 @@ class TrainingCategory
  * @Assert\NotBlank(message="Le nom de la catégorie ne doit pas être vide")
  * @Assert\Length(max=255, maxMessage="Le nom de la catégorie ne doit pas dépasser {{ 255 }} caractères")
  */
+ 
     #[ORM\Column(length: 255)]
     private ?string $category_name = null;
 
@@ -36,4 +37,13 @@ class TrainingCategory
 
         return $this;
     }
+
+
+
+
+    
+
+
+
+
 }

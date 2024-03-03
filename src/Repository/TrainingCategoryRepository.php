@@ -21,6 +21,15 @@ class TrainingCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, TrainingCategory::class);
     }
 
+    public function findBycategory_name($category_name)
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.category_name LIKE :category_name')
+            ->setParameter('category_name', '%'.$category_name.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return TrainingCategory[] Returns an array of TrainingCategory objects
 //     */

@@ -1,0 +1,40 @@
+{% extends 'baseb.html.twig' %}
+
+{% block main %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>DETAILS OF THE TRAINING</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-12">
+                <div class="card recent-sales overflow-auto">
+                    <div class="card-body">
+                        <h5 class="card-title">DETAILS OF THE TRAINING</h5>
+                        <dl class="row">
+                            <dt class="col-sm-3 text-primary">TITLE :</dt>
+                            <dd class="col-sm-9 text-info">{{ training.title }}</dd>
+                            <dt class="col-sm-3 text-primary">DESCRIPTION :</dt>
+                            <dd class="col-sm-9 text-info">{{ training.description }}</dd>
+                            <dt class="col-sm-3 text-primary">START-DATE :</dt>
+                            <dd class="col-sm-9 text-info">{{ training.startDate|date('Y-m-d') }}</dd>
+                            <dt class="col-sm-3 text-primary">END-DATE :</dt>
+                            <dd class="col-sm-9 text-info">{{ training.endDate|date('Y-m-d') }}</dd>
+                            <dt class="col-sm-3 text-primary">NUMBER OF PLACES :</dt>
+                            <dd class="col-sm-9 text-info">{{ training.numberOfPlaces }}</dd>
+                            <dt class="col-sm-3 text-primary">TRAINER :</dt>
+                            <dd class="col-sm-9 text-info">{{ training.trainer.getFullName() }}</dd>
+                            <dt class="col-sm-3 text-primary">CATEGORY :</dt>
+                            <dd class="col-sm-9 text-info">{{ training.category.getCategoryName() }}</dd>
+                        </dl>
+                        <a href="{{ path('list_training') }}" class="btn btn-primary">BACK TO LIST OF TRAININGS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+{% endblock %}

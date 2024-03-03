@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIST OF TRAININGS</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th:nth-child(1), td:nth-child(1) {
+            background-color: #ff0000; 
+        }
+        th:nth-child(2), td:nth-child(2) {
+            background-color: #ffffff; 
+        }
+        th:nth-child(3), td:nth-child(3) {
+            background-color: #ff0000; 
+        }
+        th:nth-child(4), td:nth-child(4) {
+            background-color: #ffffff; 
+        }
+        th:nth-child(5), td:nth-child(5) {
+            background-color: #ff0000; 
+        }
+        th:nth-child(6), td:nth-child(6) {
+            background-color: #ffffff; 
+        }
+        th:nth-child(7), td:nth-child(7) {
+            background-color: #ff0000; 
+        }
+        th:nth-child(8), td:nth-child(8) {
+            background-color: #ffffff; 
+        }
+    </style>
+</head>
+<body>
+    <h1>LIST OF TRAININGS</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>TITLE</th>
+                <th>DESCRIPTION</th>
+                <th>START-DATE</th>
+                <th>END-DATE</th>
+                <th>NUMBER OF PLACES</th>
+                <th>TRAINER</th>
+                <th>CATEGORY</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for training in trainings %}
+            <tr>
+                <td>{{ training.id }}</td>
+                <td>{{ training.title }}</td>
+                <td>{{ training.description }}</td>
+                <td>{{ training.startDate|date('Y-m-d') }}</td>
+                <td>{{ training.endDate|date('Y-m-d') }}</td>
+                <td>{{ training.numberOfPlaces }}</td>
+                <td>{{ training.trainer.getFullName() }}</td>
+                <td>{{ training.category.getCategoryName() }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\TrainingCategory;
 use App\Form\TrainingCategoryType;
+use App\Repository\TrainingCategoryRepository;
+use App\Repository\TrainingRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Dompdf\Dompdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,16 +33,23 @@ class TrainingCategoryController extends AbstractController
         $form->handleRequest($request);
         $em=$doctrine->getManager();
         
-        if ($form->isSubmitted())
+        if ($form->isSubmitted() && $form->isValid())
         {
 
             $em->persist($categorie);
             $em->flush();
             return $this->redirectToRoute('listcategorie');
         }
+        $errors = [];
+        foreach ($form->getErrors(true, true) as $error) {
+            $fieldName = $error->getOrigin()->getName();
+            $errorMessage = $error->getMessage();
+            $errors[$fieldName] = $errorMessage;
+        }
         
         return $this->render('training_category/add.html.twig', [
             'formcat' => $form->createView(),
+            'errors' => $errors,
         ]);
     }
 
@@ -74,11 +84,91 @@ class TrainingCategoryController extends AbstractController
      
       
            }
+
+           $errors = [];
+           foreach ($form->getErrors(true, true) as $error) {
+               $fieldName = $error->getOrigin()->getName();
+               $errorMessage = $error->getMessage();
+               $errors[$fieldName] = $errorMessage;
+           }
+
            return $this->render('training_category/add.html.twig', [
                'formcat' => $form->createView(),
+               'errors' =>$errors,
            ]);
            
    }
+
+
+
+   #[Route('/searchCat', name: 'search_categorie')]
+   public function search(Request $request, TrainingCategoryRepository $trainingcategoryRepository): Response
+   {
+       $searchTerm = $request->query->get('t');
+       $categories = $trainingcategoryRepository->findBycategory_name($searchTerm);
+
+       return $this->render('training_category/searchCat.html.twig', [
+           'controller_name' => 'TrainingController',
+           'categories' => $categories,
+       ]);
+   }
+
+
+   #[Route('/generate-pdf_cat', name: 'generate_pdf_cat')]
+   public function generatePdf(TrainingCategoryRepository $trainingcategoryRepository): Response
+   {
+       $categories = $trainingcategoryRepository->findAll();
+       
+       if (!$categories) {
+           throw $this->createNotFoundException('Aucune formation trouvée.');
+       }
+   
+       $html = $this->renderView('training_category/pdf_cat.html.twig', [
+           'categories' => $categories,
+       ]);
+   
+       $dompdf = new Dompdf();
+       $dompdf->loadHtml($html);
+       $dompdf->setPaper('A3', 'landscape');
+       $dompdf->render();
+   
+       return new Response($dompdf->output(), Response::HTTP_OK, [
+           'Content-Type' => 'application/pdf',
+       ]);
+   }
+
+
+   #[Route('/categorie/{id}', name: 'showcategorie')]
+public function showcategorie($id, TrainingCategoryRepository $trainingCategoryRepository): Response
+{
+    $categorie = $trainingCategoryRepository->find($id);
+    return $this->render('training_category/show.html.twig', [
+        'categorie' => $categorie,
+    ]);
+}
+
+
+#[Route('/chart', name: 'chart')]
+public function chart(TrainingCategoryRepository $tc, TrainingRepository $trainingRepository): Response
+{
+    $categories = $tc->findAll();
+
+    $categoryLabels = [];
+    $categoryCounts = [];
+
+    foreach ($categories as $category) {
+        $categoryLabels[] = $category->getCategoryName();
+        $trainings = $trainingRepository->findBy(['category' => $category]);
+        $categoryCounts[] = count($trainings);
+    }
+
+    return $this->render('training_category/chart.html.twig', [
+        'categoryLabels' => json_encode($categoryLabels),
+        'categoryCounts' => json_encode($categoryCounts),
+    ]);
+}
+
+   
 
 
     

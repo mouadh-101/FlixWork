@@ -1,0 +1,47 @@
+{% extends 'baseb.html.twig' %}
+
+{% block title %}Résultats de la recherche{% endblock %}
+
+{% block body %}
+    <h1>RESULT OF SEARCH</h1>
+    
+    {% if categories is not empty %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                    <th scope="col">CATEGORY NAME</th> 
+                    <th scope="col">Actions</th>  
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for categorie in categories %}
+                        <tr>
+                    <th scope="row">{{ categorie.id }}</th>
+                    <td>{{ categorie.getCategoryName() }}</td>
+                            
+                           <td>
+                    
+                      
+
+
+                      
+                    <a href="{{ path('deletecategorie', {'id': categorie.id}) }}" class="btn btn-danger" >DELETE CATEGORY</a> <!-- Bouton Supprimer en rouge -->
+                    <a href="{{ path('editcategorie', {'id': categorie.id}) }}" class="btn btn-primary" >UPDATE CATEGORY</a> <!-- Bouton Éditer en bleu -->
+
+
+
+
+                    </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="{{ path('listcategorie') }}" class="btn btn-success">RETURN TO THE COMPLETE LIST CATEGORY OF TRAININGS</a> 
+    {% else %}
+        <p>Aucun résultat trouvé pour la recherche "{{ app.request.query.get('t') }}"</p>
+        <a href="{{ path('listcategorie') }}" class="btn btn-success">RETURN TO THE COMPLETE LIST CATEGORY OF TRAININGS</a> 
+    {% endif %}
+{% endblock %}

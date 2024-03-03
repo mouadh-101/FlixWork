@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIST CATEGORY OF TRAININGS</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th:nth-child(odd), td:nth-child(odd) {
+    background-color: #ff0000; 
+}
+
+
+th:nth-child(even), td:nth-child(even) {
+    background-color: #ffffff;
+}
+       
+    </style>
+</head>
+<body>
+    <h1>LIST CATEGORY OF TRAININGS</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>CATEGORY NAME</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for categorie in categories %}
+            <tr>
+                <td>{{ categorie.id }}</td>
+                <td>{{ categorie.getCategoryName}}</td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
