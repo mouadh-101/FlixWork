@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "chart.js": "^4.4.2"
+    "chart.js": "^4.4.2",
+    "flatpickr": "^4.6.13",
+    "fullcalendar": "^6.1.11"
   }
 }

@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class TrainingCategoryController extends AbstractController
 {
@@ -166,6 +167,36 @@ public function chart(TrainingCategoryRepository $tc, TrainingRepository $traini
         'categoryLabels' => json_encode($categoryLabels),
         'categoryCounts' => json_encode($categoryCounts),
     ]);
+}
+
+
+#[Route('/generate-csv-cat', name: 'generate_csv_cat')]
+public function generateCsvCat(TrainingCategoryRepository $categoryRepository): Response
+{
+    $categories = $categoryRepository->findAll();
+    
+    if (!$categories) {
+        throw $this->createNotFoundException('Aucune catégorie trouvée.');
+    }
+
+   
+    $csvData = "ID,NAME OF CATEGORY\n";
+
+   
+    foreach ($categories as $category) {
+        $csvData .= $category->getId() . ',' .
+                    '"' . $category->getCategoryName() . '"' .
+                    "\n";
+    }
+
+   
+    $response = new Response($csvData);
+
+   
+    $response->headers->set('Content-Type', 'text/csv');
+    $response->headers->set('Content-Disposition', 'attachment; filename="liste_categories_formations.csv"');
+
+    return $response;
 }
 
    

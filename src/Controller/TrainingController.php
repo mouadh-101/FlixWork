@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class TrainingController extends AbstractController
 {
@@ -185,6 +186,38 @@ public function showTraining1($id, TrainingRepository $trainingRepository): Resp
     return $this->render('training/show.html.twig', [
         'training' => $training,
     ]);
+}
+
+
+
+#[Route('/generate-csv', name: 'generate_csv')]
+public function generateCsv(TrainingRepository $trainingRepository): Response
+{
+    $trainings = $trainingRepository->findAll();
+    
+    if (!$trainings) {
+        throw $this->createNotFoundException('Aucune formation trouvée.');
+    }
+
+    $csvData = "ID,TITLE,DESCRIPTION,START-DATE,END-DATE,NUMBER OF PLACES,TRAINER,CATEGORY\n";
+
+    foreach ($trainings as $training) {
+        $csvData .= $training->getId() . ',' .
+                    '"' . $training->getTitle() . '",' .
+                    '"' . $training->getDescription() . '",' .
+                    $training->getStartDate()->format('Y-m-d') . ',' .
+                    $training->getEndDate()->format('Y-m-d') . ',' .
+                    $training->getNumberOfPlaces() . ',' .
+                    '"' . $training->getTrainer()->getFullName() . '",' .
+                    '"' . $training->getCategory()->getCategoryName() . '"' .
+                    "\n";
+    }
+
+    $response = new Response($csvData);
+    $response->headers->set('Content-Type', 'text/csv');
+    $response->headers->set('Content-Disposition', 'attachment; filename="liste_formations.csv"');
+
+    return $response;
 }
 
 
