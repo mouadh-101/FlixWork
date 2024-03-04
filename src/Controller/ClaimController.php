@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request; // Corrected import statement
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-
+//tgfgf
 class ClaimController extends AbstractController
 {
     #[Route('/claimNew/{id}', name: 'addClaim')]
