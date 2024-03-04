@@ -28,7 +28,7 @@ class Claim
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $claimer = null;
+    private ?user $claimer = null;
 
     public function getId(): ?int
     {
@@ -83,12 +83,12 @@ class Claim
         return $this;
     }
 
-    public function getClaimer(): ?User
+    public function getClaimer(): ?user
     {
         return $this->claimer;
     }
 
-    public function setClaimer(?User $claimer): static
+    public function setClaimer(?user $claimer): static
     {
         $this->claimer = $claimer;
 

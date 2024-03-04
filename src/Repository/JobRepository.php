@@ -45,12 +45,4 @@ class JobRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-//   public function findByRecruiterId($recruiterId)
-//    {
-//        return $this->createQueryBuilder('j')
-//            ->andWhere('j.recruiter = :recruiterId')
-//            ->setParameter('recruiterId', $recruiterId)
-//            ->getQuery()
-//            ->getResult();
-//    }
 }

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block sidebar %}
+{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block body %}
+
+<div style="display: flex;align-items: center;justify-content: center;margin-top: 150px;">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Update User Backend ADMIN</h5>
+
+            <!-- General Form Elements -->
+            {{ form_start(form) }}
+            
+                <label for="inputText" class="col-sm-4 col-form-label">FullName</label>
+                <div class="col-sm-10">
+                    {{ form_widget(form.full_name, {attr: {'class': 'form-control'}}) }}
+                </div>
+           
+            
+                <label for="inputText" class="col-sm-4 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    {{ form_widget(form.email, {attr: {'class': 'form-control'}}) }}
+                </div>
+            
+            
+               
+           
+            
+                <label for="inputText" class="col-sm-4 col-form-label">UserType</label>
+                <div class="col-sm-10">
+                    {{ form_widget(form.user_type, {attr: {'class': 'form-control'}}) }}
+                </div>
+                <br/>
+                <div class="col-sn-10" style="display: flex;align-items: center;justify-content: center">
+           {{ form_widget(form.Ajouter, {attr: {'class': 'btn btn-primary'}}) }}
+           </div>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

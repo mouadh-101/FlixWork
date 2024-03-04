@@ -5,8 +5,6 @@ namespace App\Entity;
 use App\Repository\PostulationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Freelancer;
-use App\Entity\Job;
 
 #[ORM\Entity(repositoryClass: PostulationRepository::class)]
 class Postulation
