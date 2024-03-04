@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Freelancer;
 use App\Entity\Training;
 use App\Entity\User;
 use App\Form\TrainingType;
+use App\Repository\FreelancerRepository;
 use App\Repository\TrainingCategoryRepository;
 use App\Repository\TrainingRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,6 +18,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport as MailerTransport;
+use Symfony\Component\Mime\Email;
 
 class TrainingController extends AbstractController
 {
@@ -55,7 +60,7 @@ class TrainingController extends AbstractController
     }
 
     #[Route('/training/add', name: 'addtraining')]
-    public function addTraining(ManagerRegistry $doctrine, Request $request, EntityManagerInterface $entityManager): Response
+    public function addTraining(ManagerRegistry $doctrine, Request $request, EntityManagerInterface $entityManager,FreelancerRepository $freelancerRepository): Response
     {
         $user = $entityManager->getRepository(User::class)->find(1);
 
@@ -67,6 +72,29 @@ class TrainingController extends AbstractController
         $em = $doctrine->getManager();
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //mailing : 
+            $title=$form->get('title')->getData();
+            $freelancers=$freelancerRepository->findAll();
+            $transport = MailerTransport::fromDsn('gmail+smtp://flixworkteam@gmail.com:nkbnqbibnenlciiz@default');
+            $mailer = new Mailer($transport);
+            $logoUrl = 'https://i.ibb.co/cgZvtRR/logo.png';
+            foreach ($freelancers as $freelancer) {
+                // Constructing the email message
+                $email = (new Email())
+                    ->from('flixworkteam@gmail.com')
+                    ->to($freelancer->getEmail()) // Sending email to each freelancer
+                    ->subject('New Training Notification')
+                    ->html('<div style="text-align: center;"><img src="' . $logoUrl . '" alt="Logo"></div><br>'
+                        . '<p>Hello ' . $freelancer->getFullName(). ',</p>'
+                        . '<p>We would like to inform you that a new training has been added to our platform titled: ' . $title. '.</p>'
+                        . '<p>Please review the details and take necessary actions.</p>'
+                        . '<p>Best regards,<br>FlixWork</p>');
+        
+                // Sending the email
+                $mailer->send($email);
+            }
+        
+            //end mailer
             $em->persist($training);
             $em->flush();
 
